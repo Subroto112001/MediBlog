@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Search, Activity, Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // Import hook to get current URL
 import { Noto_Serif_Bengali } from "next/font/google";
 
 // --- Font Configuration ---
@@ -16,12 +17,13 @@ const notoSerifBengali = Noto_Serif_Bengali({
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const pathname = usePathname(); // Get current route
 
   const NAV_DATA = [
     { name: "হোম", href: "/" },
     { name: "ডাক্তারগণ", href: "/doctors" },
-    { name: "বিষয়সমূহ", href: "#" },
-    { name: "আমাদের সম্পর্কে", href: "#" },
+    { name: "সকল ব্লগ", href: "/articles" },
+    { name: "আমাদের সম্পর্কে", href: "/about" },
   ];
 
   return (
@@ -51,15 +53,24 @@ export default function Header() {
             className="hidden md:flex items-center gap-8"
             aria-label="ডেস্কটপ নেভিগেশন"
           >
-            {NAV_DATA.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-base font-semibold text-slate-600 hover:text-slate-900 transition-colors focus-visible:outline-none focus-visible:underline decoration-2 underline-offset-4"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {NAV_DATA.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined} // A11y: Indicates active page
+                  className={`text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d8c00] rounded px-1
+                    ${
+                      isActive
+                        ? "text-[#2d8c00] underline decoration-2 underline-offset-4" // Active Style
+                        : "text-slate-600 hover:text-slate-900" // Inactive Style
+                    }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </nav>
         </div>
 
@@ -114,16 +125,25 @@ export default function Header() {
           className="md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 p-4 flex flex-col gap-4 shadow-xl"
           aria-label="মোবাইল নেভিগেশন"
         >
-          {NAV_DATA.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-slate-900 font-medium p-2 hover:bg-slate-50 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.name}
-            </Link>
-          ))}
+          {NAV_DATA.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                aria-current={isActive ? "page" : undefined}
+                className={`font-medium p-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-200
+                  ${
+                    isActive
+                      ? "text-[#2d8c00] bg-[#2d8c00]/10" // Active Mobile Style
+                      : "text-slate-900 hover:bg-slate-50"
+                  }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
         </nav>
       )}
     </header>

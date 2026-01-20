@@ -3,7 +3,9 @@
 import React, { useState } from "react";
 import { Noto_Serif_Bengali } from "next/font/google";
 import { ChevronDown, Linkedin, Twitter, ArrowRight, Mail } from "lucide-react";
-import Link from "next/link"; // Import Link for routing
+import Link from "next/link";
+import { SPECIALISTS } from "@/lib/doctorsData";
+
 
 // --- Font Configuration ---
 const notoSerif = Noto_Serif_Bengali({
@@ -12,56 +14,12 @@ const notoSerif = Noto_Serif_Bengali({
   display: "swap",
 });
 
-// --- Data ---
 const SPECIALTIES = [
   "সব বিভাগ",
   "কার্ডিওলজি",
   "নিউরোলজি",
   "শিশু বিশেষজ্ঞ",
   "চর্মরোগ",
-];
-
-const SPECIALISTS = [
-  {
-    id: 1,
-    name: "ডা. সুব্রত বর্মন",
-    role: "নিউরোলজি",
-    displayRole: "নিউরোলজিস্ট",
-    bio: "জটিল স্নায়ুরোগ এবং রোগী-কেন্দ্রিক নিরাময় পরিকল্পনায় ১২ বছরেরও বেশি অভিজ্ঞতাসম্পন্ন।",
-    image:
-      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
-    socials: { twitter: "#", linkedin: "#" },
-  },
-  {
-    id: 2,
-    name: "ডা. সারাহ জেনকিন্স",
-    role: "কার্ডিওলজি",
-    displayRole: "কার্ডিওলজিস্ট",
-    bio: "আধুনিক জীবনযাত্রার সাথে মানানসই হৃদরোগ প্রতিরোধ এবং হার্ট হেলথ ম্যানেজমেন্টে বিশেষজ্ঞ।",
-    image:
-      "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400&h=400",
-    socials: { twitter: "#", linkedin: "#" },
-  },
-  {
-    id: 3,
-    name: "ডা. মাইকেল চেন",
-    role: "শিশু বিশেষজ্ঞ",
-    displayRole: "পেডিয়াট্রিশিয়ান",
-    bio: "শিশুদের সুস্থতা এবং কৈশোরকালীন চিকিৎসায় সহানুভূতিশীল দৃষ্টিভঙ্গি নিয়ে নিবেদিত।",
-    image:
-      "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400&h=400",
-    socials: { twitter: "#", linkedin: "#" },
-  },
-  {
-    id: 4,
-    name: "ডা. এলিনা রদ্রিগেজ",
-    role: "চর্মরোগ",
-    displayRole: "ডার্মাটোলজিস্ট",
-    bio: "ক্লিনিক্যাল এক্সিলেন্স এবং ত্বকের পুনরুজ্জীবনে বিশেষ দক্ষতাসহ বোর্ড-সার্টিফাইড চর্মরোগ বিশেষজ্ঞ।",
-    image:
-      "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=400&h=400",
-    socials: { twitter: "#", linkedin: "#" },
-  },
 ];
 
 export default function SpecialistsDirectoryBn() {
@@ -88,17 +46,11 @@ export default function SpecialistsDirectoryBn() {
         </div>
 
         {/* Filters */}
-        <div
-          className="flex flex-wrap items-center gap-3 mb-10 pb-6 border-b border-slate-100 dark:border-slate-800"
-          role="tablist"
-          aria-label="বিভাগ ফিল্টার"
-        >
+        <div className="flex flex-wrap items-center gap-3 mb-10 pb-6 border-b border-slate-100 dark:border-slate-800">
           {SPECIALTIES.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              role="tab"
-              aria-selected={activeCategory === category}
               className={`px-5 py-2.5 rounded-lg text-base font-semibold transition-all flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#BCE7FA]
                 ${
                   activeCategory === category
@@ -144,25 +96,22 @@ export default function SpecialistsDirectoryBn() {
                 </p>
               </div>
 
-              {/* Socials */}
               <div className="flex items-center gap-3 mt-6">
                 <a
                   href={doctor.socials.twitter}
-                  aria-label="টুইটার প্রোফাইল"
-                  className="p-2 rounded-full bg-slate-50 dark:bg-slate-800 text-slate-400 hover:text-[#0A2540] hover:bg-[#BCE7FA] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#BCE7FA]"
+                  className="p-2 rounded-full bg-slate-50 dark:bg-slate-800 text-slate-400 hover:text-[#0A2540] hover:bg-[#BCE7FA] transition-colors"
                 >
                   <Twitter size={18} fill="currentColor" strokeWidth={0} />
                 </a>
                 <a
                   href={doctor.socials.linkedin}
-                  aria-label="লিঙ্কডইন প্রোফাইল"
-                  className="p-2 rounded-full bg-slate-50 dark:bg-slate-800 text-slate-400 hover:text-[#0A2540] hover:bg-[#BCE7FA] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#BCE7FA]"
+                  className="p-2 rounded-full bg-slate-50 dark:bg-slate-800 text-slate-400 hover:text-[#0A2540] hover:bg-[#BCE7FA] transition-colors"
                 >
                   <Linkedin size={18} fill="currentColor" strokeWidth={0} />
                 </a>
               </div>
 
-              {/* Action Button - Updated to Link */}
+              {/* Dynamic Link Here */}
               <Link
                 href={`/doctors/${doctor.id}`}
                 className="w-full mt-6 py-2.5 px-4 rounded-lg border-2 border-[#BCE7FA] text-[#1e293b] dark:text-white font-bold hover:bg-[#BCE7FA] hover:text-[#1e293b] transition-all flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#BCE7FA]/40"
