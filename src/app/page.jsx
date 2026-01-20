@@ -1,229 +1,170 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Noto_Serif_Bengali } from "next/font/google";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import Head from "next/head";
-import {
-  Search,
-  Moon,
-  Sun,
-  ArrowRight,
-  ChevronRight,
-  Activity,
-  Share2,
-  Network,
-  Menu,
-  X,
-} from "lucide-react";
 
-// --- Dynamic Data Configuration ---
+// --- Font Configuration ---
+// Using a variable allows for easier integration with Tailwind
+const notoSerifBengali = Noto_Serif_Bengali({
+  subsets: ["bengali"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-noto-bengali",
+  display: "swap",
+});
 
-const NAV_LINKS = [
-  { name: "Home", href: "#" },
-  { name: "Doctors", href: "#" },
-  { name: "Topics", href: "#" },
-  { name: "About", href: "#" },
-];
-
+// --- DATA CONFIGURATION ---
 const CATEGORIES = [
-  "Cardiology",
-  "Nutrition",
-  "Pediatrics",
-  "Mental Health",
-  "Dermatology",
-  "Fitness",
+  "কার্ডিওলজি",
+  "পুষ্টি",
+  "শিশু বিভাগ",
+  "মানসিক স্বাস্থ্য",
+  "চর্মরোগ",
+  "ফিটনেস",
 ];
 
 const ARTICLES = [
   {
     id: 1,
-    title: "Managing Stress at Work: A Clinical Approach",
-    category: "Wellness",
-    author: "Dr. Sarah Wilson",
-    readTime: "5 min read",
-    date: "Oct 24",
+    title: "কর্মক্ষেত্রে মানসিক চাপ ব্যবস্থাপনা: একটি ক্লিনিকাল পদ্ধতি",
+    category: "সুস্থতা",
+    author: "ডা. সারাহ উইলসন",
+    readTime: "৫ মিনিট পাঠ",
+    date: "2023-10-24", // Machine readable date
+    dateDisplay: "২৪ অক্টোবর", // Human readable date
     image:
       "https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    alt: "অফিসে ধ্যানের বাটি সহ আধুনিক কাজের পরিবেশ", // Descriptive Alt Text
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
   },
   {
     id: 2,
-    title: "Vitamin D Myths and Facts: What Science Says",
-    category: "Nutrition",
-    author: "Dr. James Lee",
-    readTime: "8 min read",
-    date: "Oct 22",
+    title: "ভিটামিন ডি: ভুল ধারণা এবং সত্য, বিজ্ঞান যা বলে",
+    category: "পুষ্টি",
+    author: "ডা. জেমস লি",
+    readTime: "৮ মিনিট পাঠ",
+    date: "2023-10-22",
+    dateDisplay: "২২ অক্টোবর",
     image:
       "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    alt: "ভিটামিন এবং পানির গ্লাসের উপর সূর্যের আলো পড়ছে",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=James",
   },
   {
     id: 3,
-    title: "The Role of Sleep in Neuro-Recovery",
-    category: "Sleep Science",
-    author: "Dr. Elena Rodriguez",
-    readTime: "6 min read",
-    date: "Oct 20",
+    title: "নিউরোরিকভারিতে বা স্নায়ু পুনরুদ্ধারে ঘুমের ভূমিকা",
+    category: "স্লিপ সায়েন্স",
+    author: "ডা. এলিনা রদ্রিগেজ",
+    readTime: "৬ মিনিট পাঠ",
+    date: "2023-10-20",
+    dateDisplay: "২০ অক্টোবর",
     image:
       "https://images.unsplash.com/photo-1511295742362-92c96b1cf484?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    alt: "একজন ব্যক্তি আরামদায়কভাবে ঘুমাচ্ছেন",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Elena",
   },
 ];
 
-export default function HealthVerse() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+// --- SEO: Schema Markup (JSON-LD) ---
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  name: "HealthVerse Medical Insights",
+  description:
+    "Latest medical insights regarding cardiology, nutrition, and mental health in Bangla.",
+  audience: "Patients and Medical Professionals",
+};
 
-  // Handle Theme Toggle
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [isDarkMode]);
-
-  const toggleTheme = () => setIsDarkMode(!isDarkMode);
-
+export default function Home() {
   return (
     <div
-      className={`min-h-screen transition-colors duration-200 font-sans ${isDarkMode ? "dark bg-[#101728] text-slate-100" : "bg-white text-slate-900"}`}
+      className={`min-h-screen bg-white text-slate-900 ${notoSerifBengali.className}`}
+      lang="bn"
     >
+      {/* SEO: Head Metadata */}
       <Head>
-        <title>HealthVerse | Medical & Wellness Portal</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+          HealthVerse | প্রতিরোধমূলক কার্ডিওলজি এবং চিকিৎসা অন্তর্দৃষ্টি
+        </title>
+        <meta
+          name="description"
+          content="বাংলায় কার্ডিওলজি, পুষ্টি এবং মানসিক স্বাস্থ্য সম্পর্কিত সর্বশেষ চিকিৎসা গবেষণা এবং বিশেষজ্ঞের পরামর্শ পড়ুন।"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
       </Head>
 
-      {/* --- Header --- */}
-      <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#101728]/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 px-6 lg:px-20 py-4">
-        <div className="max-w-[1200px] mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-10">
-            {/* Logo */}
-            <div className="flex items-center gap-2 group cursor-pointer">
-              <div className="size-9 bg-[#BCE7FA] flex items-center justify-center rounded-lg text-slate-900">
-                <Activity size={20} strokeWidth={2.5} />
-              </div>
-              <h2 className="text-slate-900 dark:text-white text-xl font-extrabold tracking-tight">
-                HealthVerse
-              </h2>
-            </div>
-
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </nav>
-          </div>
-
-          <div className="flex items-center gap-4 lg:gap-6">
-            {/* Search Bar */}
-            <div className="hidden lg:flex items-center bg-slate-100 dark:bg-slate-800 rounded-full px-4 py-2 w-64">
-              <Search className="text-slate-400 mr-2" size={18} />
-              <input
-                type="text"
-                placeholder="Search insights..."
-                className="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-slate-400 outline-none text-slate-700 dark:text-slate-200"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-
-            {/* CTA & Theme Toggle */}
-            <button className="hidden sm:block bg-[#38B000] hover:bg-[#2d8c00] text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-[#38B000]/20">
-              Subscribe
-            </button>
-
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              aria-label="Toggle Dark Mode"
-            >
-              {isDarkMode ? (
-                <Sun size={20} className="text-yellow-400" />
-              ) : (
-                <Moon size={20} className="text-slate-600" />
-              )}
-            </button>
-
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu Dropdown */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-[#101728] border-b border-slate-100 dark:border-slate-800 p-4 flex flex-col gap-4 shadow-xl">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-slate-900 dark:text-white font-medium p-2"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        )}
+      <header className="sr-only">
+        <h1>HealthVerse বাংলা হোমপেজ</h1>
       </header>
 
       <main className="flex-1">
         {/* --- Hero Section --- */}
-        <section className="px-6 lg:px-20 py-12 lg:py-16 max-w-[1200px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center bg-[#BCE7FA] dark:bg-[#BCE7FA]/10 rounded-[2rem] p-8 lg:p-12 overflow-hidden relative">
-            {/* Background Decorations */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#38B000]/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+        {/* A11y: Ensure contrast allows text to be readable on the background */}
+        <section
+          className="px-6 lg:px-20 py-12 lg:py-16 max-w-[1200px] mx-auto"
+          aria-labelledby="hero-heading"
+        >
+          <div className="grid lg:grid-cols-2 gap-12 items-center bg-[#BCE7FA] rounded-[2rem] p-8 lg:p-12 overflow-hidden relative">
+            {/* Decorative background - aria-hidden to hide from screen readers */}
+            <div
+              className="absolute top-0 right-0 w-64 h-64 bg-[#38B000]/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"
+              aria-hidden="true"
+            ></div>
 
             <div className="flex flex-col gap-8 relative z-10">
-              <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur px-3 py-1 rounded-full w-fit shadow-sm">
-                <span className="flex h-2 w-2 rounded-full bg-[#38B000] animate-pulse"></span>
-                <span className="text-xs font-bold text-slate-600 dark:text-slate-300 tracking-wider uppercase">
-                  Featured Breakthrough
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur px-3 py-1 rounded-full w-fit shadow-sm border border-white/50">
+                <span className="flex h-2 w-2 rounded-full bg-[#2d8c00] animate-pulse"></span>
+                <span className="text-xs font-bold text-slate-800 tracking-wider uppercase">
+                  বিশেষ উদ্ভাবন
                 </span>
               </div>
 
-              <h1 className="text-4xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.1] tracking-tight">
-                The Future of{" "}
-                <span className="text-slate-800 dark:text-[#BCE7FA]">
-                  Preventative
-                </span>{" "}
-                Cardiology
-              </h1>
+              <h2
+                id="hero-heading"
+                className="text-4xl lg:text-6xl font-extrabold text-slate-900 leading-[1.3] tracking-tight"
+              >
+                <span className="text-slate-800">প্রতিরোধমূলক</span> কার্ডিওলজি
+                বা হৃদরোগ চিকিৎসার ভবিষ্যৎ
+              </h2>
 
-              <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-lg">
-                Explore the latest medical insights and professional health
-                advice from our certified experts on cardiovascular longevity.
+              <p className="text-lg text-slate-800 leading-relaxed max-w-lg font-medium">
+                কার্ডিওভাসকুলার দীর্ঘায়ু সম্পর্কে আমাদের প্রত্যয়িত বিশেষজ্ঞদের
+                কাছ থেকে সর্বশেষ চিকিৎসা অন্তর্দৃষ্টি এবং পেশাদার স্বাস্থ্য
+                পরামর্শ অন্বেষণ করুন।
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <button className="bg-[#38B000] hover:bg-[#2d8c00] text-white px-8 py-4 rounded-xl text-base font-bold transition-all shadow-xl shadow-[#38B000]/30 flex items-center gap-2 group">
-                  Read Article{" "}
+                {/* A11y: High contrast focus ring for keyboard navigation */}
+                <button
+                  className="bg-[#2d8c00] hover:bg-[#236e00] text-white px-8 py-4 rounded-xl text-base font-bold transition-all shadow-xl shadow-[#38B000]/20 flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40"
+                  aria-label="এই নিবন্ধটি পড়ুন"
+                >
+                  নিবন্ধ পড়ুন
                   <ArrowRight
                     size={20}
                     className="group-hover:translate-x-1 transition-transform"
+                    aria-hidden="true"
                   />
                 </button>
-                <button className="bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 px-8 py-4 rounded-xl text-base font-bold transition-all">
-                  View Doctors
+                <button className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 px-8 py-4 rounded-xl text-base font-bold transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-300">
+                  ডাক্তারদের দেখুন
                 </button>
               </div>
             </div>
 
             <div className="relative group">
-              <div className="absolute inset-0 bg-white/20 dark:bg-[#BCE7FA]/10 rounded-[1.5rem] rotate-3 scale-105 transition-transform group-hover:rotate-1"></div>
-              {/* Using a reliable placeholder image */}
               <div
+                className="absolute inset-0 bg-white/20 rounded-[1.5rem] rotate-3 scale-105 transition-transform group-hover:rotate-1"
+                aria-hidden="true"
+              ></div>
+              {/* Image rendered as background, ensure a semantic alternative exists if it conveys content, or use standard img tag for better SEO. Using div here for styling as requested, but adding role="img" and aria-label. */}
+              <div
+                role="img"
+                aria-label="ডাক্তার একটি উচ্চ প্রযুক্তির হার্ট হলোগ্রাম ধরে আছেন"
                 className="w-full h-[400px] bg-center bg-no-repeat bg-cover rounded-[1.5rem] relative shadow-2xl transition-transform"
                 style={{
                   backgroundImage:
@@ -235,19 +176,30 @@ export default function HealthVerse() {
         </section>
 
         {/* --- Category Scroller --- */}
-        <section className="px-6 lg:px-20 py-4 max-w-[1200px] mx-auto overflow-hidden">
-          <div className="flex items-center gap-4 overflow-x-auto pb-4 no-scrollbar">
-            <span className="text-sm font-bold text-slate-400 uppercase tracking-widest mr-4 whitespace-nowrap">
-              Explore:
+        <section
+          className="px-6 lg:px-20 py-4 max-w-[1200px] mx-auto overflow-hidden"
+          aria-label="বিভাগ নির্বাচন"
+        >
+          <div
+            className="flex items-center gap-4 overflow-x-auto pb-4 no-scrollbar"
+            role="tablist"
+          >
+            <span
+              className="text-sm font-bold text-slate-600 uppercase tracking-widest mr-4 whitespace-nowrap"
+              id="explore-label"
+            >
+              অনুসন্ধান করুন:
             </span>
             {CATEGORIES.map((cat, index) => (
               <button
                 key={cat}
-                className={`flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full px-6 font-semibold transition-all
+                role="tab"
+                aria-selected={index === 0}
+                className={`flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full px-6 font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900
                   ${
                     index === 0
                       ? "bg-slate-900 text-white"
-                      : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-[#BCE7FA] hover:text-slate-900"
+                      : "bg-slate-100 text-slate-700 hover:bg-[#BCE7FA] hover:text-slate-900 border border-slate-200"
                   }`}
               >
                 {cat}
@@ -257,21 +209,28 @@ export default function HealthVerse() {
         </section>
 
         {/* --- Blog Grid --- */}
-        <section className="px-6 lg:px-20 py-16 max-w-[1200px] mx-auto">
-          <div className="flex items-end justify-between mb-10 border-b border-slate-100 dark:border-slate-800 pb-6">
+        <section
+          className="px-6 lg:px-20 py-16 max-w-[1200px] mx-auto"
+          aria-labelledby="latest-insights-heading"
+        >
+          <div className="flex items-end justify-between mb-10 border-b border-slate-200 pb-6">
             <div>
-              <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">
-                Latest Medical Insights
+              <h2
+                id="latest-insights-heading"
+                className="text-3xl font-extrabold text-slate-900"
+              >
+                সর্বশেষ চিকিৎসা অন্তর্দৃষ্টি
               </h2>
-              <p className="text-slate-500 dark:text-slate-400 mt-1">
-                Peer-reviewed updates from our clinical network.
+              <p className="text-slate-600 mt-1 font-medium">
+                আমাদের ক্লিনিকাল নেটওয়ার্ক থেকে পিয়ার-রিভিউ করা আপডেট।
               </p>
             </div>
             <a
               href="#"
-              className="text-slate-900 dark:text-[#BCE7FA] font-bold flex items-center gap-1 hover:gap-2 transition-all"
+              className="text-slate-900 font-bold flex items-center gap-1 hover:gap-2 transition-all p-2 rounded-lg hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+              aria-label="সব ব্লগ পোস্ট দেখুন"
             >
-              View All Posts <ChevronRight size={20} />
+              সব পোস্ট দেখুন <ChevronRight size={20} aria-hidden="true" />
             </a>
           </div>
 
@@ -279,34 +238,47 @@ export default function HealthVerse() {
             {ARTICLES.map((article) => (
               <article
                 key={article.id}
-                className="flex flex-col group cursor-pointer"
+                className="flex flex-col group cursor-pointer h-full"
               >
-                <div className="relative overflow-hidden rounded-2xl mb-4 aspect-[4/3]">
+                <div className="relative overflow-hidden rounded-2xl mb-4 aspect-[4/3] bg-slate-100">
                   <div className="absolute inset-0 bg-[#38B000]/0 group-hover:bg-[#38B000]/10 transition-colors z-10"></div>
-                  <div
-                    className="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-110"
-                    style={{ backgroundImage: `url('${article.image}')` }}
-                  ></div>
-                  <span className="absolute top-4 left-4 z-20 bg-[#BCE7FA]/90 backdrop-blur px-3 py-1 rounded-lg text-xs font-bold text-slate-900">
+                  <img
+                    src={article.image}
+                    alt={article.alt}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <span className="absolute top-4 left-4 z-20 bg-[#BCE7FA]/95 backdrop-blur px-3 py-1 rounded-lg text-xs font-bold text-slate-900 shadow-sm">
                     {article.category}
                   </span>
                 </div>
-                <div className="flex flex-col gap-3">
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-slate-700 dark:group-hover:text-[#BCE7FA] transition-colors leading-tight">
-                    {article.title}
+                <div className="flex flex-col gap-3 flex-1">
+                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors leading-[1.4]">
+                    <a
+                      href="#"
+                      className="focus-visible:underline focus-visible:outline-none"
+                    >
+                      {article.title}
+                    </a>
                   </h3>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 mt-auto">
                     <img
                       src={article.avatar}
-                      alt={article.author}
-                      className="size-8 rounded-full bg-slate-200"
+                      alt={`${article.author} এর ছবি`}
+                      className="size-8 rounded-full bg-slate-200 border border-slate-200"
                     />
-                    <div className="text-xs">
-                      <p className="font-bold text-slate-900 dark:text-white">
+                    <div className="text-xs text-slate-600 font-medium">
+                      <p className="font-bold text-slate-900">
                         {article.author}
                       </p>
-                      <p className="text-slate-500">
-                        {article.readTime} • {article.date}
+                      <p>
+                        <span aria-label={`পড়ার সময় ${article.readTime}`}>
+                          {article.readTime}
+                        </span>{" "}
+                        •{" "}
+                        <time dateTime={article.date}>
+                          {article.dateDisplay}
+                        </time>
                       </p>
                     </div>
                   </div>
@@ -317,143 +289,60 @@ export default function HealthVerse() {
         </section>
 
         {/* --- Newsletter --- */}
-        <section className="px-6 lg:px-20 py-20 bg-[#BCE7FA]/20 dark:bg-[#BCE7FA]/5">
+        <section
+          className="px-6 lg:px-20 py-20 bg-[#BCE7FA]/20"
+          aria-labelledby="newsletter-heading"
+        >
           <div className="max-w-[1200px] mx-auto text-center">
-            <div className="bg-white dark:bg-[#101728] rounded-[3rem] p-10 lg:p-16 shadow-2xl shadow-slate-200/50 dark:shadow-none relative overflow-hidden">
-              <div className="absolute -left-10 -top-10 w-40 h-40 bg-[#38B000]/10 rounded-full blur-2xl"></div>
-              <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-[#BCE7FA]/20 rounded-full blur-2xl"></div>
+            <div className="bg-white rounded-[3rem] p-10 lg:p-16 shadow-2xl shadow-slate-200/50 relative overflow-hidden border border-slate-100">
+              <div
+                className="absolute -left-10 -top-10 w-40 h-40 bg-[#38B000]/10 rounded-full blur-2xl"
+                aria-hidden="true"
+              ></div>
+              <div
+                className="absolute -right-10 -bottom-10 w-40 h-40 bg-[#BCE7FA]/20 rounded-full blur-2xl"
+                aria-hidden="true"
+              ></div>
 
               <div className="relative z-10 max-w-2xl mx-auto flex flex-col gap-6">
-                <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white">
-                  Stay Informed. Get Medical Insights.
+                <h2
+                  id="newsletter-heading"
+                  className="text-3xl lg:text-4xl font-extrabold text-slate-900"
+                >
+                  আপডেট থাকুন। চিকিৎসা অন্তর্দৃষ্টি পান।
                 </h2>
-                <p className="text-slate-500 dark:text-slate-400 text-lg">
-                  Subscribe to our weekly newsletter and receive the latest
-                  health tips, breakthrough research, and expert advice
-                  delivered to your inbox.
+                <p className="text-slate-600 text-lg font-medium">
+                  আমাদের সাপ্তাহিক নিউজলেটারে সাবস্ক্রাইব করুন এবং সর্বশেষ
+                  স্বাস্থ্য টিপস, যুগান্তকারী গবেষণা এবং বিশেষজ্ঞের পরামর্শ
+                  সরাসরি আপনার ইনবক্সে পান।
                 </p>
                 <form
                   className="flex flex-col sm:flex-row gap-4 mt-4"
                   onSubmit={(e) => e.preventDefault()}
                 >
+                  <label htmlFor="email-input" className="sr-only">
+                    আপনার ইমেইল ঠিকানা
+                  </label>
                   <input
-                    className="flex-1 bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-2xl px-6 py-4 focus:ring-[#BCE7FA] focus:border-[#BCE7FA] outline-none transition-all"
-                    placeholder="Enter your email address"
+                    id="email-input"
+                    className="flex-1 bg-slate-50 border-slate-300 text-slate-900 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#2d8c00] focus:border-transparent outline-none transition-all placeholder:text-slate-500"
+                    placeholder="আপনার ইমেইল ঠিকানা লিখুন"
                     type="email"
+                    required
                   />
-                  <button className="bg-[#38B000] hover:bg-[#2d8c00] text-white px-10 py-4 rounded-2xl font-bold transition-all shadow-lg shadow-[#38B000]/20">
-                    Join Newsletter
+                  <button className="bg-[#2d8c00] hover:bg-[#236e00] text-white px-10 py-4 rounded-2xl font-bold transition-all shadow-lg shadow-[#38B000]/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40">
+                    নিউজলেটারে যোগ দিন
                   </button>
                 </form>
-                <p className="text-xs text-slate-400">
-                  Join 15,000+ health-conscious readers. No spam, ever.
+                <p className="text-xs text-slate-500">
+                  ১৫,০০০+ স্বাস্থ্য সচেতন পাঠকদের সাথে যোগ দিন। কোনো স্প্যাম
+                  নয়।
                 </p>
               </div>
             </div>
           </div>
         </section>
       </main>
-
-      {/* --- Footer --- */}
-      <footer className="bg-slate-900 text-slate-400 px-6 lg:px-20 py-20 border-t border-slate-800">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-2">
-              <div className="size-8 bg-[#BCE7FA] flex items-center justify-center rounded-lg text-slate-900">
-                <Activity size={20} />
-              </div>
-              <h2 className="text-white text-xl font-extrabold tracking-tight">
-                HealthVerse
-              </h2>
-            </div>
-            <p className="text-sm leading-relaxed">
-              Leading the future of medical knowledge through expert insights
-              and professional clinical directories.
-            </p>
-            <div className="flex gap-4">
-              <a
-                href="#"
-                className="size-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-[#BCE7FA] hover:text-slate-900 transition-colors"
-              >
-                <Share2 size={18} />
-              </a>
-              <a
-                href="#"
-                className="size-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-[#BCE7FA] hover:text-slate-900 transition-colors"
-              >
-                <Network size={18} />
-              </a>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <h4 className="text-white font-bold">Categories</h4>
-            <ul className="flex flex-col gap-3 text-sm">
-              {[
-                "Cardiology",
-                "Mental Health",
-                "Nutrition & Diet",
-                "Pediatrics",
-              ].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="hover:text-[#38B000] transition-colors"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <h4 className="text-white font-bold">Platform</h4>
-            <ul className="flex flex-col gap-3 text-sm">
-              {[
-                "Find a Doctor",
-                "Medical Topics",
-                "Professional Login",
-                "About Us",
-              ].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="hover:text-[#38B000] transition-colors"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <h4 className="text-white font-bold">Legal</h4>
-            <ul className="flex flex-col gap-3 text-sm">
-              {[
-                "Privacy Policy",
-                "Terms of Service",
-                "Cookie Policy",
-                "Medical Disclaimer",
-              ].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="hover:text-[#38B000] transition-colors"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="max-w-[1200px] mx-auto mt-20 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
-          © 2024 HealthVerse Medical Theme. All medical information is verified
-          by board-certified professionals.
-        </div>
-      </footer>
     </div>
   );
 }
