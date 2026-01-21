@@ -40,14 +40,14 @@ export default function Header() {
           >
             <Image
               src="/logo.png"
-              alt="সাবাব সানি আর্থাইটিস কেয়ার লোগো"
+              alt="আর্থাইটিস কেয়ার বিডি"
               width={36}
               height={36}
               className="object-contain"
               priority
             />
             <h2 className="text-slate-900 text-xl font-bold tracking-tight">
-              সাদাব সানি আর্থাইটিস কেয়ার
+              আর্থাইটিস কেয়ার বিডি
             </h2>
           </Link>
 
@@ -103,7 +103,7 @@ export default function Header() {
 
           {/* CTA Button */}
           <button className="hidden sm:block bg-[#2d8c00] hover:bg-[#236e00] text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-[#38B000]/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40">
-            সাবস্ক্রাইব
+            অ্যাপয়েন্টমেন্ট নিন
           </button>
 
           {/* Mobile Menu Button */}
