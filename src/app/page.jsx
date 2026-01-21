@@ -154,7 +154,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {LATEST_ARTICLES.map((article) => (
               <Link
-                href={`/articles/${article.slug}`}
+                // href={`/articles/${article.slug}`}
+                href={"#"}
                 key={article.id}
                 className="group focus-visible:outline-none"
               >
