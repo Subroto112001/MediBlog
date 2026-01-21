@@ -3,8 +3,9 @@
 import React, { useState } from "react";
 import { Search, Activity, Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Import hook to get current URL
+import { usePathname } from "next/navigation";
 import { Noto_Serif_Bengali } from "next/font/google";
+import Image from "next/image";
 
 // --- Font Configuration ---
 const notoSerifBengali = Noto_Serif_Bengali({
@@ -17,13 +18,13 @@ const notoSerifBengali = Noto_Serif_Bengali({
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const pathname = usePathname(); // Get current route
+  const pathname = usePathname();
 
   const NAV_DATA = [
     { name: "হোম", href: "/" },
-    { name: "ডাক্তারগণ", href: "/doctors" },
-    { name: "সকল ব্লগ", href: "/articles" },
-    { name: "আমাদের সম্পর্কে", href: "/about" },
+    { name: "ডাক্তার", href: "/doctor" },
+    { name: "সকল ব্লগ", href: "#" },
+    { name: "আমাদের সম্পর্কে", href: "#" },
   ];
 
   return (
@@ -31,20 +32,22 @@ export default function Header() {
       className={`sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 px-6 lg:px-20 py-4 ${notoSerifBengali.className}`}
     >
       <div className="max-w-[1200px] mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-10">
+        <div className="flex items-center gap-10 ">
           {/* Logo */}
           <Link
             href="/"
             className="flex items-center gap-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-lg p-1"
           >
-            <div
-              className="size-9 bg-[#BCE7FA] flex items-center justify-center rounded-lg text-slate-900"
-              aria-hidden="true"
-            >
-              <Activity size={20} strokeWidth={2.5} />
-            </div>
+            <Image
+              src="/logo.png"
+              alt="সাবাব সানি আর্থাইটিস কেয়ার লোগো"
+              width={36}
+              height={36}
+              className="object-contain"
+              priority
+            />
             <h2 className="text-slate-900 text-xl font-bold tracking-tight">
-              হেলথভার্স
+              সাদাব সানি আর্থাইটিস কেয়ার
             </h2>
           </Link>
 
@@ -59,12 +62,12 @@ export default function Header() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  aria-current={isActive ? "page" : undefined} // A11y: Indicates active page
+                  aria-current={isActive ? "page" : undefined}
                   className={`text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d8c00] rounded px-1
                     ${
                       isActive
-                        ? "text-[#2d8c00] underline decoration-2 underline-offset-4" // Active Style
-                        : "text-slate-600 hover:text-slate-900" // Inactive Style
+                        ? "text-[#2d8c00] underline decoration-2 underline-offset-4"
+                        : "text-slate-600 hover:text-slate-900"
                     }`}
                 >
                   {link.name}
@@ -135,7 +138,7 @@ export default function Header() {
                 className={`font-medium p-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-200
                   ${
                     isActive
-                      ? "text-[#2d8c00] bg-[#2d8c00]/10" // Active Mobile Style
+                      ? "text-[#2d8c00] bg-[#2d8c00]/10"
                       : "text-slate-900 hover:bg-slate-50"
                   }`}
                 onClick={() => setIsMobileMenuOpen(false)}

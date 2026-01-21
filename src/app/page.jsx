@@ -23,24 +23,24 @@ const FEATURED_ARTICLE =
 // 2. Filter out the featured one to show the rest in the grid
 const LATEST_ARTICLES = ARTICLES_DB.filter(
   (article) => article.id !== FEATURED_ARTICLE.id,
-);
+).slice(0, 6);
 
 const CATEGORIES = [
-  "কার্ডিওলজি",
+  "আর্থাইটিস",
+  "জয়েন্ট সমস্যা",
   "পুষ্টি",
-  "শিশু বিভাগ",
-  "মানসিক স্বাস্থ্য",
-  "চর্মরোগ",
-  "ফিটনেস",
+  "ব্যায়াম",
+  "অটোইমিউন রোগ",
+  "স্পাইন সমস্যা",
 ];
 
 // --- SEO: Schema Markup ---
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "MedicalWebPage",
-  name: "HealthVerse Medical Insights",
+  name: "সাবাব সানি আর্থাইটিস কেয়ার",
   description:
-    "Latest medical insights regarding cardiology, nutrition, and mental health in Bangla.",
+    "আর্থাইটিস ও জয়েন্ট রোগের চিকিৎসা, পরামর্শ এবং প্রতিরোধ সম্পর্কে বিশেষজ্ঞ পরামর্শ।",
   audience: "Patients and Medical Professionals",
 };
 
@@ -51,12 +51,10 @@ export default function Home() {
       lang="bn"
     >
       <Head>
-        <title>
-          HealthVerse | প্রতিরোধমূলক কার্ডিওলজি এবং চিকিৎসা অন্তর্দৃষ্টি
-        </title>
+        <title>সাবাব সানি আর্থাইটিস কেয়ার | আর্থাইটিস চিকিৎসা ও পরামর্শ</title>
         <meta
           name="description"
-          content="বাংলায় কার্ডিওলজি, পুষ্টি এবং মানসিক স্বাস্থ্য সম্পর্কিত সর্বশেষ চিকিৎসা গবেষণা।"
+          content="রিউমাটয়েড আর্থাইটিস, অস্টিওআর্থাইটিস, গাউট ও অন্যান্য জয়েন্ট রোগের বিশেষজ্ঞ চিকিৎসা এবং পরামর্শ।"
         />
         <script
           type="application/ld+json"
@@ -108,12 +106,6 @@ export default function Home() {
                     aria-hidden="true"
                   />
                 </Link>
-                <Link
-                  href="/doctors"
-                  className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 px-8 py-4 rounded-xl text-base font-bold transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-300"
-                >
-                  ডাক্তারদের দেখুন
-                </Link>
               </div>
             </div>
 
@@ -133,31 +125,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* --- Category Scroller --- */}
-        <section
-          className="px-6 lg:px-20 py-4 max-w-[1200px] mx-auto overflow-hidden"
-          aria-label="বিভাগ নির্বাচন"
-        >
-          <div
-            className="flex items-center gap-4 overflow-x-auto pb-4 no-scrollbar"
-            role="tablist"
-          >
-            <span className="text-sm font-bold text-slate-600 uppercase tracking-widest mr-4 whitespace-nowrap">
-              অনুসন্ধান করুন:
-            </span>
-            {CATEGORIES.map((cat, index) => (
-              <button
-                key={cat}
-                role="tab"
-                aria-selected={index === 0}
-                className={`flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full px-6 font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900
-                  ${index === 0 ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700 hover:bg-[#BCE7FA] hover:text-slate-900 border border-slate-200"}`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </section>
+        
 
         {/* --- Blog Grid (Dynamic Links) --- */}
         <section

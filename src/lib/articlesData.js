@@ -3,105 +3,210 @@
 export const ARTICLES_DB = [
   {
     id: 1,
-    slug: "sleep-hygiene-neurology",
-    title: "ঘুমের পরিচ্ছন্নতার স্নায়বিক প্রভাব: একটি ক্লিনিকাল পর্যালোচনা",
+    slug: "rheumatoid-arthritis-treatment",
+    title: "রিউমাটয়েড আর্থাইটিস: আধুনিক চিকিৎসা ও জীবনযাত্রা",
     excerpt:
-      "ঘুমের অভ্যাস এবং স্নায়বিক প্লাস্টিসিটির মধ্যে সম্পর্ক এবং রোগীর ফলাফলের জন্য এর ক্লিনিকাল গুরুত্ব।",
-    category: "নিউরোলজি",
-    type: "ক্লিনিকাল স্টাডি",
-    author: "ডা. জেন স্মিথ, এমডি",
+      "রিউমাটয়েড আর্থাইটিসের লক্ষণ, কারণ এবং আধুনিক চিকিৎসা পদ্ধতি সম্পর্কে বিস্তারিত আলোচনা।",
+    category: "আর্থাইটিস",
+    type: "ক্লিনিকাল গাইড",
+    author: "ডা: সাদাব সাউদ সানি",
     authorImage:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCL7kuuSB9o6sOupZbuNnjmaTkjfaunTMDC9Rw0BTfLA2u6HCqKuVyeWqfC7Bd4xZwpPEYR9db3uVIqgabY7dWyrg3YjfAbnZD0CFv4V3B6glyB4U63fUNA5LDI4yhrefkoif_mxdvJP2G3BpfZrx9d0nRgr4w4gJHocFfJVRMJhTe3UizuXjG12AAT7mNCMBPDYT3bi3tpAcRP-MzmxpVJWMXsEzpOsgsJOpjHHq0HQCJA3WL2Z6UsIhpyfoV5QOHudiXsqqdcxCM-",
+      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
     authorBio:
-      "ডা. স্মিথ একজন বোর্ড-প্রত্যয়িত নিউরোলজিস্ট যিনি ঘুমের আর্কিটেকচার এবং নিউরোডিজেনারেটিভ রোগের উপর বিশেষজ্ঞ।",
-    date: "2023-10-24",
-    dateDisplay: "২৪ অক্টোবর, ২০২৩",
+      "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট যিনি আর্থাইটিস ও জয়েন্ট রোগের চিকিৎসায় বিশেষজ্ঞ।",
+    date: "2024-01-15",
+    dateDisplay: "১৫ জানুয়ারি, ২০২৪",
     readTime: "১২ মিনিট পাঠ",
+    isFeatured: true,
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAI2aYSjoU8HmzwiyIQnIHQU-gvnNldgDjbIOJze9qhFMonsXrVa_gapcTJkHMUnM3_FS0RjuYlbZNtjSLn8AjQsMcIjmFXNPSaKEOvxkWCkuua_Oo28mgheM4RnJW3v4VD2Kz--9uqU7EyZDDKtQVqhnAg1Ge3a8I9nlW7ZAD36Zfrl7ol065F0HxUwl4tI__kvidg7XEV74Y75yTaLXLwiDpJluwIA1hnYzvH_hhcfFKHuCd453miJ0DBwvUugEdimumC08YRLylv", // Diagram image
+      "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=800&h=600",
     coverImage:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBXwad-Ic2-bbvRyyDhOIHhgATH4J6MJ6sPB326_wBbfbsgJfQd1eJm0kmz9FKz5id_BNAjeLQ7XMFqdlOUTxA5r_mQZRGrrLvpY8lpIN-Yp8s_2mrdyDh2WfEhIhofIIonudTufV5I1ZnON-IVE65U7O8hzU9A9frEzjl_EfNYeS9RHzn22-5XCt3HmU2nqUBB_zbHKsN-SuKu4y1yv0iiTRlbkAe9sZ4F2xoaqRuW_Tqy6HktOPCACnLhdnuiZLA8z8ki468398Nq", // Hero image
+      "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=1200&h=400",
     content: `
-      <p>ঘুমের পরিচ্ছন্নতা বা 'স্লিপ হাইজিন' প্রায়শই সাধারণ সুস্থতার আলোচনায় উঠে আসে, তবে এর স্নায়বিক প্রভাব সুদূরপ্রসারী...</p>
-      <h2>ঘুমের চক্রের কার্যপদ্ধতি</h2>
-      <p>মানব মস্তিষ্ক ঘুমকে একটি উচ্চ-তীব্রতার রক্ষণাবেক্ষণ সময় হিসেবে ব্যবহার করে...</p>
-      <h3>স্নায়ু-পুনর্গঠনমূলক ফলাফল</h3>
+      <p>রিউমাটয়েড আর্থাইটিস একটি দীর্ঘমেয়াদী অটোইমিউন রোগ যা প্রধানত জয়েন্টগুলিকে আক্রমণ করে...</p>
+      <h2>রিউমাটয়েড আর্থাইটিসের লক্ষণ</h2>
+      <p>প্রাথমিক লক্ষণগুলির মধ্যে রয়েছে জয়েন্টে ব্যথা, ফোলাভাব এবং সকালে শক্ত হয়ে যাওয়া...</p>
+      <h3>চিকিৎসা পদ্ধতি</h3>
       <ul>
-        <li>ডেল্টা তরঙ্গের ধারাবাহিকতা উন্নত জ্ঞানীয় স্মৃতির সাথে সম্পর্কিত।</li>
-        <li>দীর্ঘস্থায়ী নীল আলোর সংস্পর্শ এসসিএন (SCN) ছন্দকে ব্যাহত করে।</li>
+        <li>ডিএমএআরডি (DMARDs) ওষুধ দিয়ে রোগের অগ্রগতি নিয়ন্ত্রণ</li>
+        <li>ফিজিওথেরাপি এবং ব্যায়াম</li>
+        <li>সঠিক খাদ্যাভ্যাস ও জীবনযাত্রার পরিবর্তন</li>
       </ul>
     `,
   },
   {
     id: 2,
-    slug: "stress-management-clinical",
-    title: "কর্মক্ষেত্রে মানসিক চাপ ব্যবস্থাপনা: একটি ক্লিনিকাল পদ্ধতি",
+    slug: "osteoarthritis-knee-pain",
+    title: "অস্টিওআর্থাইটিস: হাঁটুর ব্যথার কারণ ও প্রতিকার",
     excerpt:
-      "অফিসে দীর্ঘস্থায়ী চাপ কীভাবে কর্টিসল স্তরকে প্রভাবিত করে এবং এটি পরিচালনার ব্যবহারিক কৌশল।",
-    category: "সুস্থতা",
-    type: "গাইডলাইন",
-    author: "ডা. সারাহ উইলসন",
-    authorImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
-    authorBio: "ডা. উইলসন একজন অকুপেশনাল হেলথ স্পেশালিস্ট।",
-    date: "2023-10-20",
-    dateDisplay: "২০ অক্টোবর, ২০২৩",
-    readTime: "৮ মিনিট পাঠ",
+      "হাঁটুর অস্টিওআর্থাইটিস কী, এর লক্ষণ এবং কীভাবে ব্যথা কমানো যায় তার বিস্তারিত গাইড।",
+    category: "আর্থাইটিস",
+    type: "রোগ ব্যবস্থাপনা",
+    author: "ডা: সাদাব সাউদ সানি",
+    authorImage:
+      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
+    date: "2024-01-10",
+    dateDisplay: "১০ জানুয়ারি, ২০২৪",
+    readTime: "১০ মিনিট পাঠ",
     image:
-      "https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=800&h=600",
     coverImage:
-      "https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1200&h=400",
     content: `
-      <p>আধুনিক কর্মক্ষেত্রে মানসিক চাপ একটি নীরব মহামারী...</p>
-      <h2>কর্টিসলের প্রভাব</h2>
-      <p>দীর্ঘস্থায়ী চাপ শরীরে প্রদাহ সৃষ্টি করে যা কার্ডিওভাসকুলার স্বাস্থ্যের জন্য ক্ষতিকর...</p>
+      <p>অস্টিওআর্থাইটিস হল জয়েন্টের কার্টিলেজ ক্ষয়ে যাওয়ার একটি রোগ...</p>
+      <h2>হাঁটুর ব্যথার লক্ষণ</h2>
+      <p>হাঁটুতে ব্যথা, শক্ত হয়ে যাওয়া, ফোলাভাব এবং নড়াচড়ায় সমস্যা...</p>
     `,
   },
   {
     id: 3,
-    slug: "mediterranean-diet-heart",
-    title: "ভূমধ্যসাগরীয় ডায়েট: হার্টের স্বাস্থ্যের জন্য গোল্ড স্ট্যান্ডার্ড",
+    slug: "gout-uric-acid-management",
+    title: "গাউট ও ইউরিক এসিড: খাদ্যাভ্যাস ও চিকিৎসা",
     excerpt:
-      "পুষ্টিবিজ্ঞান কেন বারবার এই ডায়েটকে হৃদরোগ প্রতিরোধের সেরা উপায় হিসেবে স্বীকৃতি দেয়।",
-    category: "পুষ্টি",
-    type: "পুষ্টি বিজ্ঞান",
-    author: "ডা. জেমস লি",
-    authorImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=James",
-    authorBio: "ডা. লি একজন ক্লিনিকাল নিউট্রিশনিস্ট এবং গবেষক।",
-    date: "2023-10-15",
-    dateDisplay: "১৫ অক্টোবর, ২০২৩",
-    readTime: "১০ মিনিট পাঠ",
+      "গাউটের কারণ, ইউরিক এসিড নিয়ন্ত্রণ এবং সঠিক খাদ্যাভ্যাস সম্পর্কে বিশেষজ্ঞ পরামর্শ।",
+    category: "জয়েন্ট সমস্যা",
+    type: "খাদ্য ও পুষ্টি",
+    author: "ডা: সাদাব সাউদ সানি",
+    authorImage:
+      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
+    date: "2024-01-05",
+    dateDisplay: "৫ জানুয়ারি, ২০২৪",
+    readTime: "৮ মিনিট পাঠ",
     image:
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=800&h=600",
     coverImage:
-      "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=1200&h=400",
     content: `
-      <p>সঠিক খাদ্যাভ্যাস হৃদরোগের ঝুঁকি ৩০% পর্যন্ত কমাতে পারে...</p>
-      <h2>অলিভ অয়েলের ভূমিকা</h2>
-      <p>এক্সট্রা ভার্জিন অলিভ অয়েল ধমনীর নমনীয়তা বজায় রাখতে সাহায্য করে...</p>
+      <p>গাউট হল একটি জয়েন্টের প্রদাহ যা রক্তে ইউরিক এসিডের মাত্রা বেড়ে গেলে হয়...</p>
+      <h2>খাদ্যাভ্যাস পরিবর্তন</h2>
+      <p>পিউরিন সমৃদ্ধ খাবার এড়িয়ে চলুন যেমন লাল মাংস, সামুদ্রিক খাবার...</p>
     `,
   },
   {
     id: 4,
-    slug: "mediterranean-diet-heart",
-    title: "ভূমধ্যসাগরীয় ডায়েট: হার্টের স্বাস্থ্যের জন্য গোল্ড স্ট্যান্ডার্ড",
+    slug: "arthritis-exercise-physiotherapy",
+    title: "আর্থাইটিস রোগীদের জন্য ব্যায়াম ও ফিজিওথেরাপি",
     excerpt:
-      "পুষ্টিবিজ্ঞান কেন বারবার এই ডায়েটকে হৃদরোগ প্রতিরোধের সেরা উপায় হিসেবে স্বীকৃতি দেয়।",
-    category: "পুষ্টি",
-    type: "পুষ্টি বিজ্ঞান",
-    author: "ডা. জেমস লি",
-    authorImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=James",
-    authorBio: "ডা. লি একজন ক্লিনিকাল নিউট্রিশনিস্ট এবং গবেষক।",
-    date: "2023-10-15",
-    dateDisplay: "১৫ অক্টোবর, ২০২৩",
-    readTime: "১০ মিনিট পাঠ",
+      "জয়েন্টের ব্যথা কমাতে এবং নমনীয়তা বাড়াতে কার্যকর ব্যায়াম ও ফিজিওথেরাপির পরামর্শ।",
+    category: "ব্যায়াম",
+    type: "থেরাপি গাইড",
+    author: "ডা: সাদাব সাউদ সানি",
+    authorImage:
+      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
+    date: "2023-12-28",
+    dateDisplay: "২৮ ডিসেম্বর, ২০২৩",
+    readTime: "৯ মিনিট পাঠ",
     image:
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=800&h=600",
     coverImage:
-      "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=1200&h=400",
     content: `
-      <p>সঠিক খাদ্যাভ্যাস হৃদরোগের ঝুঁকি ৩০% পর্যন্ত কমাতে পারে...</p>
-      <h2>অলিভ অয়েলের ভূমিকা</h2>
-      <p>এক্সট্রা ভার্জিন অলিভ অয়েল ধমনীর নমনীয়তা বজায় রাখতে সাহায্য করে...</p>
+      <p>নিয়মিত ব্যায়াম আর্থাইটিস রোগীদের জন্য অত্যন্ত গুরুত্বপূর্ণ...</p>
+      <h2>প্রস্তাবিত ব্যায়াম</h2>
+      <p>হালকা স্ট্রেচিং, সাঁতার, এবং লো-ইমপ্যাক্ট অ্যারোবিক্স...</p>
+    `,
+  },
+  {
+    id: 5,
+    slug: "spondylitis-back-pain",
+    title: "স্পন্ডিলাইটিস: পিঠ ও কোমর ব্যথার সমাধান",
+    excerpt:
+      "এঙ্কাইলোজিং স্পন্ডিলাইটিস এবং পিঠের দীর্ঘস্থায়ী ব্যথার কারণ ও চিকিৎসা।",
+    category: "স্পাইন সমস্যা",
+    type: "ক্লিনিকাল গাইড",
+    author: "ডা: সাদাব সাউদ সানি",
+    authorImage:
+      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
+    date: "2023-12-20",
+    dateDisplay: "২০ ডিসেম্বর, ২০২৩",
+    readTime: "১১ মিনিট পাঠ",
+    image:
+      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800&h=600",
+    coverImage:
+      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1200&h=400",
+    content: `
+      <p>এঙ্কাইলোজিং স্পন্ডিলাইটিস একটি দীর্ঘমেয়াদী প্রদাহজনিত রোগ...</p>
+      <h2>লক্ষণ ও চিকিৎসা</h2>
+      <p>পিঠে ব্যথা, শক্ত হয়ে যাওয়া, বিশেষত সকালে...</p>
+    `,
+  },
+  {
+    id: 6,
+    slug: "arthritis-diet-nutrition",
+    title: "আর্থাইটিস রোগীদের জন্য সঠিক খাদ্যাভ্যাস",
+    excerpt:
+      "প্রদাহ কমাতে এবং জয়েন্টের স্বাস্থ্য ভালো রাখতে কী খাবেন এবং কী এড়িয়ে চলবেন।",
+    category: "পুষ্টি",
+    type: "খাদ্য গাইড",
+    author: "ডা: সাদাব সাউদ সানি",
+    authorImage:
+      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
+    date: "2023-12-15",
+    dateDisplay: "১৫ ডিসেম্বর, ২০২৩",
+    readTime: "৭ মিনিট পাঠ",
+    image:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800&h=600",
+    coverImage:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1200&h=400",
+    content: `
+      <p>সঠিক খাদ্যাভ্যাস আর্থাইটিসের প্রদাহ কমাতে সাহায্য করে...</p>
+      <h2>প্রদাহরোধী খাবার</h2>
+      <p>ওমেগা-৩ সমৃদ্ধ মাছ, হলুদ, আদা, সবুজ শাকসবজি...</p>
+    `,
+  },
+  {
+    id: 7,
+    slug: "lupus-autoimmune-disease",
+    title: "লুপাস (এসএলই): অটোইমিউন রোগের লক্ষণ ও চিকিৎসা",
+    excerpt:
+      "সিস্টেমিক লুপাস এরিথেমাটোসাস (SLE) এর কারণ, লক্ষণ এবং আধুনিক চিকিৎসা পদ্ধতি।",
+    category: "অটোইমিউন রোগ",
+    type: "ক্লিনিকাল স্টাডি",
+    author: "ডা: সাদাব সাউদ সানি",
+    authorImage:
+      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
+    date: "2023-12-10",
+    dateDisplay: "১০ ডিসেম্বর, ২০২৩",
+    readTime: "১৩ মিনিট পাঠ",
+    image:
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800&h=600",
+    coverImage:
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1200&h=400",
+    content: `
+      <p>লুপাস একটি জটিল অটোইমিউন রোগ যা শরীরের বিভিন্ন অঙ্গকে প্রভাবিত করতে পারে...</p>
+      <h2>লক্ষণসমূহ</h2>
+      <p>প্রজাপতি আকৃতির ফুসকুড়ি, জয়েন্টে ব্যথা, ক্লান্তি...</p>
+    `,
+  },
+  {
+    id: 8,
+    slug: "joint-pain-monsoon-season",
+    title: "বর্ষাকালে জয়েন্ট ব্যথা: কারণ ও প্রতিকার",
+    excerpt:
+      "আবহাওয়া পরিবর্তনে কেন জয়েন্টের ব্যথা বাড়ে এবং কীভাবে এটি নিয়ন্ত্রণ করবেন।",
+    category: "মৌসুমী সমস্যা",
+    type: "প্রতিরোধ গাইড",
+    author: "ডা: সাদাব সাউদ সানি",
+    authorImage:
+      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
+    date: "2023-12-05",
+    dateDisplay: "৫ ডিসেম্বর, ২০২৩",
+    readTime: "৬ মিনিট পাঠ",
+    image:
+      "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?auto=format&fit=crop&q=80&w=800&h=600",
+    coverImage:
+      "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?auto=format&fit=crop&q=80&w=1200&h=400",
+    content: `
+      <p>বর্ষাকালে আর্দ্রতা এবং বায়ুচাপের পরিবর্তন জয়েন্টের ব্যথা বাড়াতে পারে...</p>
+      <h2>প্রতিরোধমূলক ব্যবস্থা</h2>
+      <p>শরীর উষ্ণ রাখা, নিয়মিত ব্যায়াম, গরম সেঁক...</p>
     `,
   },
 ];

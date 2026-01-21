@@ -20,17 +20,17 @@ export default function AboutPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: "আমাদের সম্পর্কে | HealthVerse",
+    name: "আমাদের সম্পর্কে | সাবাব সানি আর্থাইটিস কেয়ার",
     description:
-      "হেলথভার্স হল ডাক্তার এবং রোগীদের জন্য একটি পেশাদার চিকিৎসা ইকোসিস্টেম।",
+      "সাবাব সানি আর্থাইটিস কেয়ার সেন্টার - আর্থাইটিস ও জয়েন্ট রোগের বিশেষায়িত চিকিৎসা কেন্দ্র।",
     publisher: {
       "@type": "MedicalOrganization",
-      name: "HealthVerse",
+      name: "সাবাব সানি আর্থাইটিস কেয়ার",
       logo: {
         "@type": "ImageObject",
-        url: "https://yourdomain.com/logo.png", // Replace with actual logo URL
+        url: "https://yourdomain.com/logo.png",
       },
-      slogan: "সেবা এবং কমিউনিটির সেতুবন্ধন",
+      slogan: "আর্থাইটিস চিকিৎসায় বিশেষজ্ঞ সেবা",
     },
   };
 
@@ -79,16 +79,16 @@ export default function AboutPage() {
                   id="hero-heading"
                   className="text-4xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.3] mb-6"
                 >
-                  চিকিৎসা সেবা এবং <br />
-                  কমিউনিটির{" "}
+                  আর্থাইটিস চিকিৎসায় <br />
                   <span className="text-slate-700 dark:text-[#BCE7FA]">
-                    সেতুবন্ধন
+                    বিশেষজ্ঞ সেবা
                   </span>
                 </h1>
                 <p className="text-lg lg:text-xl text-slate-700 dark:text-slate-300 mb-8 max-w-xl leading-relaxed font-medium">
-                  আমরা একটি পেশাদার চিকিৎসা ইকোসিস্টেম তৈরি করছি যেখানে
-                  ডাক্তাররা তাদের মূল্যবান জ্ঞান শেয়ার করেন এবং রোগীরা নির্ভরযোগ্য,
-                  কমিউনিটি-চালিত সেবা পান।
+                  ডা. সাবাব সানি আর্থাইটিস কেয়ার সেন্টারে আমরা রিউমাটয়েড
+                  আর্থাইটিস, অস্টিওআর্থাইটিস এবং অন্যান্য জয়েন্ট রোগের আধুনিক ও
+                  কার্যকর চিকিৎসা প্রদান করি। ১৫+ বছরের অভিজ্ঞতা সহ আমরা আপনার
+                  সুস্থতার জন্য প্রতিশ্রুতিবদ্ধ।
                 </p>
                 {/* this button will route story section */}
                 <Link
@@ -114,11 +114,11 @@ export default function AboutPage() {
                 id="why-us-heading"
                 className="text-3xl lg:text-4xl font-extrabold mb-4 text-slate-900 dark:text-white"
               >
-                কেন হেলথভার্স?
+                কেন সাবাব সানি আর্থাইটিস কেয়ার?
               </h2>
               <p className="text-slate-600 dark:text-slate-400 max-w-2xl text-lg">
-                তিনটি মূল স্তম্ভের মাধ্যমে আমরা চিকিৎসা তথ্যের জন্য একটি
-                নির্ভরযোগ্য মাধ্যম তৈরি করেছি।
+                আমরা আর্থাইটিস ও জয়েন্ট রোগের চিকিৎসায় বিশেষায়িত সেবা প্রদান
+                করি যা রোগীদের জীবনযাত্রার মান উন্নত করে।
               </p>
             </div>
 
@@ -132,12 +132,12 @@ export default function AboutPage() {
                   <Shield size={32} strokeWidth={2} />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">
-                  বিশ্বাসযোগ্যতা
+                  অভিজ্ঞতা ও দক্ষতা
                 </h3>
                 <p className="text-base leading-relaxed text-slate-600 dark:text-slate-400">
-                  সুরক্ষিত ডেটা আর্কিটেকচার এবং চিকিৎসা পেশাদারদের কঠোর যাচাইকরণ
-                  প্রক্রিয়া নিশ্চিত করে যে আপনি শুধুমাত্র নির্ভরযোগ্য উৎসের
-                  সাথে যুক্ত হচ্ছেন।
+                  ১৫+ বছরের অভিজ্ঞতা সহ ডা. সাবাব সানি দেশ-বিদেশে প্রশিক্ষিত
+                  একজন বিশেষজ্ঞ রিউমাটোলজিস্ট যিনি হাজারো রোগীকে সুস্থ জীবন
+                  উপহার দিয়েছেন।
                 </p>
               </div>
 

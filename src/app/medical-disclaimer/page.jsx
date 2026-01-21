@@ -29,7 +29,7 @@ export default function MedicalDisclaimer() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Head>
-        <title>মেডিকেল দাবিত্যাগ | HealthVerse</title>
+        <title>সাবাব সানি আর্থাইটিস কেয়ার</title>
       </Head>
 
       <main className="max-w-[800px] mx-auto px-6 py-16">
@@ -37,7 +37,7 @@ export default function MedicalDisclaimer() {
           <div className="flex items-center gap-3 mb-4 text-red-500">
             <AlertTriangle size={32} aria-hidden="true" />
             <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
-              মেডিকেল দাবিত্যাগ
+              সাবাব সানি আর্থাইটিস কেয়ার
             </h1>
           </div>
           <p className="text-slate-600 dark:text-slate-400">
