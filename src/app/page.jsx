@@ -96,7 +96,8 @@ export default function Home() {
 
               <div className="flex flex-wrap gap-4">
                 <Link
-                  href={`/articles/${FEATURED_ARTICLE.slug}`}
+                  href={`#`}
+                  // href={`/articles/${FEATURED_ARTICLE.slug}`}
                   className="bg-[#2d8c00] hover:bg-[#236e00] text-white px-8 py-4 rounded-xl text-base font-bold transition-all shadow-xl shadow-[#38B000]/20 flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40"
                   aria-label={`পড়ুন: ${FEATURED_ARTICLE.title}`}
                 >
