@@ -22,7 +22,7 @@ export default function Header() {
 
   const NAV_DATA = [
     { name: "হোম", href: "/" },
-    { name: "অথর", href: "/doctor" },
+    { name: "ডাক্তার", href: "/doctor" },
     { name: "সকল ব্লগ", href: "#" },
     { name: "আমাদের সম্পর্কে", href: "#" },
   ];
