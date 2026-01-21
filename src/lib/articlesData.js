@@ -1,5 +1,5 @@
 // lib/articlesData.js
-
+import profileimage from "../assets/portfolio.jpeg";
 export const ARTICLES_DB = [
   {
     id: 1,
@@ -10,8 +10,7 @@ export const ARTICLES_DB = [
     category: "আর্থাইটিস",
     type: "ক্লিনিকাল গাইড",
     author: "ডা: সাদাব সাউদ সানি",
-    authorImage:
-      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorImage: profileimage,
     authorBio:
       "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট যিনি আর্থাইটিস ও জয়েন্ট রোগের চিকিৎসায় বিশেষজ্ঞ।",
     date: "2024-01-15",
@@ -43,8 +42,7 @@ export const ARTICLES_DB = [
     category: "আর্থাইটিস",
     type: "রোগ ব্যবস্থাপনা",
     author: "ডা: সাদাব সাউদ সানি",
-    authorImage:
-      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorImage: profileimage,
     authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
     date: "2024-01-10",
     dateDisplay: "১০ জানুয়ারি, ২০২৪",
@@ -68,8 +66,7 @@ export const ARTICLES_DB = [
     category: "জয়েন্ট সমস্যা",
     type: "খাদ্য ও পুষ্টি",
     author: "ডা: সাদাব সাউদ সানি",
-    authorImage:
-      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorImage: profileimage,
     authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
     date: "2024-01-05",
     dateDisplay: "৫ জানুয়ারি, ২০২৪",
@@ -93,8 +90,7 @@ export const ARTICLES_DB = [
     category: "ব্যায়াম",
     type: "থেরাপি গাইড",
     author: "ডা: সাদাব সাউদ সানি",
-    authorImage:
-      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorImage: profileimage,
     authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
     date: "2023-12-28",
     dateDisplay: "২৮ ডিসেম্বর, ২০২৩",
@@ -118,8 +114,7 @@ export const ARTICLES_DB = [
     category: "স্পাইন সমস্যা",
     type: "ক্লিনিকাল গাইড",
     author: "ডা: সাদাব সাউদ সানি",
-    authorImage:
-      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorImage: profileimage,
     authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
     date: "2023-12-20",
     dateDisplay: "২০ ডিসেম্বর, ২০২৩",
@@ -143,8 +138,7 @@ export const ARTICLES_DB = [
     category: "পুষ্টি",
     type: "খাদ্য গাইড",
     author: "ডা: সাদাব সাউদ সানি",
-    authorImage:
-      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorImage: profileimage,
     authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
     date: "2023-12-15",
     dateDisplay: "১৫ ডিসেম্বর, ২০২৩",
@@ -168,8 +162,8 @@ export const ARTICLES_DB = [
     category: "অটোইমিউন রোগ",
     type: "ক্লিনিকাল স্টাডি",
     author: "ডা: সাদাব সাউদ সানি",
-    authorImage:
-      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorImage: profileimage,  
+     
     authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
     date: "2023-12-10",
     dateDisplay: "১০ ডিসেম্বর, ২০২৩",
@@ -193,8 +187,7 @@ export const ARTICLES_DB = [
     category: "মৌসুমী সমস্যা",
     type: "প্রতিরোধ গাইড",
     author: "ডা: সাদাব সাউদ সানি",
-    authorImage:
-      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+    authorImage: profileimage,
     authorBio: "ডা: সাদাব সাউদ সানি একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
     date: "2023-12-05",
     dateDisplay: "৫ ডিসেম্বর, ২০২৩",

@@ -6,6 +6,7 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link"; // Import Link for routing
 import { ARTICLES_DB } from "@/lib/articlesData"; // Import Shared Data
+import Image from "next/image";
 
 // --- Font Configuration ---
 const notoSerifBengali = Noto_Serif_Bengali({
@@ -125,8 +126,6 @@ export default function Home() {
           </div>
         </section>
 
-        
-
         {/* --- Blog Grid (Dynamic Links) --- */}
         <section
           className="px-6 lg:px-20 py-16 max-w-[1200px] mx-auto"
@@ -138,7 +137,7 @@ export default function Home() {
                 id="latest-insights-heading"
                 className="text-3xl font-extrabold text-slate-900"
               >
-                সর্বশেষ চিকিৎসা অন্তর্দৃষ্টি
+                সর্বশেষ আর্টিকেলসমূহ
               </h2>
               <p className="text-slate-600 mt-1 font-medium">
                 আমাদের ক্লিনিকাল নেটওয়ার্ক থেকে পিয়ার-রিভিউ করা আপডেট।
@@ -177,11 +176,17 @@ export default function Home() {
                     <h3 className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors leading-[1.4] group-hover:underline decoration-2 underline-offset-4">
                       {article.title}
                     </h3>
-                    <div className="flex items-center gap-3 mt-auto">
-                      <img
+                    <Link
+                      href={`/doctor`}
+                      className="flex items-center gap-3 mt-auto"
+                    >
+                      <Image
                         src={article.authorImage}
                         alt={article.author}
-                        className="size-8 rounded-full bg-slate-200 border border-slate-200"
+                        width={32}
+                        
+                        
+                        className="w-10 h-10 rounded-full bg-slate-200 border border-slate-200 object-cover"
                       />
                       <div className="text-xs text-slate-600 font-medium">
                         <p className="font-bold text-slate-900">
@@ -194,7 +199,7 @@ export default function Home() {
                           </time>
                         </p>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 </article>
               </Link>
