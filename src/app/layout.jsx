@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: " আর্থাইটিস কেয়ার বিডি",
-  description: "আর্থাইটিস কেয়ার বিডি - বাতরোগ ও আর্থাইটিস বিশেষজ্ঞ ডা: সাদাব সাউদ সানির সাথে যোগাযোগ করুন।",
+  title: "আর্থাইটিস কেয়ার",
+  description: "আর্থাইটিস কেয়ার - বাতরোগ ও আর্থাইটিস বিশেষজ্ঞ ডা: সাদাব সাউদ সানির সাথে যোগাযোগ করুন।",
 };
 
 export default function RootLayout({ children }) {

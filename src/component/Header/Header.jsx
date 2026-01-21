@@ -47,7 +47,7 @@ export default function Header() {
               priority
             />
             <h2 className="text-slate-900 text-xl font-bold tracking-tight">
-              আর্থাইটিস কেয়ার বিডি
+              আর্থাইটিস কেয়ার
             </h2>
           </Link>
 

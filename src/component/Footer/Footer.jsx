@@ -102,7 +102,7 @@ export default function Footer() {
 
       {/* Copyright Bar (Responsive) */}
       <div className="max-w-[1200px] mx-auto mt-10 pt-8 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-center items-center gap-2">
-        <p>&copy; {banglaYear} আর্থাইটিস কেয়ার বিডি</p>
+        <p>&copy; {banglaYear} আর্থাইটিস কেয়ার</p>
         <span className="hidden sm:inline text-slate-700">|</span>
         <p>
           কারিগরি সহযোগিতায়{" "}
