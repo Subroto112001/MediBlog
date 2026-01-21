@@ -14,6 +14,7 @@ import {
   ArrowRight,
   ChevronLeft,
 } from "lucide-react";
+import Image from "next/image";
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali"],
@@ -135,10 +136,12 @@ export default function ArticleDetail() {
 
           <div className="flex items-center justify-center gap-4">
             <div className="size-14 rounded-full border-2 border-[#BCE7FA] p-0.5">
-              <img
-                alt={article.author}
-                className="rounded-full w-full h-full object-cover"
+              <Image
                 src={article.authorImage}
+                alt={article.author}
+                width={32}
+                height={32}
+                className="w-10 h-10 rounded-full bg-slate-200 border border-slate-200 object-cover"
               />
             </div>
             <div className="text-left">

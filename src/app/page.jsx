@@ -110,18 +110,22 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative group">
+            <div className="relative group h-[400px] w-full">
+              
               <div
                 className="absolute inset-0 bg-white/20 rounded-[1.5rem] rotate-3 scale-105 transition-transform group-hover:rotate-1"
                 aria-hidden="true"
               ></div>
-              {/* Featured Image */}
-              <div
-                role="img"
-                aria-label={FEATURED_ARTICLE.title}
-                className="w-full h-[400px] bg-center bg-no-repeat bg-cover rounded-[1.5rem] relative shadow-2xl transition-transform"
-                style={{ backgroundImage: `url('${FEATURED_ARTICLE.image}')` }}
-              ></div>
+
+              <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden shadow-2xl">
+                <Image
+                  src={FEATURED_ARTICLE.image} 
+                  alt={FEATURED_ARTICLE.title}
+                  fill 
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  priority 
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -185,8 +189,6 @@ export default function Home() {
                         src={article.authorImage}
                         alt={article.author}
                         width={32}
-                        
-                        
                         className="w-10 h-10 rounded-full bg-slate-200 border border-slate-200 object-cover"
                       />
                       <div className="text-xs text-slate-600 font-medium">
