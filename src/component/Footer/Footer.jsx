@@ -64,7 +64,7 @@ export default function Footer() {
               />
             </div>
             <h2 className="text-white text-xl font-bold tracking-tight group-hover:text-[#BCE7FA] transition-colors">
-              আর্থাইটিস কেয়ার বিডি
+              আর্থাইটিস কেয়ার
             </h2>
           </Link>
           <p className="text-sm leading-relaxed text-slate-400">
