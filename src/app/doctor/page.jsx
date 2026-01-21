@@ -57,12 +57,12 @@ export default function DoctorProfilePage() {
             <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-12">
               <div className="flex flex-col lg:flex-row gap-8 items-start">
                 {/* Profile Image */}
-                <div className="relative w-48 h-48 rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
+                <div className="relative w-46 h-58 rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
                   <Image
                     src={doctor.image}
                     alt={doctor.name}
                     fill
-                    className="object-cover"
+                    className=""
                   />
                 </div>
 

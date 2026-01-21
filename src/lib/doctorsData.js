@@ -1,5 +1,5 @@
 // lib/doctorsData.js
-
+import profileimage from "../assets/portfolio.jpeg";
 // Single Doctor Data for Arthritis Specialist
 export const DOCTOR_PROFILE = {
   id: 1,
@@ -11,8 +11,7 @@ export const DOCTOR_PROFILE = {
   bio: "তিনি একজন বাতরোগ, আর্থাইটিস ও মেডিসিন বিশেষজ্ঞ এবং সহকারী অধ্যাপক (রিউমাটোলজি)। তিনি আমেরিকা, সুইজারল্যান্ড ও জাপান থেকে উচ্চতর প্রশিক্ষণপ্রাপ্ত এবং মাস্কুলোস্কেলেটাল আল্ট্রাসাউন্ডে ইউরোপীয়ান লীগ সার্টিফাইড।",
   fullBiography:
     "ডা: সাদাব সাউদ সানি একজন অত্যন্ত অভিজ্ঞ বাতরোগ ও মেডিসিন বিশেষজ্ঞ। তিনি বর্তমানে বাংলাদেশ মেডিকেল কলেজে সহকারী অধ্যাপক (রিউমাটোলজি) হিসেবে কর্মরত। তিনি এমবিবিএস এবং এমডি (রিউমাটোলজি) ডিগ্রি অর্জনের পাশাপাশি এফএসিআর (আমেরিকা) এবং ইসিআরডি (সুইজারল্যান্ড) ফেলোশিপ সম্পন্ন করেছেন। তিনি ইউরোপীয়ান লীগ সার্টিফাইড মাস্কুলোস্কেলেটাল আল্ট্রাসাউন্ড বিশেষজ্ঞ। এছাড়াও তিনি জাপানে হাড়ক্ষয় এবং বারডেমে ডায়াবেটিস, হরমোন ও হৃদরোগ বিষয়ে উচ্চতর প্রশিক্ষণ গ্রহণ করেছেন।",
-  image:
-    "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
+  image: profileimage,
   cover:
     "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1200&h=400",
 
@@ -36,8 +35,8 @@ export const DOCTOR_PROFILE = {
     name: "ল্যাবএইড ডায়াগনস্টিকস",
     address: "টমছমব্রীজ (নিউ হোস্টেলের বিপরীতে)",
     phone: "01824-641090",
-    email: "example@gmail.com", 
-    hours: "প্রতিদিন বিকেল ৩টা - রাত ৮টা (শুক্রবার বন্ধ)", 
+    email: "example@gmail.com",
+    hours: "প্রতিদিন বিকেল ৩টা - রাত ৮টা (শুক্রবার বন্ধ)",
     appointmentRequired: true,
   },
   socials: {
