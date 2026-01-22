@@ -56,7 +56,7 @@ export default function Footer() {
             >
               <Image
                 src="/logo.png"
-                alt="সাদাব সানি আর্থাইটিস কেয়ার লোগো"
+                alt="আর্থ্রাইটিস কেয়ার"
                 width={36}
                 height={36}
                 className="object-contain"
@@ -64,7 +64,7 @@ export default function Footer() {
               />
             </div>
             <h2 className="text-white text-xl font-bold tracking-tight group-hover:text-[#BCE7FA] transition-colors">
-              আর্থাইটিস কেয়ার
+              আর্থ্রাইটিস কেয়ার
             </h2>
           </Link>
           <p className="text-sm leading-relaxed text-slate-400">
@@ -102,12 +102,15 @@ export default function Footer() {
 
       {/* Copyright Bar (Responsive) */}
       <div className="max-w-[1200px] mx-auto mt-10 pt-8 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-center items-center gap-2">
-        <p>&copy; {banglaYear} আর্থাইটিস কেয়ার</p>
+        <p>&copy; {banglaYear} আর্থ্রাইটিস কেয়ার</p>
         <span className="hidden sm:inline text-slate-700">|</span>
         <p>
           কারিগরি সহযোগিতায়{" "}
-          <a href="#" className="font-medium text-slate-400 hover:text-white transition-colors cursor-pointer">
-           ranocoder Ltd.
+          <a
+            href="#"
+            className="font-medium text-slate-400 hover:text-white transition-colors cursor-pointer"
+          >
+            ranocoder Ltd.
           </a>
         </p>
       </div>

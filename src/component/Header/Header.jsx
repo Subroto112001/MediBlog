@@ -40,14 +40,14 @@ export default function Header() {
           >
             <Image
               src="/logo.png"
-              alt="আর্থাইটিস কেয়ার বিডি"
+              alt="আর্থ্রাইটিস কেয়ার বিডি"
               width={36}
               height={36}
               className="object-contain"
               priority
             />
             <h2 className="text-slate-900 text-xl font-bold tracking-tight">
-              আর্থাইটিস কেয়ার
+              আর্থ্রাইটিস কেয়ার
             </h2>
           </Link>
 
