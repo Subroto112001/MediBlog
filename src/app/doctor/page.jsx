@@ -127,7 +127,7 @@ export default function DoctorProfilePage() {
               <div>
                 <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
                   <User className="text-[#2d8c00]" size={32} />
-                  ডা. সাদাব সাউদ সানি
+                  ডা. সাদাব সাউদ সানী
                 </h2>
                 <p className="text-lg text-slate-700 leading-relaxed mb-6">
                   {doctor.fullBiography}

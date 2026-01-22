@@ -145,11 +145,12 @@ export default function Home() {
                 সর্বশেষ আর্টিকেলসমূহ
               </h2>
               <p className="text-slate-600 mt-1 font-medium">
-                আমাদের ক্লিনিকাল নেটওয়ার্ক থেকে পিয়ার-রিভিউ করা আপডেট।
+                আমাদের ক্লিনিকাল নেটওয়ার্ক থেকে প্রাপ্ত স্বাস্থ্য তথ্য ও পরামর্শ।
               </p>
             </div>
             <Link
-              href="/articles"
+              href="#"
+              // href="/articles"
               className="text-slate-900 font-bold flex items-center gap-1 hover:gap-2 transition-all p-2 rounded-lg hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
             >
               সব পোস্ট দেখুন <ChevronRight size={20} aria-hidden="true" />
@@ -232,7 +233,7 @@ export default function Home() {
                   id="newsletter-heading"
                   className="text-3xl lg:text-4xl font-extrabold text-slate-900"
                 >
-                  আপডেট থাকুন। চিকিৎসা অন্তর্দৃষ্টি পান।
+                  আপডেট থাকুন। স্বাস্থ্য টিপস পান।
                 </h2>
                 <p className="text-slate-600 text-lg font-medium">
                   আমাদের সাপ্তাহিক নিউজলেটারে সাবস্ক্রাইব করুন এবং সর্বশেষ

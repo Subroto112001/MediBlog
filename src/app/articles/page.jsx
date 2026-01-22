@@ -3,8 +3,9 @@
 import React from "react";
 import Link from "next/link";
 import { Noto_Serif_Bengali } from "next/font/google";
-import { ARTICLES_DB } from "@/lib/articlesData"; // Import Data
+import { ARTICLES_DB } from "@/lib/articlesData";
 import { Calendar, Clock, ArrowRight, Search } from "lucide-react";
+import Image from "next/image";
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali"],
@@ -51,8 +52,11 @@ export default function AllArticles() {
               key={article.id}
               className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full group"
             >
-              {/* Image */}
-              <div className="h-56 relative overflow-hidden">
+              {/* Image as a Link */}
+              <Link
+                href={`/articles/${article.slug}`}
+                className="h-56 relative overflow-hidden block"
+              >
                 <img
                   src={article.image}
                   alt={article.title}
@@ -61,7 +65,7 @@ export default function AllArticles() {
                 <span className="absolute top-4 left-4 bg-[#BCE7FA] text-slate-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                   {article.category}
                 </span>
-              </div>
+              </Link>
 
               {/* Content */}
               <div className="p-6 flex flex-col flex-1">
@@ -89,10 +93,12 @@ export default function AllArticles() {
 
                 <div className="border-t border-slate-100 pt-4 flex items-center justify-between mt-auto">
                   <div className="flex items-center gap-2">
-                    <img
+                    <Image
                       src={article.authorImage}
                       alt={article.author}
-                      className="size-8 rounded-full bg-slate-200"
+                      width={40}
+                      height={40}
+                      className=" w-10 h-10 rounded-full bg-slate-200 border border-slate-200 object-cover"
                     />
                     <span className="text-xs font-bold text-slate-700">
                       {article.author}
