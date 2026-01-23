@@ -1,20 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation"; // To get the slug
-import { ARTICLES_DB } from "@/lib/articlesData"; // Import Data
-import Head from "next/head";
+import React, { useEffect, useState, useRef } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { ARTICLES_DB } from "@/lib/articlesData";
 import { Noto_Serif_Bengali } from "next/font/google";
 import {
-  CheckCircle2,
   Clock,
   Calendar,
-  Share2,
-  Mail,
-  ArrowRight,
   ChevronLeft,
+  ChevronRight,
+  Share2,
+  Bookmark,
+  List,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali"],
@@ -24,23 +24,34 @@ const notoSerifBengali = Noto_Serif_Bengali({
 });
 
 export default function ArticleDetail() {
-  const params = useParams(); // Get slug from URL
+  const params = useParams();
   const router = useRouter();
   const [article, setArticle] = useState(null);
+  const [modifiedContent, setModifiedContent] = useState(""); // মডিফাইড কন্টেন্ট (ID সহ)
+  const [headings, setHeadings] = useState([]); // সূচিপত্রের তালিকা
+  const [activeId, setActiveId] = useState(""); // বর্তমান সেকশন
   const [readingProgress, setReadingProgress] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // --- Fetch Data Logic ---
+  // ১. আর্টিকেল লোড এবং কন্টেন্ট প্রসেসিং
   useEffect(() => {
     if (params?.slug) {
-      // Find the article that matches the slug
       const foundArticle = ARTICLES_DB.find((a) => a.slug === params.slug);
-      setArticle(foundArticle);
+
+      if (foundArticle) {
+        // কন্টেন্ট থেকে হেডিং বের করা এবং ID যুক্ত করা
+        const { processedContent, extractedHeadings } = processContent(
+          foundArticle.content,
+        );
+        setArticle(foundArticle);
+        setModifiedContent(processedContent);
+        setHeadings(extractedHeadings);
+      }
       setLoading(false);
     }
   }, [params]);
 
-  // --- Scroll Progress Logic ---
+  // ২. স্ক্রল প্রোগ্রেস বার
   useEffect(() => {
     const updateProgress = () => {
       const currentScroll = window.scrollY;
@@ -55,157 +66,284 @@ export default function ArticleDetail() {
     return () => window.removeEventListener("scroll", updateProgress);
   }, []);
 
-  // --- Loading State ---
+  // ৩. স্ক্রল স্পাই (Active Section Detection)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-100px 0px -60% 0px" }, // স্ক্রিনের মাঝখানে আসলে ডিটেক্ট করবে
+    );
+
+    headings.forEach((heading) => {
+      const element = document.getElementById(heading.id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [headings, modifiedContent]); // কন্টেন্ট রেন্ডার হওয়ার পর রান হবে
+
+  // --- Helper Function: Content Processor ---
+  const processContent = (htmlString) => {
+    const headingRegex = /<h([2-3])>(.*?)<\/h\1>/g;
+    const extractedHeadings = [];
+    let counter = 0;
+
+    const processedContent = htmlString.replace(
+      headingRegex,
+      (match, level, text) => {
+        const id = `section-${counter++}`;
+        // এইচটিএমএল ট্যাগ রিমুভ করে ক্লিন টেক্সট রাখা
+        const cleanText = text.replace(/<[^>]*>?/gm, "");
+        extractedHeadings.push({ id, text: cleanText, level: parseInt(level) });
+        // অরিজিনাল ট্যাগের বদলে ID সহ ট্যাগ রিটার্ন করা
+        return `<h${level} id="${id}" class="scroll-mt-24">${text}</h${level}>`;
+      },
+    );
+
+    return { processedContent, extractedHeadings };
+  };
+
+  const handleScrollToSection = (e, id) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setActiveId(id);
+    }
+  };
+
   if (loading)
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        লোড হচ্ছে...
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-10 h-10 border-4 border-[#68c20e] border-t-transparent rounded-full animate-spin"></div>
+          <span className="text-slate-500 font-medium">লোড হচ্ছে...</span>
+        </div>
       </div>
     );
 
-  // --- 404 State ---
   if (!article)
     return (
       <div
-        className={`min-h-screen flex flex-col items-center justify-center ${notoSerifBengali.className}`}
+        className={`min-h-screen flex flex-col items-center justify-center bg-slate-50 ${notoSerifBengali.className}`}
       >
-        <h1 className="text-2xl font-bold mb-4">নিবন্ধটি পাওয়া যায়নি</h1>
-        <button
-          onClick={() => router.back()}
-          className="text-sky-600 hover:underline"
-        >
-          ফিরে যান
-        </button>
+        <div className="text-center p-8 bg-white rounded-2xl shadow-sm border border-slate-100 max-w-md w-full">
+          <h1 className="text-2xl font-bold mb-2 text-slate-800">
+            নিবন্ধটি পাওয়া যায়নি
+          </h1>
+          <button
+            onClick={() => router.back()}
+            className="bg-[#2d8c00] text-white px-6 py-2.5 rounded-full hover:bg-[#267500] transition-colors font-medium"
+          >
+            ফিরে যান
+          </button>
+        </div>
       </div>
     );
-
-  // --- SEO Schema ---
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "MedicalScholarlyArticle",
-    headline: article.title,
-    image: article.image,
-    author: { "@type": "Physician", name: article.author },
-    datePublished: article.date,
-    description: article.excerpt,
-  };
 
   return (
     <div
       className={`min-h-screen bg-white text-slate-900 ${notoSerifBengali.className}`}
       lang="bn"
     >
-      {/* --- Reading Progress Bar --- */}
+      {/* Progress Bar */}
       <div
-        className="fixed top-0 left-0 w-full h-1.5 bg-slate-100 z-[100]"
+        className="fixed top-0 left-0 w-full h-1 bg-slate-100 z-[100]"
         role="progressbar"
-        aria-valuenow={readingProgress}
-        aria-valuemin="0"
-        aria-valuemax="100"
       >
         <div
-          className="h-full bg-[#70E000] transition-all duration-150 ease-out"
+          className="h-full bg-gradient-to-r from-[#68c20e] to-[#2d8c00] transition-all duration-150 ease-out"
           style={{ width: `${readingProgress}%` }}
         />
       </div>
 
-      <main className="max-w-[1440px] mx-auto px-6 py-12 lg:py-16">
-        {/* --- Header --- */}
-        <header className="max-w-[800px] mx-auto text-center mb-16 relative">
-          {/* Back Button */}
+      <main className="max-w-[1280px] mx-auto px-6 py-8 lg:py-12">
+        {/* Navigation & Actions */}
+        <div className="flex items-center justify-between mb-8">
           <button
             onClick={() => router.back()}
-            className="absolute left-0 top-0 md:-left-20 p-2 rounded-full hover:bg-slate-100 transition-colors hidden md:block"
-            aria-label="ফিরে যান"
+            className="group flex items-center gap-2 text-slate-500 hover:text-[#2d8c00] transition-colors"
           >
-            <ChevronLeft size={24} className="text-slate-500" />
+            <div className="p-2 rounded-full bg-slate-50 group-hover:bg-[#2d8c00]/10 transition-colors">
+              <ChevronLeft size={20} />
+            </div>
+            <span className="font-medium hidden sm:inline">ফিরে যান</span>
           </button>
 
-          <div className="flex justify-center gap-3 mb-6">
-            <span className="px-4 py-1 rounded-full bg-[#BCE7FA] text-slate-900 text-xs font-bold tracking-wide uppercase">
-              {article.category}
-            </span>
-            <span className="px-4 py-1 rounded-full bg-slate-100 text-slate-500 text-xs font-bold tracking-wide uppercase">
-              {article.type}
-            </span>
+          <div className="flex items-center gap-2">
+            <button
+              className="p-2.5 rounded-full text-slate-500 hover:bg-slate-50 hover:text-[#2d8c00] transition-colors"
+              title="সেভ করুন"
+            >
+              <Bookmark size={20} />
+            </button>
+            <button
+              className="p-2.5 rounded-full text-slate-500 hover:bg-slate-50 hover:text-[#2d8c00] transition-colors"
+              title="শেয়ার করুন"
+            >
+              <Share2 size={20} />
+            </button>
           </div>
+        </div>
 
-          <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.3] text-slate-900 mb-8">
-            {article.title}
-          </h1>
+        {/* Layout Grid: Left Sidebar (TOC) & Right Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-12 items-start">
+          {/* --- Left Sidebar: Table of Contents --- */}
+          <aside className="hidden lg:block sticky top-24 h-[calc(100vh-120px)] overflow-y-auto pr-4 custom-scrollbar">
+            <div className="bg-slate-50/50 rounded-2xl p-6 border border-slate-100">
+              <div className="flex items-center gap-2 mb-4 text-slate-900 font-bold text-lg border-b border-slate-200 pb-2">
+                <List size={20} className="text-[#2d8c00]" />
+                <h3>এই পৃষ্ঠায়</h3>
+              </div>
 
-          <div className="flex items-center justify-center gap-4">
-            <div className="size-14 rounded-full border-2 border-[#BCE7FA] p-0.5">
-              <Image
-                src={article.authorImage}
-                alt={article.author}
-                width={32}
-                height={32}
-                className="w-10 h-10 rounded-full bg-slate-200 border border-slate-200 object-cover"
-              />
+              {headings.length > 0 ? (
+                <nav className="flex flex-col gap-1">
+                  {headings.map((heading) => (
+                    <a
+                      key={heading.id}
+                      href={`#${heading.id}`}
+                      onClick={(e) => handleScrollToSection(e, heading.id)}
+                      className={`block text-sm py-2 px-3 rounded-lg transition-all duration-200 border-l-2 
+                        ${
+                          activeId === heading.id
+                            ? "border-[#2d8c00] bg-[#2d8c00]/10 text-[#2d8c00] font-bold shadow-sm"
+                            : "border-transparent text-slate-600 hover:text-[#2d8c00] hover:bg-slate-100 font-medium"
+                        }
+                        ${heading.level === 3 ? "ml-4 text-xs" : ""}
+                      `}
+                    >
+                      {heading.text}
+                    </a>
+                  ))}
+                </nav>
+              ) : (
+                <p className="text-slate-400 text-sm">কোনো সূচিপত্র নেই</p>
+              )}
             </div>
-            <div className="text-left">
-              <p className="font-bold text-slate-900 text-lg">
-                {article.author}
-              </p>
-              <div className="flex items-center gap-3 text-sm text-slate-500 font-medium">
-                <span className="flex items-center gap-1">
-                  <Calendar size={14} /> {article.dateDisplay}
+
+            
+          </aside>
+
+          {/* --- Right Column: Main Content --- */}
+          <article className="w-full min-w-0">
+            {/* Breadcrumb */}
+            <nav className="flex items-center gap-2 text-sm mb-6 text-slate-500 flex-wrap">
+              <Link
+                href="/articles"
+                className="hover:text-[#2d8c00] transition-colors"
+              >
+                ব্লগ
+              </Link>
+              <ChevronRight size={14} />
+              <Link
+                href={`/articles?category=${encodeURIComponent(article.category)}`}
+                className="hover:text-[#2d8c00] transition-colors"
+              >
+                {article.category}
+              </Link>
+            </nav>
+
+            {/* Header */}
+            <header className="mb-10">
+              <div className="flex flex-wrap gap-3 mb-6">
+                <span className="px-4 py-1.5 rounded-full bg-[#E8F7F0] text-[#2d8c00] text-xs font-bold uppercase tracking-wider border border-[#2d8c00]/20">
+                  {article.category}
                 </span>
-                <span className="flex items-center gap-1">
-                  <Clock size={14} /> {article.readTime}
+                <span className="px-4 py-1.5 rounded-full bg-slate-100 text-slate-600 text-xs font-bold uppercase tracking-wider">
+                  {article.type}
                 </span>
               </div>
-            </div>
-          </div>
-        </header>
 
-        {/* --- Content Layout --- */}
-        <div className="relative flex justify-center gap-16">
-          {/* Main Article Body */}
-          <article className="max-w-[800px] w-full text-lg leading-relaxed text-slate-700">
-            {/* Hero Image inside article */}
-            <div className="mb-10 rounded-2xl overflow-hidden shadow-sm">
-              <img
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.2] text-slate-900 mb-8">
+                {article.title}
+              </h1>
+
+              {/* Author Meta (Mobile Visible) */}
+              <div className="flex items-center justify-between border-y border-slate-100 py-6">
+                <div className="flex items-center gap-4">
+                  <div className="relative size-12 rounded-full overflow-hidden border border-slate-200">
+                    <Image
+                      src={article.authorImage}
+                      alt={article.author}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-900 text-base">
+                      {article.author}
+                    </p>
+                    <p className="text-sm text-slate-500">
+                      বিশেষজ্ঞ রিউমাটোলজিস্ট
+                    </p>
+                  </div>
+                </div>
+                <div className="hidden sm:flex flex-col items-end gap-1 text-sm text-slate-500 font-medium">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar size={15} className="text-[#68c20e]" />{" "}
+                    {article.dateDisplay}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock size={15} className="text-[#68c20e]" />{" "}
+                    {article.readTime}
+                  </span>
+                </div>
+              </div>
+            </header>
+
+            {/* Hero Image */}
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg mb-10">
+              <Image
                 src={article.coverImage}
                 alt={article.title}
-                className="w-full h-auto object-cover"
+                fill
+                priority
+                className="object-cover hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 1000px) 100vw, 800px"
               />
             </div>
 
-            {/* DangerouslySetInnerHTML is used here because we are passing HTML strings 
-                from our database. In a real app, use a markdown parser or sanitizer.
-            */}
+            {/* Dynamic Content with IDs */}
             <div
-              className="prose prose-lg max-w-none prose-headings:text-slate-900 prose-headings:font-bold prose-p:mb-6 prose-li:mb-2 prose-strong:text-slate-900"
-              dangerouslySetInnerHTML={{ __html: article.content }}
-            />
+              className="prose prose-lg md:prose-xl prose-slate max-w-none 
+              prose-headings:font-bold prose-headings:text-slate-900 prose-headings:scroll-mt-24
+              prose-p:text-slate-700 prose-p:leading-8 
+              prose-a:text-[#2d8c00] prose-a:no-underline hover:prose-a:underline
+              prose-strong:text-slate-900 
+              prose-li:marker:text-[#68c20e]"
+            >
+              <div dangerouslySetInnerHTML={{ __html: modifiedContent }} />
+            </div>
 
-            <hr className="my-16 border-slate-200" />
+            <hr className="my-12 border-slate-200" />
 
-            {/* Author Bio Box */}
-            <section className="bg-slate-50 rounded-2xl p-8 md:p-10 border border-slate-100 mb-16">
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="size-28 shrink-0 rounded-2xl overflow-hidden shadow-sm border-2 border-white">
-                  <img
+            {/* Author Box Footer */}
+            <div className="bg-[#f8fcf5] rounded-3xl p-8 border border-[#e6f4d9]">
+              <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start text-center sm:text-left">
+                <div className="relative size-24 shrink-0 rounded-2xl overflow-hidden shadow-sm border-2 border-white ring-2 ring-[#68c20e]/20">
+                  <Image
                     alt={article.author}
-                    className="w-full h-full object-cover"
                     src={article.authorImage}
+                    fill
+                    className="object-cover"
                   />
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-2xl font-bold text-slate-900 mb-2">
+                  <h4 className="text-xl font-bold text-slate-900 mb-2">
                     {article.author}
                   </h4>
-                  <p className="text-slate-600 text-base leading-relaxed mb-6">
-                    {article.authorBio}
+                  <p className="text-slate-600 text-base leading-relaxed mb-0">
+                    {article.authorBio} ডা: সাদাব সাউদ সানী রোগীদের দীর্ঘমেয়াদী
+                    বাত ব্যথা নিরাময়ে নিবেদিতপ্রাণ।
                   </p>
-                  <button className="bg-[#BCE7FA] text-slate-900 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-[#a0dcf8] transition-all">
-                    প্রোফাইল দেখুন
-                  </button>
                 </div>
               </div>
-            </section>
+            </div>
           </article>
         </div>
       </main>
