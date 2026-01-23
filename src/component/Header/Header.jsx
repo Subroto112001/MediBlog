@@ -27,13 +27,12 @@ export default function Header() {
     ...new Set(ARTICLES_DB.map((article) => article.category)),
   ];
 
-  // ক্যাটাগরিগুলোকে ড্রপডাউন আইটেমের ফরম্যাটে সাজানো
+
   const blogDropdownItems = uniqueCategories.map((cat) => ({
     name: cat,
     href: `/articles?category=${cat}`,
   }));
 
-  // ২. মেইন নেভিগেশন ডেটা স্ট্রাকচার (যেকোনো মেনুতে ড্রপডাউন সাপোর্ট করার জন্য)
   const NAV_DATA = [
     {
       name: "হোম",
@@ -119,14 +118,17 @@ export default function Header() {
                   </Link>
 
                   {hasDropdown && (
-                    <div className="absolute top-full left-0 pt-2 w-max opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top translate-y-2 group-hover:translate-y-0 z-50">
+                    <div className="absolute top-full left-0 pt-2 w-max max-w-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top translate-y-2 group-hover:translate-y-0 z-50">
+                      {/* পরিবর্তন ১: max-w-xl দেওয়া হয়েছে যাতে মেনুটি খুব বেশি চওড়া না হয় */}
+
                       <div className="bg-white border border-slate-100 rounded-lg shadow-xl overflow-hidden">
-                        <ul className="py-2 flex ">
+                        {/* পরিবর্তন ২: flex-wrap এবং gap-2 দেওয়া হয়েছে */}
+                        <ul className="p-3 flex flex-wrap gap-2">
                           {link.dropdownItems.map((subItem, index) => (
-                            <li key={index}>
+                            <li key={index} className="flex-shrink-0">
                               <Link
                                 href={subItem.href}
-                                className="block px-4 py-2.5 text-sm text-slate-600 hover:text-[#2d8c00] hover:bg-slate-50 transition-colors"
+                                className="block px-4 py-2 text-sm text-slate-600 font-medium hover:text-[#2d8c00] hover:bg-slate-50 rounded-md transition-colors whitespace-nowrap border border-transparent hover:border-slate-100"
                               >
                                 {subItem.name}
                               </Link>
