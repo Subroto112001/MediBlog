@@ -67,7 +67,7 @@ export default function Header() {
                   className={`text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d8c00] rounded px-1
                     ${
                       isActive
-                        ? "text-[#2d8c00] underline decoration-2 underline-offset-4"
+                        ? "text-[#70E000] underline decoration-2 underline-offset-4"
                         : "text-slate-600 hover:text-slate-900"
                     }`}
                 >

@@ -4,6 +4,7 @@ import React from "react";
 import { Noto_Serif_Bengali } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
+import Button from "../Button/Button";
 
 // --- Font Configuration ---
 const notoSerifBengali = Noto_Serif_Bengali({
@@ -71,6 +72,7 @@ export default function Footer() {
             বিশেষজ্ঞের অন্তর্দৃষ্টি এবং পেশাদার ক্লিনিকাল ডিরেক্টরির মাধ্যমে
             চিকিৎসা জ্ঞানের ভবিষ্যৎ নেতৃত্ব দিচ্ছে।
           </p>
+          <Button />
         </div>
 
         {/* Dynamic Link Sections (Responsive) */}
