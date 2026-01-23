@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Noto_Serif_Bengali } from "next/font/google";
@@ -25,7 +25,40 @@ const notoSerifBengali = Noto_Serif_Bengali({
 // পেজিনেশন কনফিগারেশন
 const ARTICLES_PER_PAGE = 12;
 
-export default function AllArticles() {
+// Loading Fallback Component
+function ArticlesLoading() {
+  return (
+    <div
+      className={`min-h-screen bg-slate-50 text-slate-900 ${notoSerifBengali.className}`}
+      lang="bn"
+    >
+      <main className="max-w-[1200px] mx-auto px-6 py-12">
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <div className="h-10 w-64 bg-slate-200 rounded-lg mx-auto mb-4 animate-pulse"></div>
+          <div className="h-6 w-96 bg-slate-200 rounded-lg mx-auto animate-pulse"></div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div
+              key={i}
+              className="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100"
+            >
+              <div className="h-56 bg-slate-200 animate-pulse"></div>
+              <div className="p-6">
+                <div className="h-4 w-32 bg-slate-200 rounded animate-pulse mb-3"></div>
+                <div className="h-6 w-full bg-slate-200 rounded animate-pulse mb-3"></div>
+                <div className="h-4 w-full bg-slate-200 rounded animate-pulse"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
+  );
+}
+
+// Main Articles Content Component (uses useSearchParams)
+function ArticlesContent() {
   const searchParams = useSearchParams();
   const categoryFromUrl = searchParams.get("category");
 
@@ -280,5 +313,14 @@ export default function AllArticles() {
         )}
       </main>
     </div>
+  );
+}
+
+// Main Export with Suspense Boundary
+export default function AllArticles() {
+  return (
+    <Suspense fallback={<ArticlesLoading />}>
+      <ArticlesContent />
+    </Suspense>
   );
 }

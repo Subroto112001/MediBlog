@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "আর্থাইটিস কেয়ার",
-  description: "আর্থাইটিস কেয়ার - বাতরোগ ও আর্থাইটিস বিশেষজ্ঞ ডা: সাদাব সাউদ সানির সাথে যোগাযোগ করুন।",
+  description: "আর্থাইটিস কেয়ার - বাতরোগ ও আর্থাইটিস বিশেষজ্ঞ ডা: সাদাব সাউদ সানীর সাথে যোগাযোগ করুন।",
 };
 
 export default function RootLayout({ children }) {
