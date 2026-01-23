@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Noto_Serif_Bengali } from "next/font/google";
 import Image from "next/image";
+import Button from "../Button/Button";
 
 // --- Font Configuration ---
 const notoSerifBengali = Noto_Serif_Bengali({
@@ -23,7 +24,7 @@ export default function Header() {
   const NAV_DATA = [
     { name: "হোম", href: "/" },
     { name: "ডাক্তার", href: "/doctor" },
-    { name: "সকল ব্লগ", href: "#" },
+    { name: "সকল ব্লগ", href: "/articles" },
     { name: "আমাদের সম্পর্কে", href: "#" },
   ];
 
@@ -100,12 +101,7 @@ export default function Header() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </form>
-
-          {/* CTA Button */}
-          <button className="hidden sm:block bg-[#2d8c00] hover:bg-[#236e00] text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-[#38B000]/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40">
-            অ্যাপয়েন্টমেন্ট নিন
-          </button>
-
+          <Button />
           {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 text-slate-900 rounded-lg hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"

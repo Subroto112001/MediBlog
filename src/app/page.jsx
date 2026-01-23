@@ -112,7 +112,6 @@ export default function Home() {
             </div>
 
             <div className="relative group h-[400px] w-full">
-              
               <div
                 className="absolute inset-0 bg-white/20 rounded-[1.5rem] rotate-3 scale-105 transition-transform group-hover:rotate-1"
                 aria-hidden="true"
@@ -120,11 +119,11 @@ export default function Home() {
 
               <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden shadow-2xl">
                 <Image
-                  src={FEATURED_ARTICLE.image} 
+                  src={FEATURED_ARTICLE.image}
                   alt={FEATURED_ARTICLE.title}
-                  fill 
+                  fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  priority 
+                  priority
                 />
               </div>
             </div>
@@ -145,7 +144,8 @@ export default function Home() {
                 সর্বশেষ আর্টিকেলসমূহ
               </h2>
               <p className="text-slate-600 mt-1 font-medium">
-                আমাদের ক্লিনিকাল নেটওয়ার্ক থেকে প্রাপ্ত স্বাস্থ্য তথ্য ও পরামর্শ।
+                আমাদের ক্লিনিকাল নেটওয়ার্ক থেকে প্রাপ্ত স্বাস্থ্য তথ্য ও
+                পরামর্শ।
               </p>
             </div>
             <Link
@@ -211,7 +211,72 @@ export default function Home() {
             ))}
           </div>
         </section>
+        {/* --- YouTube Video Section --- */}
+        <section
+          className="px-4 lg:px-20 py-12 max-w-[1200px] mx-auto"
+          style={{ fontFamily: '"Noto Serif", serif' }}
+          aria-labelledby="video-section-heading"
+        >
+          {/* হেডার */}
+          <div className="mb-8">
+            <h2
+              id="video-section-heading"
+              className="text-2xl md:text-3xl font-extrabold text-slate-900"
+            >
+              ভিডিও পরামর্শ
+            </h2>
+            <p className="text-slate-600 mt-1 font-medium text-sm md:text-base">
+              আর্থ্রাইটিস ও জয়েন্ট পেইন নিয়ে সরাসরি ডক্টরের পরামর্শ দেখুন।
+            </p>
+          </div>
 
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:items-stretch">
+            {/* বড় ভিডিও (বাম পাশ) */}
+            <div className="lg:col-span-7 relative overflow-hidden rounded-xl bg-slate-900 shadow-xl aspect-video lg:aspect-auto lg:h-full">
+              <iframe
+                className="w-full h-full object-cover border-0"
+                src="https://www.youtube.com/embed/VIDEO_ID_1"
+                title="Featured Health Video"
+                allowFullScreen
+              ></iframe>
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none">
+                <h3 className="text-white text-base md:text-2xl font-bold leading-tight">
+                  আর্থ্রাইটিস রোগীদের জন্য সঠিক জীবনধারা
+                </h3>
+              </div>
+            </div>
+
+            {/* ছোট ভিডিওর কন্টেইনার (ডান পাশ / মোবাইল বটম) */}
+            <div className="lg:col-span-5 flex flex-row lg:flex-col gap-3 md:gap-4 overflow-hidden">
+              {[1, 2, 3].map((item) => (
+                <div
+                  key={item}
+                  className="flex flex-col lg:flex-row gap-2 lg:gap-4 flex-1 min-w-0"
+                >
+                  {/* থাম্বনেইল অংশ - মোবাইলে ১/৩ জায়গা নিবে */}
+                  <div className="relative overflow-hidden rounded-lg bg-slate-200 shadow-sm aspect-video lg:w-40 xl:w-48 flex-shrink-0">
+                    <iframe
+                      className="w-full h-full object-cover border-0"
+                      src={`https://www.youtube.com/embed/VIDEO_ID_${item + 1}?modestbranding=1&rel=0`}
+                      title={`Health Tip Video ${item}`}
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+
+                  {/* টাইটেল অংশ */}
+                  <div className="flex flex-col justify-start lg:justify-center overflow-hidden">
+                    <h4 className="text-slate-900 text-[9px] sm:text-xs md:text-sm lg:text-[15px] font-bold leading-tight line-clamp-2">
+                      জয়েন্ট পেইন ব্যায়াম - পর্ব {item}
+                    </h4>
+                    <p className="hidden lg:block text-slate-500 text-[12px] mt-1 font-medium">
+                      Youtube Video
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
         {/* --- Newsletter --- */}
         <section
           className="px-6 lg:px-20 py-20 bg-[#BCE7FA]/20"
