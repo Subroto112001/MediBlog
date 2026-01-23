@@ -96,9 +96,8 @@ export default function Home() {
 
               <div className="flex flex-wrap gap-4">
                 <Link
-                  href={`#`}
-                  // href={`/articles/${FEATURED_ARTICLE.slug}`}
-                  className="bg-[#2d8c00] hover:bg-[#236e00] text-white px-8 py-4 rounded-xl text-base font-bold transition-all shadow-xl shadow-[#38B000]/20 flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40"
+                  href={`/articles/${FEATURED_ARTICLE.slug}`}
+                  className="bg-[#68c20e] hover:bg-[#44af13] text-white px-8 py-4 rounded-xl text-base font-bold transition-all shadow-xl shadow-[#38B000]/20 flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40"
                   aria-label={`পড়ুন: ${FEATURED_ARTICLE.title}`}
                 >
                   নিবন্ধ পড়ুন
@@ -149,8 +148,7 @@ export default function Home() {
               </p>
             </div>
             <Link
-              href="#"
-              // href="/articles"
+              href="/articles"
               className="text-slate-900 font-bold flex items-center gap-1 hover:gap-2 transition-all p-2 rounded-lg hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
             >
               সব পোস্ট দেখুন <ChevronRight size={20} aria-hidden="true" />
@@ -160,8 +158,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {LATEST_ARTICLES.map((article) => (
               <Link
-                // href={`/articles/${article.slug}`}
-                href={"#"}
+                href={`/articles/${article.slug}`}
                 key={article.id}
                 className="group focus-visible:outline-none"
               >
