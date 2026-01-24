@@ -55,8 +55,7 @@ export default function Header() {
       dropdownItems: categoryData,
     },
     { name: "ব্লগ", href: "/articles" },
-    { name: "ডাক্তার", href: "/doctor" },
-    { name: "আমাদের সম্পর্কে", href: "/about" },
+    { name: "লেখক সম্পর্কে", href: "/writer" },
   ];
 
   return (
