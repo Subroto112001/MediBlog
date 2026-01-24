@@ -213,7 +213,7 @@ function ArticlesContent() {
                     </div>
                     <Link
                       href={`/articles/${article.slug}`}
-                      className="size-10 rounded-full bg-[#f0f9ff] flex items-center justify-center text-sky-600 group-hover:bg-[#68c20e] group-hover:text-white transition-colors"
+                      className="size-10 rounded-full bg-[#f0f9ff] flex items-center justify-center text-sky-600 group-hover:bg-[#236e00] group-hover:text-white transition-colors"
                       aria-label={`পড়ুন: ${article.title}`}
                     >
                       <ArrowRight size={18} />
@@ -240,7 +240,7 @@ function ArticlesContent() {
                 setSearchQuery("");
                 setCurrentPage(1);
               }}
-              className="mt-6 text-[#70E000] font-bold hover:underline"
+              className="mt-6 text-[#2d8c00] font-bold hover:underline"
             >
               সব নিবন্ধ দেখুন
             </button>
@@ -258,7 +258,7 @@ function ArticlesContent() {
                 ${
                   currentPage === 1
                     ? "bg-slate-100 text-slate-400 cursor-not-allowed"
-                    : "bg-white text-slate-700 border border-slate-200 hover:border-[#68c20e] hover:text-[#68c20e]"
+                    : "bg-white text-slate-700 border border-slate-200 hover:border-[#2d8c00] hover:text-[#68c20e]"
                 }`}
             >
               <ChevronLeft size={18} />
@@ -276,7 +276,7 @@ function ArticlesContent() {
                     ${
                       currentPage === page
                         ? "bg-[#68c20e] text-white shadow-md"
-                        : "bg-white text-slate-700 border border-slate-200 hover:border-[#68c20e] hover:text-[#68c20e]"
+                        : "bg-white text-slate-700 border border-slate-200 hover:border-[#2d8c00] hover:text-[#68c20e]"
                     }`}
                   >
                     {toBengaliNumber(page)}
@@ -293,7 +293,7 @@ function ArticlesContent() {
                 ${
                   currentPage === totalPages
                     ? "bg-slate-100 text-slate-400 cursor-not-allowed"
-                    : "bg-white text-slate-700 border border-slate-200 hover:border-[#68c20e] hover:text-[#68c20e]"
+                    : "bg-white text-slate-700 border border-slate-200 hover:border-[#68c20e] hover:text-[#236e00]"
                 }`}
             >
               পরবর্তী

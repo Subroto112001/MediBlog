@@ -8,7 +8,7 @@ export const ARTICLES_DB = [
     title: "রিউমাটয়েড আর্থ্রাইটিস : আধুনিক চিকিৎসা ও জীবনযাত্রা",
     excerpt:
       "রিউমাটয়েড আর্থ্রাইটিসের লক্ষণ, কারণ এবং আধুনিক চিকিৎসা পদ্ধতি সম্পর্কে বিস্তারিত আলোচনা।",
-    category: "আর্থ্রাইটিস ",
+    category: "আর্থ্রাইটিস",
     type: "ক্লিনিকাল গাইড",
     author: "ডা: সাদাব সাউদ সানী",
     authorImage: profileimage,
@@ -18,10 +18,8 @@ export const ARTICLES_DB = [
     dateDisplay: "১৫ জানুয়ারি, ২০২৪",
     readTime: "১২ মিনিট পাঠ",
     isFeatured: true,
-    image:
-      heroimage,
-    coverImage:
-      heroimage,
+    image: heroimage,
+    coverImage: heroimage,
     content: `
       <p>রিউমাটয়েড আর্থ্রাইটিস একটি দীর্ঘমেয়াদী অটোইমিউন রোগ যা প্রধানত জয়েন্টগুলিকে আক্রমণ করে...</p>
       <h2>রিউমাটয়েড আর্থ্রাইটিসের লক্ষণ</h2>
@@ -40,7 +38,7 @@ export const ARTICLES_DB = [
     title: "অস্টিওআর্থ্রাইটিস : হাঁটুর ব্যথার কারণ ও প্রতিকার",
     excerpt:
       "হাঁটুর অস্টিওআর্থ্রাইটিস কী, এর লক্ষণ এবং কীভাবে ব্যথা কমানো যায় তার বিস্তারিত গাইড।",
-    category: "আর্থ্রাইটিস ",
+    category: "আর্থ্রাইটিস",
     type: "রোগ ব্যবস্থাপনা",
     author: "ডা: সাদাব সাউদ সানী",
     authorImage: profileimage,
@@ -163,8 +161,8 @@ export const ARTICLES_DB = [
     category: "অটোইমিউন রোগ",
     type: "ক্লিনিকাল স্টাডি",
     author: "ডা: সাদাব সাউদ সানী",
-    authorImage: profileimage,  
-     
+    authorImage: profileimage,
+
     authorBio: "ডা: সাদাব সাউদ সানী একজন অভিজ্ঞ রিউমাটোলজিস্ট।",
     date: "2023-12-10",
     dateDisplay: "১০ ডিসেম্বর, ২০২৩",

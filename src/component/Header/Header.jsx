@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Search, Menu, X, ChevronDown } from "lucide-react";
+import { Search, Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Noto_Serif_Bengali } from "next/font/google";
@@ -9,13 +9,18 @@ import Image from "next/image";
 import Button from "../Button/Button";
 import { ARTICLES_DB } from "@/lib/articlesData";
 
-// --- Font Configuration ---
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-noto-bengali",
   display: "swap",
 });
+
+// ইংরেজি সংখ্যাকে বাংলায় রূপান্তর করার ফাংশন
+const toBengaliNumber = (num) => {
+  const bengaliDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+  return num.toString().replace(/\d/g, (d) => bengaliDigits[d]);
+};
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,7 +29,6 @@ export default function Header() {
   const [mobileExpanded, setMobileExpanded] = useState(null);
   const pathname = usePathname();
 
-  // ১. ডায়নামিক ক্যাটাগরিগুলো জেনারেট করা (Articles DB থেকে) সাথে আর্টিকেল কাউন্ট
   const categoryData = useMemo(() => {
     const categoryCounts = {};
     ARTICLES_DB.forEach((article) => {
@@ -42,31 +46,17 @@ export default function Header() {
     }));
   }, []);
 
-  const blogDropdownItems = categoryData;
-
   const NAV_DATA = [
-    {
-      name: "হোম",
-      href: "/",
-    },
+    { name: "হোম", href: "/" },
     {
       name: "টপিকস",
-      href: "/articles",
+      href: "#",
       hasMegaMenu: true,
-      dropdownItems: blogDropdownItems,
+      dropdownItems: categoryData,
     },
-    {
-      name: "ব্লগ",
-      href: "/articles",
-    },
-    {
-      name: "ডাক্তার",
-      href: "/doctor",
-    },
-    {
-      name: "আমাদের সম্পর্কে",
-      href: "/about",
-    },
+    { name: "ব্লগ", href: "/articles" },
+    { name: "ডাক্তার", href: "/doctor" },
+    { name: "আমাদের সম্পর্কে", href: "/about" },
   ];
 
   return (
@@ -79,14 +69,13 @@ export default function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-lg p-1"
+              className="flex items-center gap-2 group cursor-pointer"
             >
               <Image
                 src="/logo.png"
                 alt="আর্থ্রাইটিস কেয়ার বিডি"
                 width={36}
                 height={36}
-                className="object-contain"
                 priority
               />
               <h2 className="text-slate-900 text-xl font-bold tracking-tight">
@@ -95,17 +84,17 @@ export default function Header() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav
-              className="hidden md:flex items-center gap-8"
-              aria-label="ডেস্কটপ নেভিগেশন"
-            >
+            <nav className="hidden md:flex items-center gap-8">
               {NAV_DATA.map((link) => {
-                // টপিকস্ এর জন্য active check করবো না, শুধু hover এ highlight হবে
-                const isActive = !link.hasMegaMenu && pathname === link.href;
                 const hasMegaMenu =
                   link.hasMegaMenu && link.dropdownItems?.length > 0;
-                const hasDropdown =
-                  !link.hasMegaMenu && link.dropdownItems?.length > 0;
+
+                // টপিকস্ শুধু hover হলে active, বাকিগুলো pathname দিয়ে
+                const isActive = hasMegaMenu
+                  ? isMegaMenuOpen
+                  : pathname === link.href ||
+                    (link.href === "/articles" &&
+                      pathname.startsWith("/articles"));
 
                 return (
                   <div
@@ -116,81 +105,47 @@ export default function Header() {
                   >
                     <Link
                       href={link.href}
-                      className={`flex items-center gap-1 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d8c00] rounded px-1 py-2
-                        ${
-                          isActive
-                            ? "text-[#2d8c00]"
-                            : hasMegaMenu && isMegaMenuOpen
-                              ? "text-[#2d8c00]"
-                              : "text-slate-600 hover:text-[#2d8c00]"
-                        }`}
+                      className={`flex items-center gap-1 text-base font-semibold transition-colors py-2
+                        ${isActive ? "text-[#2d8c00]" : "text-slate-600 hover:text-[#2d8c00]"}`}
                     >
                       {link.name}
-
-                      {(hasMegaMenu || hasDropdown) && (
+                      {hasMegaMenu && (
                         <ChevronDown
                           size={16}
-                          className={`transition-transform duration-300 ${hasMegaMenu && isMegaMenuOpen ? "rotate-180" : ""}`}
+                          className={`transition-transform ${isMegaMenuOpen ? "rotate-180" : ""}`}
                         />
                       )}
                     </Link>
 
-                    {/* মেগা মেনু - Google Blog স্টাইল হরাইজেন্টাল */}
+                    {/* Desktop Mega Menu */}
                     {hasMegaMenu && (
-                      <>
-                        {/* Invisible bridge - হেডার থেকে মেগামেনুতে যাওয়ার জন্য */}
-                        <div
-                          className={`fixed left-0 right-0 top-[57px] h-[20px] z-[99] ${isMegaMenuOpen ? "block" : "hidden"}`}
-                          onMouseEnter={() => setIsMegaMenuOpen(true)}
-                        />
-
-                        <div
-                          className={`fixed left-0 right-0 top-[73px] bg-white border-b border-slate-200 shadow-sm
-                            transition-all duration-200 ease-out z-[100]
-                            ${isMegaMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}
-                          onMouseEnter={() => setIsMegaMenuOpen(true)}
-                          onMouseLeave={() => setIsMegaMenuOpen(false)}
-                        >
-                          <div className="max-w-[1200px] mx-auto px-6 py-5">
-                            {/* হরাইজেন্টাল ক্যাটাগরি লিস্ট */}
-                            <div className="flex flex-wrap items-center gap-3">
-                              {link.dropdownItems.map((category, index) => (
-                                <Link
-                                  key={index}
-                                  href={category.href}
-                                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium 
-                                    text-slate-600 bg-slate-50 border border-slate-200
-                                    hover:bg-[#2D8C00] hover:text-white hover:border-[#236e00]
-                                    transition-all duration-200"
-                                >
-                                  {category.name}
-                                  <span className="text-xs opacity-70">
-                                    ({category.count})
-                                  </span>
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </>
-                    )}
-
-                    {/* সাধারণ ড্রপডাউন (মেগা মেনু ছাড়া) */}
-                    {hasDropdown && (
-                      <div className="absolute top-full left-0 pt-2 w-max max-w-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top translate-y-2 group-hover:translate-y-0 z-50">
-                        <div className="bg-white border border-slate-100 rounded-lg shadow-xl overflow-hidden">
-                          <ul className="p-3 flex flex-wrap gap-2">
-                            {link.dropdownItems.map((subItem, index) => (
-                              <li key={index} className="flex-shrink-0">
-                                <Link
-                                  href={subItem.href}
-                                  className="block px-4 py-2 text-sm text-slate-600 font-medium hover:text-[#2d8c00] hover:bg-slate-50 rounded-md transition-colors whitespace-nowrap border border-transparent hover:border-slate-100"
-                                >
-                                  {subItem.name}
-                                </Link>
-                              </li>
+                      <div
+                        className={`fixed left-0 right-0 top-[73px] bg-white border-b border-slate-200 shadow-lg transition-all z-[100] ${isMegaMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+                      >
+                        <div className="max-w-[1200px] mx-auto px-6 py-8">
+                          <div className="flex flex-wrap items-center gap-3 mb-6">
+                            {link.dropdownItems.map((category, index) => (
+                              <Link
+                                key={index}
+                                href={category.href}
+                                onClick={() => setIsMegaMenuOpen(false)}
+                                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 bg-slate-50 border border-slate-200 hover:bg-[#2D8C00] hover:text-white transition-all"
+                              >
+                                {category.name}{" "}
+                                <span className="text-xs opacity-70">
+                                  ({toBengaliNumber(category.count)})
+                                </span>
+                              </Link>
                             ))}
-                          </ul>
+                          </div>
+                          <hr className="border-slate-100 mb-4" />
+                          <Link
+                            href="/articles"
+                            onClick={() => setIsMegaMenuOpen(false)}
+                            className="inline-flex items-center gap-2 text-[#2d8c00] font-bold hover:underline"
+                          >
+                            সকল ব্লগ দেখুন <ArrowRight size={18} />
+                          </Link>
                         </div>
                       </div>
                     )}
@@ -200,24 +155,20 @@ export default function Header() {
             </nav>
           </div>
 
-          {/* Right Side Actions */}
-          <div className="flex items-center gap-4 lg:gap-6">
-            {/* Search Bar */}
-            <form className="hidden lg:flex items-center bg-slate-100 rounded-full px-4 py-2 w-64 focus-within:ring-2 focus-within:ring-[#BCE7FA]">
+          <div className="flex items-center gap-4">
+            <form className="hidden lg:flex items-center bg-slate-100 rounded-full px-4 py-2 w-64">
               <Search className="text-slate-400 mr-2" size={18} />
               <input
                 type="text"
                 placeholder="অনুসন্ধান করুন..."
-                className="bg-transparent border-none focus:ring-0 text-sm w-full outline-none text-slate-900"
+                className="bg-transparent border-none focus:ring-0 text-sm w-full outline-none"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </form>
             <Button />
-
-            {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 text-slate-900 rounded-lg hover:bg-slate-100"
+              className="md:hidden p-2 text-slate-900"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -225,59 +176,68 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown */}
+        {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 p-4 flex flex-col gap-2 shadow-xl max-h-[80vh] overflow-y-auto">
+          <nav className="md:hidden absolute top-full left-0 w-full bg-white border-b shadow-xl max-h-[85vh] overflow-y-auto p-4 flex flex-col gap-2">
             {NAV_DATA.map((link) => {
-              const isActive = pathname === link.href;
-              const hasDropdown =
-                link.dropdownItems && link.dropdownItems.length > 0;
+              const hasDropdown = link.dropdownItems?.length > 0;
               const isExpanded = mobileExpanded === link.name;
+
+              // টপিকস্ শুধু expanded হলে active, বাকিগুলো pathname দিয়ে
+              const isActive = hasDropdown
+                ? isExpanded
+                : pathname === link.href ||
+                  (link.href === "/articles" &&
+                    pathname.startsWith("/articles"));
 
               return (
                 <div key={link.name} className="flex flex-col">
-                  <div className="flex items-center justify-between">
-                    <Link
-                      href={link.href}
-                      className={`flex-1 font-medium p-3 rounded-lg 
-                      ${isActive ? "text-[#2d8c00] bg-[#2d8c00]/10" : "text-slate-900 hover:bg-slate-50"}`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {link.name}
-                    </Link>
+                  <div
+                    onClick={() =>
+                      hasDropdown
+                        ? setMobileExpanded(isExpanded ? null : link.name)
+                        : setIsMobileMenuOpen(false)
+                    }
+                    className={`flex items-center justify-between p-3 rounded-lg font-medium transition-all
+                    ${isActive ? "text-[#2d8c00] bg-[#2d8c00]/10" : "text-slate-900"}`}
+                  >
+                    {hasDropdown ? (
+                      <span className="flex-1 cursor-pointer">{link.name}</span>
+                    ) : (
+                      <Link href={link.href} className="flex-1">
+                        {link.name}
+                      </Link>
+                    )}
                     {hasDropdown && (
-                      <button
-                        onClick={() =>
-                          setMobileExpanded(isExpanded ? null : link.name)
-                        }
-                        className="p-3 hover:bg-slate-100 rounded-lg"
-                      >
-                        <ChevronDown
-                          size={20}
-                          className={`text-slate-500 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
-                        />
-                      </button>
+                      <ChevronDown
+                        size={20}
+                        className={`transition-transform ${isExpanded ? "rotate-180" : ""}`}
+                      />
                     )}
                   </div>
 
-                  {/* Mobile Submenu */}
                   {hasDropdown && isExpanded && (
                     <div className="mt-2 ml-2 pl-4 border-l-2 border-slate-100 space-y-1">
                       {link.dropdownItems.map((subItem, idx) => (
                         <Link
                           key={idx}
                           href={subItem.href}
-                          className="flex items-center justify-between p-3 rounded-lg text-sm transition-colors bg-slate-50 hover:bg-slate-100"
+                          className="flex items-center justify-between p-3 rounded-lg text-sm bg-slate-50"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
-                          <span className="font-medium text-slate-700">
-                            {subItem.name}
-                          </span>
+                          <span className="text-slate-700">{subItem.name}</span>
                           <span className="text-xs text-slate-500">
-                            {subItem.count}টি
+                            {toBengaliNumber(subItem.count)}টি
                           </span>
                         </Link>
                       ))}
+                      <Link
+                        href="/articles"
+                        className="flex items-center justify-center gap-2 p-3 mt-2 rounded-lg text-sm font-bold text-white bg-[#2d8c00]"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        সকল ব্লগ দেখুন <ArrowRight size={16} />
+                      </Link>
                     </div>
                   )}
                 </div>
