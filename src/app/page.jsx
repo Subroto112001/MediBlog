@@ -97,7 +97,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href={`/articles/${FEATURED_ARTICLE.slug}`}
-                  className="bg-[#68c20e] hover:bg-[#44af13] text-white px-8 py-4 rounded-xl text-base font-bold transition-all shadow-xl shadow-[#38B000]/20 flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40"
+                  className="bg-[#2D8C00] hover:bg-[#236e00] text-white px-8 py-4 rounded-xl text-base font-bold transition-all shadow-xl shadow-[#38B000]/20 flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40"
                   aria-label={`পড়ুন: ${FEATURED_ARTICLE.title}`}
                 >
                   নিবন্ধ পড়ুন

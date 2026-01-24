@@ -32,6 +32,7 @@ export default function Footer() {
         { label: "গোপনীয়তা নীতি", href: "#" },
         { label: "ব্যবহারের শর্তাবলী", href: "#" },
         { label: "কুকি পলিসি", href: "#" },
+        { label: "সাইট ম্যাপ", href: "#" },
        
       ],
     },
