@@ -210,7 +210,7 @@ export default function Home() {
         </section>
         {/* --- YouTube Video Section --- */}
         <section
-          className="px-4 lg:px-20 py-12 max-w-[1200px] mx-auto"
+          className="px-4 lg:px-20 py-12 max-w-[1200px] mx-auto border-t border-slate-200"
           style={{ fontFamily: '"Noto Serif", serif' }}
           aria-labelledby="video-section-heading"
         >
