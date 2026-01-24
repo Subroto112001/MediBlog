@@ -312,6 +312,54 @@ function ArticlesContent() {
           </p>
         )}
       </main>
+      {/* --- Newsletter --- */}
+      <section
+        className="px-6 lg:px-20 py-20 bg-[#BCE7FA]/20"
+        aria-labelledby="newsletter-heading"
+      >
+        <div className="max-w-[1200px] mx-auto text-center">
+          <div className="bg-white rounded-[3rem] p-10 lg:p-16 shadow-2xl shadow-slate-200/50 relative overflow-hidden border border-slate-100">
+            <div
+              className="absolute -left-10 -top-10 w-40 h-40 bg-[#38B000]/10 rounded-full blur-2xl"
+              aria-hidden="true"
+            ></div>
+            <div
+              className="absolute -right-10 -bottom-10 w-40 h-40 bg-[#BCE7FA]/20 rounded-full blur-2xl"
+              aria-hidden="true"
+            ></div>
+
+            <div className="relative z-10 max-w-2xl mx-auto flex flex-col gap-6">
+              <h2
+                id="newsletter-heading"
+                className="text-3xl lg:text-4xl font-extrabold text-slate-900"
+              >
+                ই-মেইলে স্বাস্থ্য টিপস পান
+              </h2>
+              <p className="text-slate-600 text-lg font-medium">
+                স্বাস্থ্য টিপস পেতে সাবস্ক্রাইব করুন!
+              </p>
+              <form
+                className="flex flex-col sm:flex-row gap-4 mt-4"
+                onSubmit={(e) => e.preventDefault()}
+              >
+                <label htmlFor="email-input" className="sr-only">
+                  আপনার ইমেইল ঠিকানা
+                </label>
+                <input
+                  id="email-input"
+                  className="flex-1 bg-slate-50 border-slate-300 text-slate-900 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#2d8c00] focus:border-transparent outline-none transition-all placeholder:text-slate-500"
+                  placeholder="আপনার ইমেইল ঠিকানা লিখুন"
+                  type="email"
+                  required
+                />
+                <button className="bg-[#2d8c00] hover:bg-[#236e00] text-white px-10 py-4 rounded-2xl font-bold transition-all shadow-lg shadow-[#38B000]/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40">
+                  যোগ দিন
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

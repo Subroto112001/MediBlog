@@ -269,6 +269,7 @@ export default function DoctorProfilePage() {
             </div>
           </div>
         </section>
+        
       </main>
     </div>
   );

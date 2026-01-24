@@ -14,9 +14,9 @@ const Button = () => {
     <a
       href="tel:+8801700000000"
       onClick={handleCall}
-      className="inline-block bg-[#68c20e] hover:bg-[#44af13] text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-[#38B000]/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40 text-center cursor-pointer"
+      className="inline-block bg-[#2D8C00] hover:bg-[#236e00] text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-[#38B000]/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40 text-center cursor-pointer"
     >
-      অ্যাপয়েন্টমেন্ট নিন
+      পরামর্শ নিন
     </a>
   );
 };

@@ -295,11 +295,10 @@ export default function Home() {
                   id="newsletter-heading"
                   className="text-3xl lg:text-4xl font-extrabold text-slate-900"
                 >
-                  আপডেট থাকুন। স্বাস্থ্য টিপস পান।
+                  ই-মেইলে স্বাস্থ্য টিপস পান
                 </h2>
                 <p className="text-slate-600 text-lg font-medium">
-                  আমাদের সাপ্তাহিক নিউজলেটারে সাবস্ক্রাইব করুন এবং সর্বশেষ
-                  স্বাস্থ্য টিপস সরাসরি আপনার ইনবক্সে পান।
+                  স্বাস্থ্য টিপস পেতে সাবস্ক্রাইব করুন!
                 </p>
                 <form
                   className="flex flex-col sm:flex-row gap-4 mt-4"
@@ -316,7 +315,7 @@ export default function Home() {
                     required
                   />
                   <button className="bg-[#2d8c00] hover:bg-[#236e00] text-white px-10 py-4 rounded-2xl font-bold transition-all shadow-lg shadow-[#38B000]/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40">
-                    নিউজলেটারে যোগ দিন
+                    যোগ দিন
                   </button>
                 </form>
               </div>

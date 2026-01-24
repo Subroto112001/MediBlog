@@ -119,10 +119,10 @@ export default function Header() {
                       className={`flex items-center gap-1 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d8c00] rounded px-1 py-2
                         ${
                           isActive
-                            ? "text-[#68c20e]"
+                            ? "text-[#2d8c00]"
                             : hasMegaMenu && isMegaMenuOpen
-                              ? "text-[#68c20e]"
-                              : "text-slate-600 hover:text-[#68c20e]"
+                              ? "text-[#2d8c00]"
+                              : "text-slate-600 hover:text-[#2d8c00]"
                         }`}
                     >
                       {link.name}
@@ -160,7 +160,7 @@ export default function Header() {
                                   href={category.href}
                                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium 
                                     text-slate-600 bg-slate-50 border border-slate-200
-                                    hover:bg-[#2d8c00] hover:text-white hover:border-[#2d8c00]
+                                    hover:bg-[#2D8C00] hover:text-white hover:border-[#236e00]
                                     transition-all duration-200"
                                 >
                                   {category.name}
