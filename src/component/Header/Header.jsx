@@ -61,29 +61,33 @@ export default function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 px-6 lg:px-20 py-4 ${notoSerifBengali.className}`}
+        className={`sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 px-4 sm:px-6 lg:px-20 py-3 sm:py-4 ${notoSerifBengali.className}`}
       >
-        <div className="max-w-[1200px] mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-10">
+        <div className="max-w-[1200px] mx-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-4 lg:gap-10">
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-2 group cursor-pointer"
+              className="flex items-center gap-1.5 sm:gap-2 group cursor-pointer flex-shrink-0"
             >
               <Image
                 src="/logo.png"
                 alt="আর্থ্রাইটিস কেয়ার বিডি"
                 width={36}
                 height={36}
+                className="w-8 h-8 sm:w-9 sm:h-9"
                 priority
               />
-              <h2 className="text-slate-900 text-xl font-bold tracking-tight">
-                আর্থ্রাইটিস কেয়ার
+              <h2 className="text-slate-900 text-sm min-[400px]:text-base sm:text-lg lg:text-xl font-bold tracking-tight whitespace-nowrap">
+                <span className="hidden min-[400px]:inline">
+                  আর্থ্রাইটিস কেয়ার
+                </span>
+                <span className="min-[400px]:hidden">আ. কেয়ার</span>
               </h2>
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
               {NAV_DATA.map((link) => {
                 const hasMegaMenu =
                   link.hasMegaMenu && link.dropdownItems?.length > 0;
@@ -154,9 +158,10 @@ export default function Header() {
             </nav>
           </div>
 
-          <div className="flex items-center gap-4">
-            <form className="hidden lg:flex items-center bg-slate-100 rounded-full px-4 py-2 w-64">
-              <Search className="text-slate-400 mr-2" size={18} />
+          <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
+            {/* Desktop/Tablet Search Bar */}
+            <form className="hidden md:flex items-center bg-slate-100 rounded-full px-3 lg:px-4 py-2 w-44 lg:w-56 xl:w-64 transition-all">
+              <Search className="text-slate-400 mr-2 shrink-0" size={18} />
               <input
                 type="text"
                 placeholder="অনুসন্ধান করুন..."
@@ -165,10 +170,20 @@ export default function Header() {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </form>
+            {/* Mobile/Tablet Search Icon */}
+            <button
+              type="button"
+              className="md:hidden p-2 text-slate-600 hover:text-[#2d8c00] hover:bg-slate-100 rounded-full transition-colors"
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="অনুসন্ধান"
+            >
+              <Search size={20} />
+            </button>
             <Button />
             <button
-              className="md:hidden p-2 text-slate-900"
+              className="lg:hidden p-2 text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "মেনু বন্ধ করুন" : "মেনু খুলুন"}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -177,7 +192,28 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden absolute top-full left-0 w-full bg-white border-b shadow-xl max-h-[85vh] overflow-y-auto p-4 flex flex-col gap-2">
+          <nav className="lg:hidden absolute top-full left-0 w-full bg-white border-b shadow-xl max-h-[85vh] overflow-y-auto p-4 flex flex-col gap-2 z-50">
+            {/* Mobile Search Bar */}
+            <form className="flex items-center bg-slate-100 rounded-full px-4 py-3 mb-2">
+              <Search className="text-slate-400 mr-3 shrink-0" size={20} />
+              <input
+                type="text"
+                placeholder="অনুসন্ধান করুন..."
+                className="bg-transparent border-none focus:ring-0 text-base w-full outline-none"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="text-slate-400 hover:text-slate-600 ml-2"
+                >
+                  <X size={18} />
+                </button>
+              )}
+            </form>
             {NAV_DATA.map((link) => {
               const hasDropdown = link.dropdownItems?.length > 0;
               const isExpanded = mobileExpanded === link.name;
