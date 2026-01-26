@@ -55,7 +55,10 @@ export default function Sitemap() {
     >
       <Head>
         <title>সাইটম্যাপ | সাবাব সানি আর্থ্রাইটিস কেয়ার</title>
-        <meta name="description" content="আর্থ্রাইটিস কেয়ার ওয়েবসাইটের সম্পূর্ণ সাইটম্যাপ।" />
+        <meta
+          name="description"
+          content="আর্থ্রাইটিস কেয়ার ওয়েবসাইটের সম্পূর্ণ সাইটম্যাপ।"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -74,7 +77,8 @@ export default function Sitemap() {
             </h1>
           </div>
           <p className="text-base md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
-            আর্থ্রাইটিস কেয়ার ওয়েবসাইটের সকল পৃষ্ঠা এবং গুরুত্বপূর্ণ তথ্যের একটি সুসংগঠিত তালিকা।
+            আর্থ্রাইটিস কেয়ার ওয়েবসাইটের সকল পৃষ্ঠা এবং গুরুত্বপূর্ণ তথ্যের
+            একটি সুসংগঠিত তালিকা।
           </p>
         </header>
 
@@ -95,7 +99,10 @@ export default function Sitemap() {
                       aria-hidden="true"
                     />
                   </div>
-                  <h2 id={`section-heading-${index}`} className="text-xl font-bold">
+                  <h2
+                    id={`section-heading-${index}`}
+                    className="text-xl font-bold"
+                  >
                     {section.title}
                   </h2>
                 </div>
@@ -152,7 +159,7 @@ export default function Sitemap() {
               href="mailto:info@arthritiscare.com.bd"
               className="text-[#2D8C00] font-bold hover:underline decoration-2 underline-offset-4 transition-all"
             >
-              info@arthritiscare.com.bd
+              example@gmail.com
             </a>
           </p>
         </footer>
