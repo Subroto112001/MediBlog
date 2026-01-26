@@ -56,9 +56,7 @@ export default function DoctorProfilePage() {
         <section className="px-6 lg:px-20 -mt-32 pb-12 relative z-10">
           <div className="max-w-[1200px] mx-auto">
             <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-12">
-              {/* Added 'items-center' to center image and details on mobile.
-          'lg:items-start' keeps the original layout for desktop.
-      */}
+        
               <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
                 {/* Profile Image */}
                 <div className="relative w-48 h-60 rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
@@ -71,9 +69,7 @@ export default function DoctorProfilePage() {
                 </div>
 
                 {/* Doctor Details */}
-                {/* Added 'text-center' to mobile view.
-            'lg:text-left' restores left-alignment on desktop.
-        */}
+                
                 <div className="flex-1 text-center lg:text-left">
                   <div className="mb-6">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-2">

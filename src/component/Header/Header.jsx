@@ -79,10 +79,10 @@ export default function Header() {
                 priority
               />
               <h2 className="text-slate-900 text-sm min-[400px]:text-base sm:text-lg lg:text-xl font-bold tracking-tight whitespace-nowrap">
-                <span className="hidden min-[400px]:inline">
+                <span className="hidden min-[350px]:inline">
                   আর্থ্রাইটিস কেয়ার
                 </span>
-                <span className="min-[400px]:hidden">আ. কেয়ার</span>
+              
               </h2>
             </Link>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { ARTICLES_DB } from "@/lib/articlesData";
 import { Noto_Serif_Bengali } from "next/font/google";
@@ -27,9 +27,9 @@ export default function ArticleDetail() {
   const params = useParams();
   const router = useRouter();
   const [article, setArticle] = useState(null);
-  const [modifiedContent, setModifiedContent] = useState(""); // মডিফাইড কন্টেন্ট (ID সহ)
-  const [headings, setHeadings] = useState([]); // সূচিপত্রের তালিকা
-  const [activeId, setActiveId] = useState(""); // বর্তমান সেকশন
+  const [modifiedContent, setModifiedContent] = useState("");
+  const [headings, setHeadings] = useState([]);
+  const [activeId, setActiveId] = useState("");
   const [readingProgress, setReadingProgress] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -39,7 +39,6 @@ export default function ArticleDetail() {
       const foundArticle = ARTICLES_DB.find((a) => a.slug === params.slug);
 
       if (foundArticle) {
-        // কন্টেন্ট থেকে হেডিং বের করা এবং ID যুক্ত করা
         const { processedContent, extractedHeadings } = processContent(
           foundArticle.content,
         );
@@ -76,7 +75,7 @@ export default function ArticleDetail() {
           }
         });
       },
-      { rootMargin: "-100px 0px -60% 0px" }, // স্ক্রিনের মাঝখানে আসলে ডিটেক্ট করবে
+      { rootMargin: "-100px 0px -60% 0px" },
     );
 
     headings.forEach((heading) => {
@@ -85,7 +84,7 @@ export default function ArticleDetail() {
     });
 
     return () => observer.disconnect();
-  }, [headings, modifiedContent]); // কন্টেন্ট রেন্ডার হওয়ার পর রান হবে
+  }, [headings, modifiedContent]);
 
   // --- Helper Function: Content Processor ---
   const processContent = (htmlString) => {
@@ -97,10 +96,8 @@ export default function ArticleDetail() {
       headingRegex,
       (match, level, text) => {
         const id = `section-${counter++}`;
-        // এইচটিএমএল ট্যাগ রিমুভ করে ক্লিন টেক্সট রাখা
         const cleanText = text.replace(/<[^>]*>?/gm, "");
         extractedHeadings.push({ id, text: cleanText, level: parseInt(level) });
-        // অরিজিনাল ট্যাগের বদলে ID সহ ট্যাগ রিটার্ন করা
         return `<h${level} id="${id}" class="scroll-mt-24">${text}</h${level}>`;
       },
     );
@@ -116,6 +113,43 @@ export default function ArticleDetail() {
       setActiveId(id);
     }
   };
+
+  // --- Reusable Table of Contents Component ---
+  // এটি ডেস্কটপ এবং মোবাইল দুই ভিউতেই ব্যবহার করা হবে
+  const renderTableOfContents = (isMobile = false) => (
+    <div
+      className={`bg-slate-50/50 rounded-2xl p-6 border border-slate-100 ${isMobile ? "mb-10" : ""}`}
+    >
+      <div className="flex items-center gap-2 mb-4 text-slate-900 font-bold text-lg border-b border-slate-200 pb-2">
+        <List size={20} className="text-[#2d8c00]" />
+        <h3>এই পৃষ্ঠায়</h3>
+      </div>
+
+      {headings.length > 0 ? (
+        <nav className="flex flex-col gap-1">
+          {headings.map((heading) => (
+            <a
+              key={heading.id}
+              href={`#${heading.id}`}
+              onClick={(e) => handleScrollToSection(e, heading.id)}
+              className={`block text-sm py-2 px-3 rounded-lg transition-all duration-200 border-l-2 
+                ${
+                  activeId === heading.id
+                    ? "border-[#2d8c00] bg-[#2d8c00]/10 text-[#2d8c00] font-bold shadow-sm"
+                    : "border-transparent text-slate-600 hover:text-[#2d8c00] hover:bg-slate-100 font-medium"
+                }
+                ${heading.level === 3 ? "ml-4 text-xs" : ""}
+              `}
+            >
+              {heading.text}
+            </a>
+          ))}
+        </nav>
+      ) : (
+        <p className="text-slate-400 text-sm">কোনো সূচিপত্র নেই</p>
+      )}
+    </div>
+  );
 
   if (loading)
     return (
@@ -193,38 +227,9 @@ export default function ArticleDetail() {
 
         {/* Layout Grid: Left Sidebar (TOC) & Right Content */}
         <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-12 items-start">
-          {/* --- Left Sidebar: Table of Contents --- */}
-          <aside className="hidden lg:block sticky top-24 h-[calc(100vh-120px)] overflow-y-auto pr-4 custom-scrollbar">
-            <div className="bg-slate-50/50 rounded-2xl p-6 border border-slate-100">
-              <div className="flex items-center gap-2 mb-4 text-slate-900 font-bold text-lg border-b border-slate-200 pb-2">
-                <List size={20} className="text-[#2d8c00]" />
-                <h3>এই পৃষ্ঠায়</h3>
-              </div>
-
-              {headings.length > 0 ? (
-                <nav className="flex flex-col gap-1">
-                  {headings.map((heading) => (
-                    <a
-                      key={heading.id}
-                      href={`#${heading.id}`}
-                      onClick={(e) => handleScrollToSection(e, heading.id)}
-                      className={`block text-sm py-2 px-3 rounded-lg transition-all duration-200 border-l-2 
-                        ${
-                          activeId === heading.id
-                            ? "border-[#2d8c00] bg-[#2d8c00]/10 text-[#2d8c00] font-bold shadow-sm"
-                            : "border-transparent text-slate-600 hover:text-[#2d8c00] hover:bg-slate-100 font-medium"
-                        }
-                        ${heading.level === 3 ? "ml-4 text-xs" : ""}
-                      `}
-                    >
-                      {heading.text}
-                    </a>
-                  ))}
-                </nav>
-              ) : (
-                <p className="text-slate-400 text-sm">কোনো সূচিপত্র নেই</p>
-              )}
-            </div>
+          {/* --- Left Sidebar: Table of Contents (Desktop Only + Sticky) --- */}
+          <aside className="hidden lg:block sticky top-24  overflow-y-auto pr-4 custom-scrollbar">
+            {renderTableOfContents(false)}
           </aside>
 
           {/* --- Right Column: Main Content --- */}
@@ -239,7 +244,9 @@ export default function ArticleDetail() {
               </Link>
               <ChevronRight size={14} />
               <Link
-                href={`/articles?category=${encodeURIComponent(article.category)}`}
+                href={`/articles?category=${encodeURIComponent(
+                  article.category,
+                )}`}
                 className="hover:text-[#2d8c00] transition-colors"
               >
                 {article.category}
@@ -306,6 +313,9 @@ export default function ArticleDetail() {
               />
             </div>
 
+            {/* --- Mobile Table of Contents (Under Image, Non-Sticky) --- */}
+            <div className="lg:hidden">{renderTableOfContents(true)}</div>
+
             {/* Dynamic Content with IDs */}
             <div
               className="prose prose-lg md:prose-xl prose-slate max-w-none 
@@ -345,6 +355,7 @@ export default function ArticleDetail() {
           </article>
         </div>
       </main>
+
       {/* --- Newsletter --- */}
       <section
         className="px-6 lg:px-20 py-20 bg-[#BCE7FA]/20"
