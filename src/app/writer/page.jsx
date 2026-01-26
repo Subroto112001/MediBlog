@@ -40,7 +40,8 @@ export default function DoctorProfilePage() {
     >
       <main className="flex-1">
         {/* --- Hero Section with Cover Image --- */}
-        <section className="relative h-[400px] bg-slate-900">
+        {/* --- Hero Section with Cover Image --- */}
+        <section className="relative h-[300px] md:h-[400px] bg-slate-900">
           <Image
             src={doctor.cover}
             alt="ডাক্তার প্রোফাইল কভার"
@@ -55,21 +56,27 @@ export default function DoctorProfilePage() {
         <section className="px-6 lg:px-20 -mt-32 pb-12 relative z-10">
           <div className="max-w-[1200px] mx-auto">
             <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-12">
-              <div className="flex flex-col lg:flex-row gap-8 items-start">
+              {/* Added 'items-center' to center image and details on mobile.
+          'lg:items-start' keeps the original layout for desktop.
+      */}
+              <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
                 {/* Profile Image */}
-                <div className="relative w-46 h-58 rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
+                <div className="relative w-48 h-60 rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
                   <Image
                     src={doctor.image}
                     alt={doctor.name}
                     fill
-                    className=""
+                    className="object-cover"
                   />
                 </div>
 
                 {/* Doctor Details */}
-                <div className="flex-1">
+                {/* Added 'text-center' to mobile view.
+            'lg:text-left' restores left-alignment on desktop.
+        */}
+                <div className="flex-1 text-center lg:text-left">
                   <div className="mb-6">
-                    <h1 className="text-4xl lg:text-5xl font-extrabold text-slate-900 mb-2">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-2">
                       {doctor.name}
                     </h1>
                     <p className="text-xl text-[#2d8c00] font-semibold mb-2">
@@ -78,7 +85,8 @@ export default function DoctorProfilePage() {
                     <p className="text-lg text-slate-600 mb-4">
                       {doctor.designation}
                     </p>
-                    <div className="flex items-center gap-2 text-slate-600">
+                    {/* Centered the MapPin location for mobile */}
+                    <div className="flex items-center justify-center lg:justify-start gap-2 text-slate-600">
                       <MapPin size={20} />
                       <span>{doctor.location}</span>
                     </div>
@@ -89,8 +97,8 @@ export default function DoctorProfilePage() {
                     {doctor.bio}
                   </p>
 
-                  {/* Social Links */}
-                  <div className="flex gap-4">
+                  {/* Social Links - Centered on mobile */}
+                  <div className="flex gap-4 justify-center lg:justify-start">
                     <a
                       href={doctor.socials.facebook}
                       className="flex items-center justify-center w-10 h-10 bg-slate-100 hover:bg-[#BCE7FA] rounded-full transition-colors"
@@ -269,7 +277,6 @@ export default function DoctorProfilePage() {
             </div>
           </div>
         </section>
-        
       </main>
     </div>
   );
