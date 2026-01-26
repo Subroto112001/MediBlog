@@ -15,8 +15,8 @@ export default function CookiePolicy() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "কুকি পলিসি | HealthVerse",
-    description: "HealthVerse কীভাবে কুকি ব্যবহার করে তার বিস্তারিত।",
+    name: "কুকি পলিসি | আর্থ্রাইটিস কেয়ার",
+    description: "আর্থ্রাইটিস কেয়ার কীভাবে কুকি ব্যবহার করে তার বিস্তারিত।",
   };
 
   return (
@@ -29,7 +29,7 @@ export default function CookiePolicy() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Head>
-        <title>কুকি পলিসি | HealthVerse</title>
+        <title>কুকি পলিসি | আর্থ্রাইটিস কেয়ার</title>
       </Head>
 
       <main className="max-w-[800px] mx-auto px-6 py-16">
@@ -39,17 +39,26 @@ export default function CookiePolicy() {
             <h1 className="text-3xl md:text-4xl font-bold">কুকি পলিসি</h1>
           </div>
           <p className="text-slate-600 dark:text-slate-400">
-            সর্বশেষ আপডেট: ২০ জানুয়ারি, ২০২৬
+            সর্বশেষ আপডেট: ২৬ জানুয়ারি, ২০২৬
           </p>
         </header>
 
         <article className="prose prose-lg dark:prose-invert max-w-none">
           <p>
-            এই কুকি পলিসি ব্যাখ্যা করে যে হেলথভার্স কীভাবে কুকি এবং অনুরূপ
-            প্রযুক্তি ব্যবহার করে যখন আপনি আমাদের ওয়েবসাইট ভিজিট করেন।
+            এই কুকি পলিসি ব্যাখ্যা করে যে আর্থ্রাইটিস কেয়ার কীভাবে কুকি এবং
+            অনুরূপ প্রযুক্তি ব্যবহার করে যখন আপনি আমাদের ওয়েবসাইট ভিজিট করেন।
           </p>
 
-          <h2 className="text-2xl font-bold mt-8 mb-4">১. কুকি কি?</h2>
+          <h2 className="text-2xl font-bold mt-8 mb-4">
+            ১. আর্থ্রাইটিস কেয়ার সম্পর্কে
+          </h2>
+          <p>
+            আর্থ্রাইটিস কেয়ার হলো বাংলাদেশের একটি বিশ্বস্ত স্বাস্থ্য তথ্য
+            প্ল্যাটফর্ম যা বাতরোগ ও আর্থ্রাইটিস সম্পর্কিত সঠিক তথ্য প্রদান করে।
+            ডা: সাদাব সাউদ সানী এর তত্ত্বাবধানে এই প্ল্যাটফর্ম পরিচালিত হয়।
+          </p>
+
+          <h2 className="text-2xl font-bold mt-8 mb-4">২. কুকি কি?</h2>
           <p>
             কুকি হলো ছোট টেক্সট ফাইল যা আপনার কম্পিউটার বা মোবাইল ডিভাইসে
             সংরক্ষিত হয় যখন আপনি একটি ওয়েবসাইট ভিজিট করেন। এটি ওয়েবসাইটকে
@@ -57,28 +66,38 @@ export default function CookiePolicy() {
           </p>
 
           <h2 className="text-2xl font-bold mt-8 mb-4">
-            ২. আমরা কিভাবে কুকি ব্যবহার করি?
+            ৩. আমরা কিভাবে কুকি ব্যবহার করি?
           </h2>
           <ul className="list-disc pl-6 space-y-2 mb-6">
             <li>
-              <strong>প্রয়োজনীয় কুকিজ:</strong> সাইটের মৌলিক কার্যকারিতার জন্য
-              এগুলি অপরিহার্য।
+              <strong>প্রয়োজনীয় কুকিজ:</strong> আর্থ্রাইটিস কেয়ার সাইটের
+              মৌলিক কার্যকারিতার জন্য এগুলি অপরিহার্য।
             </li>
             <li>
               <strong>পারফরম্যান্স কুকিজ:</strong> আমরা বুঝতে চেষ্টা করি
-              ভিজিটররা কীভাবে সাইট ব্যবহার করছেন।
+              ভিজিটররা কীভাবে আর্থ্রাইটিস সম্পর্কিত তথ্য ব্যবহার করছেন।
             </li>
             <li>
-              <strong>ফাংশনাল কুকিজ:</strong> আপনার ভাষা পছন্দ বা লগইন তথ্য মনে
-              রাখার জন্য।
+              <strong>ফাংশনাল কুকিজ:</strong> আপনার ভাষা পছন্দ বা পড়ার ইতিহাস
+              মনে রাখার জন্য।
+            </li>
+            <li>
+              <strong>অ্যানালিটিক্স কুকিজ:</strong> আমাদের আর্থ্রাইটিস সম্পর্কিত
+              কন্টেন্ট উন্নত করতে সাহায্য করে।
             </li>
           </ul>
 
-          <h2 className="text-2xl font-bold mt-8 mb-4">৩. কুকি নিয়ন্ত্রণ</h2>
+          <h2 className="text-2xl font-bold mt-8 mb-4">৪. কুকি নিয়ন্ত্রণ</h2>
           <p>
             আপনি আপনার ব্রাউজার সেটিংসের মাধ্যমে কুকি ব্লক বা মুছে ফেলতে পারেন।
             তবে মনে রাখবেন, কুকি অক্ষম করলে সাইটের কিছু অংশ সঠিকভাবে কাজ নাও
             করতে পারে।
+          </p>
+
+          <h2 className="text-2xl font-bold mt-8 mb-4">৫. যোগাযোগ</h2>
+          <p>কুকি পলিসি সম্পর্কে কোনো প্রশ্ন থাকলে আমাদের সাথে যোগাযোগ করুন:</p>
+          <p className="mt-2">
+            <strong>ইমেইল:</strong> info@arthritiscare.com.bd
           </p>
         </article>
       </main>

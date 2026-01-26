@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Noto_Serif_Bengali } from "next/font/google";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight, Calendar, ChevronRight, Clock } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link"; // Import Link for routing
 import { ARTICLES_DB } from "@/lib/articlesData"; // Import Shared Data
@@ -110,7 +110,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative group h-[400px] w-full">
+            <div className="relative group h-[250px] md:h-[400px] w-full">
               <div
                 className="absolute inset-0 bg-white/20 rounded-[1.5rem] rotate-3 scale-105 transition-transform group-hover:rotate-1"
                 aria-hidden="true"
@@ -134,7 +134,8 @@ export default function Home() {
           className="px-6 lg:px-20 py-16 max-w-[1200px] mx-auto"
           aria-labelledby="latest-insights-heading"
         >
-          <div className="flex items-end justify-between mb-10 border-b border-slate-200 pb-6">
+          {/* Header: Stacks on mobile, side-by-side on tablet+ */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-slate-200 pb-6 gap-4">
             <div>
               <h2
                 id="latest-insights-heading"
@@ -142,69 +143,88 @@ export default function Home() {
               >
                 সর্বশেষ আর্টিকেলসমূহ
               </h2>
-              <p className="text-slate-600 mt-1 font-medium">
+              <p className="text-slate-600 mt-1 font-medium w-full md:w-[80%]">
                 আমাদের ক্লিনিকাল নেটওয়ার্ক থেকে প্রাপ্ত স্বাস্থ্য তথ্য ও
                 পরামর্শ।
               </p>
             </div>
             <Link
               href="/articles"
-              className="text-slate-900 font-bold flex items-center gap-1 hover:gap-2 transition-all p-2 rounded-lg hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+              className="text-slate-900 font-bold text-[14px] md:text-[16px] flex items-center gap-1 hover:gap-2 transition-all p-2 rounded-lg hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 w-fit"
             >
               সব পোস্ট দেখুন <ChevronRight size={20} aria-hidden="true" />
             </Link>
           </div>
 
+          {/* Grid: 1 column on mobile, 2 on tablet, 3 on desktop */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {LATEST_ARTICLES.map((article) => (
-              <Link
-                href={`/articles/${article.slug}`}
+              <article
                 key={article.id}
-                className="group focus-visible:outline-none"
+                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full group"
               >
-                <article className="flex flex-col h-full cursor-pointer">
-                  <div className="relative overflow-hidden rounded-2xl mb-4 aspect-[4/3] bg-slate-100 group-focus-visible:ring-4 group-focus-visible:ring-slate-900">
-                    <div className="absolute inset-0 bg-[#38B000]/0 group-hover:bg-[#38B000]/10 transition-colors z-10"></div>
-                    <img
-                      src={article.image}
-                      alt={article.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                    <span className="absolute top-4 left-4 z-20 bg-[#BCE7FA]/95 backdrop-blur px-3 py-1 rounded-lg text-xs font-bold text-slate-900 shadow-sm">
-                      {article.category}
+                {/* Image as a Link */}
+                <Link
+                  href={`/articles/${article.slug}`}
+                  className="h-56 relative overflow-hidden block"
+                >
+                  <Image
+                    src={article.image}
+                    alt={article.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  {/* Category Badge */}
+                  <span className="absolute top-4 left-4 bg-[#BCE7FA] text-slate-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    {article.category}
+                  </span>
+                </Link>
+
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-4 text-xs text-slate-500 font-medium mb-3">
+                    <span className="flex items-center gap-1">
+                      <Calendar size={14} /> {article.dateDisplay}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock size={14} /> {article.readTime}
                     </span>
                   </div>
 
-                  <div className="flex flex-col gap-3 flex-1">
-                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors leading-[1.4] group-hover:underline decoration-2 underline-offset-4">
+                  <h2 className="text-xl font-bold mb-3 leading-snug group-hover:text-sky-600 transition-colors">
+                    <Link href={`/articles/${article.slug}`}>
                       {article.title}
-                    </h3>
-                    <Link
-                      href={`/doctor`}
-                      className="flex items-center gap-3 mt-auto"
-                    >
+                    </Link>
+                  </h2>
+
+                  <p className="text-slate-600 text-sm line-clamp-3 mb-6 flex-1">
+                    {article.excerpt}
+                  </p>
+
+                  <div className="border-t border-slate-100 pt-4 flex items-center justify-between mt-auto">
+                    <div className="flex items-center gap-2">
                       <Image
                         src={article.authorImage}
                         alt={article.author}
-                        width={32}
-                        className="w-10 h-10 rounded-full bg-slate-200 border border-slate-200 object-cover"
+                        width={40}
+                        height={40}
+                        className=" w-10 h-10 rounded-full bg-slate-200 border border-slate-200 object-cover"
                       />
-                      <div className="text-xs text-slate-600 font-medium">
-                        <p className="font-bold text-slate-900">
-                          {article.author}
-                        </p>
-                        <p>
-                          {article.readTime} •{" "}
-                          <time dateTime={article.date}>
-                            {article.dateDisplay}
-                          </time>
-                        </p>
-                      </div>
+                      <span className="text-xs font-bold text-slate-700">
+                        {article.author}
+                      </span>
+                    </div>
+                    <Link
+                      href={`/articles/${article.slug}`}
+                      className="size-10 rounded-full bg-[#f0f9ff] flex items-center justify-center text-sky-600 group-hover:bg-[#236e00] group-hover:text-white transition-colors"
+                      aria-label={`পড়ুন: ${article.title}`}
+                    >
+                      <ArrowRight size={18} />
                     </Link>
                   </div>
-                </article>
-              </Link>
+                </div>
+              </article>
             ))}
           </div>
         </section>

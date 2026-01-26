@@ -188,7 +188,7 @@ function ArticlesContent() {
                   <h2 className="text-xl font-bold mb-3 leading-snug group-hover:text-sky-600 transition-colors">
                     <Link
                       href={`/articles/${article.slug}`}
-                      className="focus:outline-none focus:underline"
+                     
                     >
                       {article.title}
                     </Link>

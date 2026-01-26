@@ -29,11 +29,10 @@ export default function Footer() {
     {
       title: "আইনি তথ্য", // Legal
       links: [
-        { label: "গোপনীয়তা নীতি", href: "#" },
-        { label: "ব্যবহারের শর্তাবলী", href: "#" },
-        { label: "কুকি পলিসি", href: "#" },
-        { label: "সাইট ম্যাপ", href: "#" },
-       
+        { label: "গোপনীয়তা নীতি", href: "/privacy-policy" },
+        { label: "ব্যবহারের শর্তাবলী", href: "/terms-of-service" },
+        { label: "কুকি পলিসি", href: "/cookie-policy" },
+        { label: "সাইট ম্যাপ", href: "/sitemap" },
       ],
     },
   ];
