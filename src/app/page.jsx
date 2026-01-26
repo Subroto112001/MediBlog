@@ -52,10 +52,7 @@ export default function Home() {
       lang="bn"
     >
       <Head>
-        <title>
-          {" "}
-          আর্থ্রাইটিস কেয়ার | আর্থ্রাইটিস চিকিৎসা ও পরামর্শ
-        </title>
+        <title> আর্থ্রাইটিস কেয়ার | আর্থ্রাইটিস চিকিৎসা ও পরামর্শ</title>
         <meta
           name="description"
           content="রিউমাটয়েড আর্থাইটিস, অস্টিওআর্থাইটিস, গাউট ও অন্যান্য জয়েন্ট রোগের বিশেষজ্ঞ চিকিৎসা এবং পরামর্শ।"
@@ -220,7 +217,7 @@ export default function Home() {
                     </div>
                     <Link
                       href={`/articles/${article.slug}`}
-                      className="size-10 rounded-full bg-[#f0f9ff] flex items-center justify-center text-sky-600 group-hover:bg-[#236e00] group-hover:text-white transition-colors"
+                      className="size-10 rounded-full bg-[#f0f9ff] flex items-center justify-center text-sky-600 group-hover:bg-sky-600 group-hover:text-white transition-colors"
                       aria-label={`পড়ুন: ${article.title}`}
                     >
                       <ArrowRight size={18} />

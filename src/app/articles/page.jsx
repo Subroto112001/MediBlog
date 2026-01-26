@@ -186,10 +186,7 @@ function ArticlesContent() {
                   </div>
 
                   <h2 className="text-xl font-bold mb-3 leading-snug group-hover:text-sky-600 transition-colors">
-                    <Link
-                      href={`/articles/${article.slug}`}
-                     
-                    >
+                    <Link href={`/articles/${article.slug}`}>
                       {article.title}
                     </Link>
                   </h2>
@@ -213,7 +210,7 @@ function ArticlesContent() {
                     </div>
                     <Link
                       href={`/articles/${article.slug}`}
-                      className="size-10 rounded-full bg-[#f0f9ff] flex items-center justify-center text-sky-600 group-hover:bg-[#236e00] group-hover:text-white transition-colors"
+                      className="size-10 rounded-full bg-[#f0f9ff] flex items-center justify-center text-sky-600 group-hover:bg-sky-600 group-hover:text-white transition-colors"
                       aria-label={`পড়ুন: ${article.title}`}
                     >
                       <ArrowRight size={18} />
