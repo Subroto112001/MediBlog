@@ -2,16 +2,27 @@
 
 import React from "react";
 import { Noto_Serif_Bengali } from "next/font/google";
-import Head from "next/head";
 import { FileText } from "lucide-react";
 
+/**
+ * todo: Font Configuration
+ * description: Configure Noto Serif Bengali font for Bengali text rendering
+ */
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
+/**
+ * todo: Terms of Service Page Component
+ * description: Displays the terms of service information with structured data for SEO
+ */
 export default function TermsOfService() {
+  /**
+   * todo: JSON-LD Structured Data
+   * description: Schema.org markup for search engine rich snippets
+   */
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -24,13 +35,11 @@ export default function TermsOfService() {
       className={`min-h-screen bg-slate-50 dark:bg-[#101728] text-slate-900 dark:text-slate-100 ${notoSerifBengali.className}`}
       lang="bn"
     >
+      {/* SEO: JSON-LD Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Head>
-        <title>ব্যবহারের শর্তাবলী | আর্থ্রাইটিস কেয়ার</title>
-      </Head>
 
       <main className="max-w-[800px] mx-auto px-6 py-16">
         <header className="mb-10 border-b border-slate-200 dark:border-slate-700 pb-6">
@@ -41,11 +50,17 @@ export default function TermsOfService() {
             </h1>
           </div>
           <p className="text-slate-600 dark:text-slate-400">
-            সর্বশেষ আপডেট: ২৬ জানুয়ারি, ২০২৬
+            <time dateTime="2026-01-26">সর্বশেষ আপডেট: ২৬ জানুয়ারি, ২০২৬</time>
           </p>
         </header>
 
-        <article className="prose prose-lg dark:prose-invert max-w-none">
+        <article
+          className="prose prose-lg dark:prose-invert max-w-none"
+          aria-labelledby="terms-title"
+        >
+          <h2 id="terms-title" className="sr-only">
+            ব্যবহারের শর্তাবলীর বিস্তারিত
+          </h2>
           <p>
             আর্থ্রাইটিস কেয়ার ব্যবহার করার জন্য আপনাকে ধন্যবাদ। আমাদের
             ওয়েবসাইট বা পরিষেবাগুলি ব্যবহার করে, আপনি এই শর্তাবলীতে সম্মত

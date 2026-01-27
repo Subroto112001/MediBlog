@@ -62,6 +62,8 @@ export default function Header() {
     <>
       <header
         className={`sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 px-4 sm:px-6 lg:px-20 py-3 sm:py-4 ${notoSerifBengali.className}`}
+        role="banner"
+        aria-label="প্রধান হেডার"
       >
         <div className="max-w-[1200px] mx-auto flex items-center justify-between gap-2">
           <div className="flex items-center gap-4 lg:gap-10">
@@ -69,25 +71,29 @@ export default function Header() {
             <Link
               href="/"
               className="flex items-center gap-1.5 sm:gap-2 group cursor-pointer flex-shrink-0"
+              aria-label="আর্থ্রাইটিস কেয়ার - হোম পেজে যান"
             >
               <Image
                 src="/logo.png"
-                alt="আর্থ্রাইটিস কেয়ার বিডি"
+                alt=""
                 width={36}
                 height={36}
                 className="w-8 h-8 sm:w-9 sm:h-9"
                 priority
+                aria-hidden="true"
               />
               <h2 className="text-slate-900 text-sm min-[400px]:text-base sm:text-lg lg:text-xl font-bold tracking-tight whitespace-nowrap">
                 <span className="hidden min-[350px]:inline">
                   আর্থ্রাইটিস কেয়ার
                 </span>
-              
               </h2>
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+            <nav
+              className="hidden lg:flex items-center gap-6 xl:gap-8"
+              aria-label="প্রধান নেভিগেশন"
+            >
               {NAV_DATA.map((link) => {
                 const hasMegaMenu =
                   link.hasMegaMenu && link.dropdownItems?.length > 0;
@@ -160,10 +166,22 @@ export default function Header() {
 
           <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
             {/* Desktop/Tablet Search Bar */}
-            <form className="hidden md:flex items-center bg-slate-100 rounded-full px-3 lg:px-4 py-2 w-44 lg:w-56 xl:w-64 transition-all">
-              <Search className="text-slate-400 mr-2 shrink-0" size={18} />
+            <form
+              className="hidden md:flex items-center bg-slate-100 rounded-full px-3 lg:px-4 py-2 w-44 lg:w-56 xl:w-64 transition-all"
+              role="search"
+              aria-label="সাইট অনুসন্ধান"
+            >
+              <Search
+                className="text-slate-400 mr-2 shrink-0"
+                size={18}
+                aria-hidden="true"
+              />
+              <label htmlFor="desktop-search" className="sr-only">
+                অনুসন্ধান করুন
+              </label>
               <input
-                type="text"
+                id="desktop-search"
+                type="search"
                 placeholder="অনুসন্ধান করুন..."
                 className="bg-transparent border-none focus:ring-0 text-sm w-full outline-none"
                 value={searchQuery}
@@ -184,20 +202,42 @@ export default function Header() {
               className="lg:hidden p-2 text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "মেনু বন্ধ করুন" : "মেনু খুলুন"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? (
+                <X size={24} aria-hidden="true" />
+              ) : (
+                <Menu size={24} aria-hidden="true" />
+              )}
             </button>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <nav className="lg:hidden absolute top-full left-0 w-full bg-white border-b shadow-xl max-h-[85vh] overflow-y-auto p-4 flex flex-col gap-2 z-50">
+          <nav
+            id="mobile-menu"
+            className="lg:hidden absolute top-full left-0 w-full bg-white border-b shadow-xl max-h-[85vh] overflow-y-auto p-4 flex flex-col gap-2 z-50"
+            aria-label="মোবাইল নেভিগেশন"
+          >
             {/* Mobile Search Bar */}
-            <form className="flex items-center bg-slate-100 rounded-full px-4 py-3 mb-2">
-              <Search className="text-slate-400 mr-3 shrink-0" size={20} />
+            <form
+              className="flex items-center bg-slate-100 rounded-full px-4 py-3 mb-2"
+              role="search"
+              aria-label="মোবাইল অনুসন্ধান"
+            >
+              <Search
+                className="text-slate-400 mr-3 shrink-0"
+                size={20}
+                aria-hidden="true"
+              />
+              <label htmlFor="mobile-search" className="sr-only">
+                অনুসন্ধান করুন
+              </label>
               <input
-                type="text"
+                id="mobile-search"
+                type="search"
                 placeholder="অনুসন্ধান করুন..."
                 className="bg-transparent border-none focus:ring-0 text-base w-full outline-none"
                 value={searchQuery}

@@ -32,7 +32,7 @@ export default function Footer() {
         { label: "গোপনীয়তা নীতি", href: "/privacy-policy" },
         { label: "ব্যবহারের শর্তাবলী", href: "/terms-of-service" },
         { label: "কুকি পলিসি", href: "/cookie-policy" },
-        { label: "সাইট ম্যাপ", href: "/sitemap" },
+        { label: "সাইট ম্যাপ", href: "/site-map" },
       ],
     },
   ];
@@ -77,9 +77,16 @@ export default function Footer() {
 
         {/* Dynamic Link Sections (Responsive) */}
         {FOOTER_LINKS.map((section, index) => (
-          <nav key={index} className="w-full flex justify-center">
+          <nav
+            key={index}
+            className="w-full flex justify-center"
+            aria-label={section.title}
+          >
             {/* Added flex-wrap and gap adjustments for mobile */}
-            <ul className="flex flex-wrap justify-center items-center gap-x-4 gap-y-3 text-sm px-2">
+            <ul
+              className="flex flex-wrap justify-center items-center gap-x-4 gap-y-3 text-sm px-2"
+              role="list"
+            >
               {section.links.map((link, i) => (
                 <li key={link.label} className="flex items-center gap-2">
                   <Link
@@ -91,7 +98,10 @@ export default function Footer() {
 
                   {/* Separator Logic: Hide on mobile if wrapped, strictly visual separator */}
                   {i < section.links.length - 1 && (
-                    <span className="text-slate-700 select-none hidden sm:inline">
+                    <span
+                      className="text-slate-700 select-none hidden sm:inline"
+                      aria-hidden="true"
+                    >
                       |
                     </span>
                   )}
@@ -105,12 +115,15 @@ export default function Footer() {
       {/* Copyright Bar (Responsive) */}
       <div className="max-w-[1200px] mx-auto mt-10 pt-8 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-center items-center gap-2">
         <p>&copy; {banglaYear} আর্থ্রাইটিস কেয়ার</p>
-        <span className="hidden sm:inline text-slate-700">|</span>
+        <span className="hidden sm:inline text-slate-700" aria-hidden="true">
+          |
+        </span>
         <p>
           কারিগরি সহযোগিতায়{" "}
           <a
             href="#"
             className="font-medium text-slate-400 hover:text-white transition-colors cursor-pointer"
+            aria-label="ranocoder Ltd. ওয়েবসাইটে যান"
           >
             ranocoder Ltd.
           </a>

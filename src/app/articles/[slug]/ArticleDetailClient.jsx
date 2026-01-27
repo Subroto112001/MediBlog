@@ -16,6 +16,10 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+/**
+ * todo: Font Configuration
+ * description: Configure Noto Serif Bengali font for Bengali text rendering
+ */
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali"],
   weight: ["400", "500", "600", "700", "800"],
@@ -23,6 +27,10 @@ const notoSerifBengali = Noto_Serif_Bengali({
   display: "swap",
 });
 
+/**
+ * todo: Article Detail Page Component
+ * description: Displays full article content with table of contents, reading progress, and author info
+ */
 export default function ArticleDetail() {
   const params = useParams();
   const router = useRouter();
@@ -33,7 +41,10 @@ export default function ArticleDetail() {
   const [readingProgress, setReadingProgress] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // ১. আর্টিকেল লোড এবং কন্টেন্ট প্রসেসিং
+  /**
+   * todo: Article Loading Effect
+   * description: Load article data and process content on component mount
+   */
   useEffect(() => {
     if (params?.slug) {
       const foundArticle = ARTICLES_DB.find((a) => a.slug === params.slug);
@@ -50,7 +61,10 @@ export default function ArticleDetail() {
     }
   }, [params]);
 
-  // ২. স্ক্রল প্রোগ্রেস বার
+  /**
+   * todo: Reading Progress Bar
+   * description: Track and display reading progress as user scrolls through article
+   */
   useEffect(() => {
     const updateProgress = () => {
       const currentScroll = window.scrollY;
@@ -65,7 +79,10 @@ export default function ArticleDetail() {
     return () => window.removeEventListener("scroll", updateProgress);
   }, []);
 
-  // ৩. স্ক্রল স্পাই (Active Section Detection)
+  /**
+   * todo: Scroll Spy Implementation
+   * description: Detect active section for table of contents highlighting
+   */
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -86,7 +103,10 @@ export default function ArticleDetail() {
     return () => observer.disconnect();
   }, [headings, modifiedContent]);
 
-  // --- Helper Function: Content Processor ---
+  /**
+   * todo: Content Processor Helper
+   * description: Process HTML content to extract headings and add IDs for navigation
+   */
   const processContent = (htmlString) => {
     const headingRegex = /<h([2-3])>(.*?)<\/h\1>/g;
     const extractedHeadings = [];
@@ -114,24 +134,33 @@ export default function ArticleDetail() {
     }
   };
 
-  // --- Reusable Table of Contents Component ---
-  // এটি ডেস্কটপ এবং মোবাইল দুই ভিউতেই ব্যবহার করা হবে
+  /**
+   * todo: Render Table of Contents
+   * description: Generate table of contents component for article headings
+   */
+
   const renderTableOfContents = (isMobile = false) => (
     <div
       className={`bg-slate-50/50 rounded-2xl p-6 border border-slate-100 ${isMobile ? "mb-10" : ""}`}
     >
       <div className="flex items-center gap-2 mb-4 text-slate-900 font-bold text-lg border-b border-slate-200 pb-2">
-        <List size={20} className="text-[#2d8c00]" />
-        <h3>এই পৃষ্ঠায়</h3>
+        <List size={20} className="text-[#2d8c00]" aria-hidden="true" />
+        <h3 id={isMobile ? "toc-heading-mobile" : "toc-heading"}>
+          এই পৃষ্ঠায়
+        </h3>
       </div>
 
       {headings.length > 0 ? (
-        <nav className="flex flex-col gap-1">
+        <nav
+          className="flex flex-col gap-1"
+          aria-labelledby={isMobile ? "toc-heading-mobile" : "toc-heading"}
+        >
           {headings.map((heading) => (
             <a
               key={heading.id}
               href={`#${heading.id}`}
               onClick={(e) => handleScrollToSection(e, heading.id)}
+              aria-current={activeId === heading.id ? "true" : undefined}
               className={`block text-sm py-2 px-3 rounded-lg transition-all duration-200 border-l-2 
                 ${
                   activeId === heading.id
@@ -153,9 +182,16 @@ export default function ArticleDetail() {
 
   if (loading)
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div
+        className="min-h-screen flex items-center justify-center bg-slate-50"
+        role="status"
+        aria-live="polite"
+      >
         <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 border-4 border-[#68c20e] border-t-transparent rounded-full animate-spin"></div>
+          <div
+            className="w-10 h-10 border-4 border-[#68c20e] border-t-transparent rounded-full animate-spin"
+            aria-hidden="true"
+          ></div>
           <span className="text-slate-500 font-medium">লোড হচ্ছে...</span>
         </div>
       </div>
@@ -165,6 +201,7 @@ export default function ArticleDetail() {
     return (
       <div
         className={`min-h-screen flex flex-col items-center justify-center bg-slate-50 ${notoSerifBengali.className}`}
+        role="alert"
       >
         <div className="text-center p-8 bg-white rounded-2xl shadow-sm border border-slate-100 max-w-md w-full">
           <h1 className="text-2xl font-bold mb-2 text-slate-800">
@@ -172,6 +209,7 @@ export default function ArticleDetail() {
           </h1>
           <button
             onClick={() => router.back()}
+            aria-label="পূর্ববর্তী পৃষ্ঠায় ফিরে যান"
             className="bg-[#2d8c00] text-white px-6 py-2.5 rounded-full hover:bg-[#267500] transition-colors font-medium"
           >
             ফিরে যান
@@ -189,10 +227,15 @@ export default function ArticleDetail() {
       <div
         className="fixed top-0 left-0 w-full h-1 bg-slate-100 z-[100]"
         role="progressbar"
+        aria-label="পড়ার অগ্রগতি"
+        aria-valuenow={Math.round(readingProgress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
       >
         <div
           className="h-full bg-gradient-to-r from-[#68c20e] to-[#2d8c00] transition-all duration-150 ease-out"
           style={{ width: `${readingProgress}%` }}
+          aria-hidden="true"
         />
       </div>
 
@@ -201,53 +244,66 @@ export default function ArticleDetail() {
         <div className="flex items-center justify-between mb-8">
           <button
             onClick={() => router.back()}
+            aria-label="পূর্ববর্তী পৃষ্ঠায় ফিরে যান"
             className="group flex items-center gap-2 text-slate-500 hover:text-[#2d8c00] transition-colors"
           >
             <div className="p-2 rounded-full bg-slate-50 group-hover:bg-[#2d8c00]/10 transition-colors">
-              <ChevronLeft size={20} />
+              <ChevronLeft size={20} aria-hidden="true" />
             </div>
             <span className="font-medium hidden sm:inline">ফিরে যান</span>
           </button>
 
-          <div className="flex items-center gap-2">
+          <div
+            className="flex items-center gap-2"
+            role="toolbar"
+            aria-label="নিবন্ধ ক্রিয়াকলাপ"
+          >
             <button
               className="p-2.5 rounded-full text-slate-500 hover:bg-slate-50 hover:text-[#2d8c00] transition-colors"
               title="সেভ করুন"
+              aria-label="নিবন্ধটি সংরক্ষণ করুন"
             >
-              <Bookmark size={20} />
+              <Bookmark size={20} aria-hidden="true" />
             </button>
             <button
               className="p-2.5 rounded-full text-slate-500 hover:bg-slate-50 hover:text-[#2d8c00] transition-colors"
               title="শেয়ার করুন"
+              aria-label="নিবন্ধটি শেয়ার করুন"
             >
-              <Share2 size={20} />
+              <Share2 size={20} aria-hidden="true" />
             </button>
           </div>
         </div>
 
-        {/* Layout Grid: Left Sidebar (TOC) & Right Content */}
         <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-12 items-start">
-          {/* --- Left Sidebar: Table of Contents (Desktop Only + Sticky) --- */}
-          <aside className="hidden lg:block sticky top-24  overflow-y-auto pr-4 custom-scrollbar">
+          {/* --- Left Sidebar: Table of Contents --- */}
+          <aside
+            className="hidden lg:block sticky top-24  overflow-y-auto pr-4 custom-scrollbar"
+            aria-label="সূচিপত্র"
+          >
             {renderTableOfContents(false)}
           </aside>
 
           {/* --- Right Column: Main Content --- */}
           <article className="w-full min-w-0">
             {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-sm mb-6 text-slate-500 flex-wrap">
+            <nav
+              className="flex items-center gap-2 text-sm mb-6 text-slate-500 flex-wrap"
+              aria-label="ব্রেডক্রাম্ব"
+            >
               <Link
                 href="/articles"
                 className="hover:text-[#2d8c00] transition-colors"
               >
                 ব্লগ
               </Link>
-              <ChevronRight size={14} />
+              <ChevronRight size={14} aria-hidden="true" />
               <Link
                 href={`/articles?category=${encodeURIComponent(
                   article.category,
                 )}`}
                 className="hover:text-[#2d8c00] transition-colors"
+                aria-current="page"
               >
                 {article.category}
               </Link>
@@ -268,7 +324,7 @@ export default function ArticleDetail() {
                 {article.title}
               </h1>
 
-              {/* Author Meta (Mobile Visible) */}
+              {/* Author Meta ( Mobile View ) */}
               <div className="flex items-center justify-between border-y border-slate-100 py-6">
                 <div className="flex items-center gap-4">
                   <div className="relative size-12 rounded-full overflow-hidden border border-slate-200">
@@ -313,10 +369,9 @@ export default function ArticleDetail() {
               />
             </div>
 
-            {/* --- Mobile Table of Contents (Under Image, Non-Sticky) --- */}
+            {/* --- Mobile Table of Contents --- */}
             <div className="lg:hidden">{renderTableOfContents(true)}</div>
 
-            {/* Dynamic Content with IDs */}
             <div
               className="prose prose-lg md:prose-xl prose-slate max-w-none 
               prose-headings:font-bold prose-headings:text-slate-900 prose-headings:scroll-mt-24

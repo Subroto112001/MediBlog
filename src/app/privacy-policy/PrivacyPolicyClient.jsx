@@ -2,9 +2,12 @@
 
 import React from "react";
 import { Noto_Serif_Bengali } from "next/font/google";
-import Head from "next/head";
 import { ShieldCheck } from "lucide-react";
 
+/**
+ * todo: Font Configuration
+ * description: Configure Noto Serif Bengali font for Bengali text rendering
+ */
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali"],
   weight: ["400", "500", "600", "700"],
@@ -12,7 +15,15 @@ const notoSerifBengali = Noto_Serif_Bengali({
   display: "swap",
 });
 
+/**
+ * todo: Privacy Policy Page Component
+ * description: Displays the privacy policy information with structured data for SEO
+ */
 export default function PrivacyPolicy() {
+  /**
+   * todo: JSON-LD Structured Data
+   * description: Schema.org markup for search engine rich snippets
+   */
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -26,17 +37,11 @@ export default function PrivacyPolicy() {
       className={`min-h-screen bg-slate-50 dark:bg-[#101728] text-slate-900 dark:text-slate-100 ${notoSerifBengali.className}`}
       lang="bn"
     >
+      {/* SEO: JSON-LD Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Head>
-        <title>গোপনীয়তা নীতি | আর্থ্রাইটিস কেয়ার</title>
-        <meta
-          name="description"
-          content="আর্থ্রাইটিস কেয়ার ব্যবহারকারীদের তথ্যের সুরক্ষা এবং ব্যবহারের নীতিমালা।"
-        />
-      </Head>
 
       <main className="max-w-[800px] mx-auto px-6 py-16">
         <header className="mb-10 border-b border-slate-200 dark:border-slate-700 pb-6">
@@ -49,11 +54,17 @@ export default function PrivacyPolicy() {
             <h1 className="text-3xl md:text-4xl font-bold">গোপনীয়তা নীতি</h1>
           </div>
           <p className="text-slate-600 dark:text-slate-400">
-            সর্বশেষ আপডেট: ২৬ জানুয়ারি, ২০২৬
+            <time dateTime="2026-01-26">সর্বশেষ আপডেট: ২৬ জানুয়ারি, ২০২৬</time>
           </p>
         </header>
 
-        <article className="prose prose-lg dark:prose-invert max-w-none">
+        <article
+          className="prose prose-lg dark:prose-invert max-w-none"
+          aria-labelledby="privacy-policy-title"
+        >
+          <h2 id="privacy-policy-title" className="sr-only">
+            গোপনীয়তা নীতির বিস্তারিত
+          </h2>
           <p>
             আর্থ্রাইটিস কেয়ার - এ, আমরা আপনার গোপনীয়তাকে অত্যন্ত গুরুত্ব
             সহকারে দেখি। এই গোপনীয়তা নীতি বর্ণনা করে যে আমরা কীভাবে আপনার

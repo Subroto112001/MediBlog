@@ -22,7 +22,7 @@ const notoSerifBengali = Noto_Serif_Bengali({
   display: "swap",
 });
 
-// পেজিনেশন কনফিগারেশন
+// Pagination: Articles per page
 const ARTICLES_PER_PAGE = 12;
 
 // Loading Fallback Component
@@ -31,13 +31,25 @@ function ArticlesLoading() {
     <div
       className={`min-h-screen bg-slate-50 text-slate-900 ${notoSerifBengali.className}`}
       lang="bn"
+      role="status"
+      aria-live="polite"
+      aria-label="নিবন্ধ লোড হচ্ছে"
     >
       <main className="max-w-[1200px] mx-auto px-6 py-12">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="h-10 w-64 bg-slate-200 rounded-lg mx-auto mb-4 animate-pulse"></div>
-          <div className="h-6 w-96 bg-slate-200 rounded-lg mx-auto animate-pulse"></div>
+          <div
+            className="h-10 w-64 bg-slate-200 rounded-lg mx-auto mb-4 animate-pulse"
+            aria-hidden="true"
+          ></div>
+          <div
+            className="h-6 w-96 bg-slate-200 rounded-lg mx-auto animate-pulse"
+            aria-hidden="true"
+          ></div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          aria-hidden="true"
+        >
           {[1, 2, 3, 4, 5, 6].map((i) => (
             <div
               key={i}
@@ -52,6 +64,9 @@ function ArticlesLoading() {
             </div>
           ))}
         </div>
+        <span className="sr-only">
+          নিবন্ধ লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...
+        </span>
       </main>
     </div>
   );
@@ -62,17 +77,17 @@ function ArticlesContent() {
   const searchParams = useSearchParams();
   const categoryFromUrl = searchParams.get("category");
 
-  // ইংরেজি সংখ্যাকে বাংলায় রূপান্তর করার ফাংশন
+  // Function to convert English numbers to Bengali
   const toBengaliNumber = (num) => {
     return num.toString().replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[d]);
   };
 
-  // ১. স্টেট ম্যানেজমেন্ট
+  // State for selected category, search query, and current page
   const [selectedCategory, setSelectedCategory] = useState("সব");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // URL থেকে ক্যাটাগরি পড়ে সেট করা
+  // Category from URL
   useEffect(() => {
     if (categoryFromUrl) {
       setSelectedCategory(categoryFromUrl);
@@ -82,13 +97,11 @@ function ArticlesContent() {
     setCurrentPage(1);
   }, [categoryFromUrl]);
 
-  // ২. ডেটাবেস থেকে ইউনিক ক্যাটাগরিগুলো বের করা
-  const categories = useMemo(() => {
-    const allCats = ARTICLES_DB.map((article) => article.category);
-    return ["সব", ...new Set(allCats)];
-  }, []);
+  /**
+   * todo :  Filter logic
+   * description: Filter articles based on selected category and search query
+   * */
 
-  // ৩. ফিল্টারিং লজিক
   const filteredArticles = ARTICLES_DB.filter((article) => {
     const matchesCategory =
       selectedCategory === "সব" || article.category === selectedCategory;
@@ -98,13 +111,19 @@ function ArticlesContent() {
     return matchesCategory && matchesSearch;
   });
 
-  // ৪. পেজিনেশন লজিক
+  /**
+   * todo :  Pagination logic
+   * description: Calculate total pages and slice articles for current page
+   */
   const totalPages = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
   const startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
   const endIndex = startIndex + ARTICLES_PER_PAGE;
   const currentArticles = filteredArticles.slice(startIndex, endIndex);
 
-  // পেজ পরিবর্তন হ্যান্ডলার
+  /**
+   * todo :  Handle Page Change
+   * description: Update current page and scroll to top on page change
+   */
   const handlePageChange = (page) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -120,7 +139,7 @@ function ArticlesContent() {
         {selectedCategory !== "সব" && (
           <nav
             className="flex items-center gap-2 text-sm mb-8"
-            aria-label="Breadcrumb"
+            aria-label="ব্রেডক্রাম্ব"
           >
             <Link
               href="/articles"
@@ -128,8 +147,12 @@ function ArticlesContent() {
             >
               ব্লগ
             </Link>
-            <ChevronRight size={16} className="text-slate-400" />
-            <span className="text-slate-900 font-semibold">
+            <ChevronRight
+              size={16}
+              className="text-slate-400"
+              aria-hidden="true"
+            />
+            <span className="text-slate-900 font-semibold" aria-current="page">
               {selectedCategory}
             </span>
           </nav>
@@ -150,20 +173,29 @@ function ArticlesContent() {
 
         {/* Grid Section */}
         {filteredArticles.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {currentArticles.map((article) => (
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            role="feed"
+            aria-label="নিবন্ধ তালিকা"
+            aria-busy="false"
+          >
+            {currentArticles.map((article, index) => (
               <article
                 key={article.id}
                 className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full group"
+                aria-posinset={startIndex + index + 1}
+                aria-setsize={filteredArticles.length}
               >
                 {/* Image as a Link */}
                 <Link
                   href={`/articles/${article.slug}`}
                   className="h-56 relative overflow-hidden block"
+                  tabIndex="-1"
+                  aria-hidden="true"
                 >
                   <Image
                     src={article.image}
-                    alt={article.title}
+                    alt=""
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -178,10 +210,11 @@ function ArticlesContent() {
                 <div className="p-6 flex flex-col flex-1">
                   <div className="flex items-center gap-4 text-xs text-slate-500 font-medium mb-3">
                     <span className="flex items-center gap-1">
-                      <Calendar size={14} /> {article.dateDisplay}
+                      <Calendar size={14} aria-hidden="true" />
+                      <time dateTime={article.date}>{article.dateDisplay}</time>
                     </span>
                     <span className="flex items-center gap-1">
-                      <Clock size={14} /> {article.readTime}
+                      <Clock size={14} aria-hidden="true" /> {article.readTime}
                     </span>
                   </div>
 
@@ -244,13 +277,18 @@ function ArticlesContent() {
           </div>
         )}
 
-        {/* Pagination Section (Fully Bengali) */}
+        {/* Pagination Section  */}
         {totalPages > 1 && filteredArticles.length > 0 && (
-          <div className="flex items-center justify-center gap-2 mt-12">
+          <nav
+            className="flex items-center justify-center gap-2 mt-12"
+            aria-label="পেজিনেশন নেভিগেশন"
+            role="navigation"
+          >
             {/* Previous Button */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
+              aria-label="পূর্ববর্তী পৃষ্ঠায় যান"
               className={`flex items-center gap-1 px-4 py-2 rounded-lg font-semibold transition-all duration-200
                 ${
                   currentPage === 1
@@ -258,17 +296,19 @@ function ArticlesContent() {
                     : "bg-white text-slate-700 border border-slate-200 hover:border-[#2d8c00] hover:text-[#68c20e]"
                 }`}
             >
-              <ChevronLeft size={18} />
+              <ChevronLeft size={18} aria-hidden="true" />
               পূর্ববর্তী
             </button>
 
-            {/* Page Numbers (Bengali Digits) */}
-            <div className="flex items-center gap-1">
+            {/* Page Numbers  */}
+            <div className="flex items-center gap-1" role="list">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                 (page) => (
                   <button
                     key={page}
                     onClick={() => handlePageChange(page)}
+                    aria-label={`পৃষ্ঠা ${toBengaliNumber(page)}`}
+                    aria-current={currentPage === page ? "page" : undefined}
                     className={`w-10 h-10 rounded-lg font-semibold transition-all duration-200
                     ${
                       currentPage === page
@@ -286,6 +326,7 @@ function ArticlesContent() {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
+              aria-label="পরবর্তী পৃষ্ঠায় যান"
               className={`flex items-center gap-1 px-4 py-2 rounded-lg font-semibold transition-all duration-200
                 ${
                   currentPage === totalPages
@@ -294,14 +335,17 @@ function ArticlesContent() {
                 }`}
             >
               পরবর্তী
-              <ChevronRight size={18} />
+              <ChevronRight size={18} aria-hidden="true" />
             </button>
-          </div>
+          </nav>
         )}
 
-        {/* Articles Count Info (Bengali Digits) */}
+        {/* Articles Count Info  */}
         {filteredArticles.length > 0 && (
-          <p className="text-center text-slate-500 text-sm mt-6">
+          <p
+            className="text-center text-slate-500 text-sm mt-6"
+            aria-live="polite"
+          >
             মোট {toBengaliNumber(filteredArticles.length)}টি নিবন্ধের মধ্যে{" "}
             {toBengaliNumber(startIndex + 1)} -{" "}
             {toBengaliNumber(Math.min(endIndex, filteredArticles.length))}{" "}

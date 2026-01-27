@@ -2,16 +2,27 @@
 
 import React from "react";
 import { Noto_Serif_Bengali } from "next/font/google";
-import Head from "next/head";
 import { Cookie } from "lucide-react";
 
+/**
+ * todo: Font Configuration
+ * description: Configure Noto Serif Bengali font for Bengali text rendering
+ */
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
+/**
+ * todo: Cookie Policy Page Component
+ * description: Displays the cookie policy information with structured data for SEO
+ */
 export default function CookiePolicy() {
+  /**
+   * todo: JSON-LD Structured Data
+   * description: Schema.org markup for search engine rich snippets
+   */
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -24,13 +35,11 @@ export default function CookiePolicy() {
       className={`min-h-screen bg-slate-50 dark:bg-[#101728] text-slate-900 dark:text-slate-100 ${notoSerifBengali.className}`}
       lang="bn"
     >
+      {/* SEO: JSON-LD Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Head>
-        <title>কুকি পলিসি | আর্থ্রাইটিস কেয়ার</title>
-      </Head>
 
       <main className="max-w-[800px] mx-auto px-6 py-16">
         <header className="mb-10 border-b border-slate-200 dark:border-slate-700 pb-6">
@@ -39,11 +48,17 @@ export default function CookiePolicy() {
             <h1 className="text-3xl md:text-4xl font-bold">কুকি পলিসি</h1>
           </div>
           <p className="text-slate-600 dark:text-slate-400">
-            সর্বশেষ আপডেট: ২৬ জানুয়ারি, ২০২৬
+            <time dateTime="2026-01-26">সর্বশেষ আপডেট: ২৬ জানুয়ারি, ২০২৬</time>
           </p>
         </header>
 
-        <article className="prose prose-lg dark:prose-invert max-w-none">
+        <article
+          className="prose prose-lg dark:prose-invert max-w-none"
+          aria-labelledby="cookie-policy-title"
+        >
+          <h2 id="cookie-policy-title" className="sr-only">
+            কুকি পলিসির বিস্তারিত
+          </h2>
           <p>
             এই কুকি পলিসি ব্যাখ্যা করে যে আর্থ্রাইটিস কেয়ার কীভাবে কুকি এবং
             অনুরূপ প্রযুক্তি ব্যবহার করে যখন আপনি আমাদের ওয়েবসাইট ভিজিট করেন।

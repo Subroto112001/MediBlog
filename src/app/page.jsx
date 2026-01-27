@@ -3,12 +3,14 @@
 import React from "react";
 import { Noto_Serif_Bengali } from "next/font/google";
 import { ArrowRight, Calendar, ChevronRight, Clock } from "lucide-react";
-import Head from "next/head";
-import Link from "next/link"; // Import Link for routing
-import { ARTICLES_DB } from "@/lib/articlesData"; // Import Shared Data
+import Link from "next/link";
+import { ARTICLES_DB } from "@/lib/articlesData";
 import Image from "next/image";
 
-// --- Font Configuration ---
+/**
+ * todo: Font Configuration
+ * description: Configure Noto Serif Bengali font for Bengali text rendering
+ */
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali"],
   weight: ["400", "500", "600", "700", "800"],
@@ -16,60 +18,57 @@ const notoSerifBengali = Noto_Serif_Bengali({
   display: "swap",
 });
 
-// --- Dynamic Data Selection ---
-// 1. Find the featured article for the Hero Section
+/**
+ * todo: Dynamic Data Selection
+ * description: Find the featured article for the Hero Section
+ */
 const FEATURED_ARTICLE =
   ARTICLES_DB.find((article) => article.isFeatured) || ARTICLES_DB[0];
 
-// 2. Filter out the featured one to show the rest in the grid
+/**
+ * todo: Dynamic Data Selection
+ * description: Filter out the featured one to show the rest in the grid
+ */
 const LATEST_ARTICLES = ARTICLES_DB.filter(
   (article) => article.id !== FEATURED_ARTICLE.id,
 ).slice(0, 6);
 
-const CATEGORIES = [
-  "আর্থাইটিস",
-  "জয়েন্ট সমস্যা",
-  "পুষ্টি",
-  "ব্যায়াম",
-  "অটোইমিউন রোগ",
-  "স্পাইন সমস্যা",
-];
-
-// --- SEO: Schema Markup ---
+/**
+ * todo: SEO Schema Markup
+ * description: Structured data for search engine rich snippets
+ */
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "MedicalWebPage",
-  name: "সাবাব সানি আর্থাইটিস কেয়ার",
+  name: "সাদাব সানী আর্থ্রাইটিস কেয়ার",
   description:
-    "আর্থাইটিস ও জয়েন্ট রোগের চিকিৎসা, পরামর্শ এবং প্রতিরোধ সম্পর্কে বিশেষজ্ঞ পরামর্শ।",
+    "আর্থ্রাইটিস ও জয়েন্ট রোগের চিকিৎসা, পরামর্শ এবং প্রতিরোধ সম্পর্কে বিশেষজ্ঞ পরামর্শ।",
   audience: "Patients and Medical Professionals",
 };
 
+/**
+ * todo: Home Page Component
+ * description: Main landing page with hero section, article grid, and newsletter
+ */
 export default function Home() {
   return (
     <div
       className={`min-h-screen bg-white text-slate-900 ${notoSerifBengali.className}`}
       lang="bn"
     >
-      <Head>
-        <title> আর্থ্রাইটিস কেয়ার | আর্থ্রাইটিস চিকিৎসা ও পরামর্শ</title>
-        <meta
-          name="description"
-          content="রিউমাটয়েড আর্থাইটিস, অস্টিওআর্থাইটিস, গাউট ও অন্যান্য জয়েন্ট রোগের বিশেষজ্ঞ চিকিৎসা এবং পরামর্শ।"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-        />
-      </Head>
+      {/* SEO: JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
 
       <main className="flex-1">
-        {/* --- Hero Section (Dynamic) --- */}
+        {/* --- Hero Section --- */}
         <section
-          className="px-6 lg:px-20 py-12 lg:py-16 max-w-[1200px] mx-auto"
+          className="px-6 lg:px-20 py-12 lg:py-16 max-w-7xl mx-auto"
           aria-labelledby="hero-heading"
         >
-          <div className="grid lg:grid-cols-2 gap-12 items-center bg-[#BCE7FA] rounded-[2rem] p-8 lg:p-12 overflow-hidden relative">
+          <div className="grid lg:grid-cols-2 gap-12 items-center bg-[#BCE7FA] rounded-4xl p-8 lg:p-12 overflow-hidden relative">
             <div
               className="absolute top-0 right-0 w-64 h-64 bg-[#38B000]/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"
               aria-hidden="true"
@@ -110,13 +109,13 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative group h-[250px] md:h-[400px] w-full">
+            <div className="relative group h-62.5 md:h-100 w-full">
               <div
-                className="absolute inset-0 bg-white/20 rounded-[1.5rem] rotate-3 scale-105 transition-transform group-hover:rotate-1"
+                className="absolute inset-0 bg-white/20 rounded-3xl rotate-3 scale-105 transition-transform group-hover:rotate-1"
                 aria-hidden="true"
               ></div>
 
-              <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden shadow-2xl">
+              <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
                 <Image
                   src={FEATURED_ARTICLE.image}
                   alt={FEATURED_ARTICLE.title}
@@ -129,12 +128,12 @@ export default function Home() {
           </div>
         </section>
 
-        {/* --- Blog Grid (Dynamic Links) --- */}
+        {/* --- Blog Grid  --- */}
         <section
-          className="px-6 lg:px-20 py-16 max-w-[1200px] mx-auto"
+          className="px-6 lg:px-20 py-16 max-w-7xl mx-auto"
           aria-labelledby="latest-insights-heading"
         >
-          {/* Header: Stacks on mobile, side-by-side on tablet+ */}
+          {/* Header*/}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-slate-200 pb-6 gap-4">
             <div>
               <h2
@@ -157,20 +156,28 @@ export default function Home() {
           </div>
 
           {/* Grid: 1 column on mobile, 2 on tablet, 3 on desktop */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {LATEST_ARTICLES.map((article) => (
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            role="feed"
+            aria-label="সর্বশেষ নিবন্ধসমূহ"
+          >
+            {LATEST_ARTICLES.map((article, index) => (
               <article
                 key={article.id}
                 className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full group"
+                aria-posinset={index + 1}
+                aria-setsize={LATEST_ARTICLES.length}
               >
                 {/* Image as a Link */}
                 <Link
                   href={`/articles/${article.slug}`}
                   className="h-56 relative overflow-hidden block"
+                  tabIndex="-1"
+                  aria-hidden="true"
                 >
                   <Image
                     src={article.image}
-                    alt={article.title}
+                    alt=""
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -185,18 +192,20 @@ export default function Home() {
                 <div className="p-6 flex flex-col flex-1">
                   <div className="flex items-center gap-4 text-xs text-slate-500 font-medium mb-3">
                     <span className="flex items-center gap-1">
-                      <Calendar size={14} /> {article.dateDisplay}
+                      <Calendar size={14} aria-hidden="true" />
+                      <time dateTime={article.date}>{article.dateDisplay}</time>
                     </span>
                     <span className="flex items-center gap-1">
-                      <Clock size={14} /> {article.readTime}
+                      <Clock size={14} aria-hidden="true" />
+                      <span>{article.readTime}</span>
                     </span>
                   </div>
 
-                  <h2 className="text-xl font-bold mb-3 leading-snug group-hover:text-sky-600 transition-colors">
+                  <h3 className="text-xl font-bold mb-3 leading-snug group-hover:text-sky-600 transition-colors">
                     <Link href={`/articles/${article.slug}`}>
                       {article.title}
                     </Link>
-                  </h2>
+                  </h3>
 
                   <p className="text-slate-600 text-sm line-clamp-3 mb-6 flex-1">
                     {article.excerpt}
@@ -206,10 +215,11 @@ export default function Home() {
                     <div className="flex items-center gap-2">
                       <Image
                         src={article.authorImage}
-                        alt={article.author}
+                        alt=""
                         width={40}
                         height={40}
                         className=" w-10 h-10 rounded-full bg-slate-200 border border-slate-200 object-cover"
+                        aria-hidden="true"
                       />
                       <span className="text-xs font-bold text-slate-700">
                         {article.author}
@@ -220,7 +230,7 @@ export default function Home() {
                       className="size-10 rounded-full bg-[#f0f9ff] flex items-center justify-center text-sky-600 group-hover:bg-sky-600 group-hover:text-white transition-colors"
                       aria-label={`পড়ুন: ${article.title}`}
                     >
-                      <ArrowRight size={18} />
+                      <ArrowRight size={18} aria-hidden="true" />
                     </Link>
                   </div>
                 </div>
@@ -230,11 +240,11 @@ export default function Home() {
         </section>
         {/* --- YouTube Video Section --- */}
         <section
-          className="px-4 lg:px-20 py-12 max-w-[1200px] mx-auto border-t border-slate-200"
+          className="px-4 lg:px-20 py-12 max-w-7xl mx-auto border-t border-slate-200"
           style={{ fontFamily: '"Noto Serif", serif' }}
           aria-labelledby="video-section-heading"
         >
-          {/* হেডার */}
+          {/* title section */}
           <div className="mb-8">
             <h2
               id="video-section-heading"
@@ -248,39 +258,44 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:items-stretch">
-            {/* বড় ভিডিও (বাম পাশ) */}
+            {/* Leftside Big video */}
             <div className="lg:col-span-7 relative overflow-hidden rounded-xl bg-slate-900 shadow-xl aspect-video lg:aspect-auto lg:h-full">
               <iframe
                 className="w-full h-full object-cover border-0"
                 src="https://www.youtube.com/embed/VIDEO_ID_1"
-                title="Featured Health Video"
+                title="আর্থ্রাইটিস রোগীদের জন্য সঠিক জীবনধারা - প্রধান ভিডিও"
                 allowFullScreen
+                loading="lazy"
               ></iframe>
-              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none">
+              <div
+                className="absolute bottom-0 left-0 right-0 p-4 md:p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none"
+                aria-hidden="true"
+              >
                 <h3 className="text-white text-base md:text-2xl font-bold leading-tight">
                   আর্থ্রাইটিস রোগীদের জন্য সঠিক জীবনধারা
                 </h3>
               </div>
             </div>
 
-            {/* ছোট ভিডিওর কন্টেইনার (ডান পাশ / মোবাইল বটম) */}
+            {/* Right Side : Small Videos */}
             <div className="lg:col-span-5 flex flex-row lg:flex-col gap-3 md:gap-4 overflow-hidden">
               {[1, 2, 3].map((item) => (
                 <div
                   key={item}
                   className="flex flex-col lg:flex-row gap-2 lg:gap-4 flex-1 min-w-0"
                 >
-                  {/* থাম্বনেইল অংশ - মোবাইলে ১/৩ জায়গা নিবে */}
+                  {/* Thumbnail part  */}
                   <div className="relative overflow-hidden rounded-lg bg-slate-200 shadow-sm aspect-video lg:w-40 xl:w-48 flex-shrink-0">
                     <iframe
                       className="w-full h-full object-cover border-0"
                       src={`https://www.youtube.com/embed/VIDEO_ID_${item + 1}?modestbranding=1&rel=0`}
-                      title={`Health Tip Video ${item}`}
+                      title={`জয়েন্ট পেইন ব্যায়াম - পর্ব ${item}`}
                       allowFullScreen
+                      loading="lazy"
                     ></iframe>
                   </div>
 
-                  {/* টাইটেল অংশ */}
+                  {/* Title part */}
                   <div className="flex flex-col justify-start lg:justify-center overflow-hidden">
                     <h4 className="text-slate-900 text-[9px] sm:text-xs md:text-sm lg:text-[15px] font-bold leading-tight line-clamp-2">
                       জয়েন্ট পেইন ব্যায়াম - পর্ব {item}
@@ -299,7 +314,7 @@ export default function Home() {
           className="px-6 lg:px-20 py-20 bg-[#BCE7FA]/20"
           aria-labelledby="newsletter-heading"
         >
-          <div className="max-w-[1200px] mx-auto text-center">
+          <div className="max-w-7xl mx-auto text-center">
             <div className="bg-white rounded-[3rem] p-10 lg:p-16 shadow-2xl shadow-slate-200/50 relative overflow-hidden border border-slate-100">
               <div
                 className="absolute -left-10 -top-10 w-40 h-40 bg-[#38B000]/10 rounded-full blur-2xl"
@@ -323,6 +338,7 @@ export default function Home() {
                 <form
                   className="flex flex-col sm:flex-row gap-4 mt-4"
                   onSubmit={(e) => e.preventDefault()}
+                  aria-label="নিউজলেটার সাবস্ক্রিপশন ফর্ম"
                 >
                   <label htmlFor="email-input" className="sr-only">
                     আপনার ইমেইল ঠিকানা
@@ -333,11 +349,19 @@ export default function Home() {
                     placeholder="আপনার ইমেইল ঠিকানা লিখুন"
                     type="email"
                     required
+                    autoComplete="email"
+                    aria-describedby="newsletter-description"
                   />
-                  <button className="bg-[#2d8c00] hover:bg-[#236e00] text-white px-10 py-4 rounded-2xl font-bold transition-all shadow-lg shadow-[#38B000]/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40">
+                  <button
+                    type="submit"
+                    className="bg-[#2d8c00] hover:bg-[#236e00] text-white px-10 py-4 rounded-2xl font-bold transition-all shadow-lg shadow-[#38B000]/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2d8c00]/40"
+                  >
                     যোগ দিন
                   </button>
                 </form>
+                <p id="newsletter-description" className="sr-only">
+                  আপনার ইমেইল দিয়ে সাবস্ক্রাইব করুন স্বাস্থ্য টিপস পেতে
+                </p>
               </div>
             </div>
           </div>
